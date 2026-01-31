@@ -17,6 +17,14 @@ const slides = [
   { src: "/hero-slideshow/product10.png", alt: "Premium Wine Selection 10" },
 ];
 
+// Preload all images
+const preloadImages = () => {
+  slides.forEach((slide) => {
+    const img = new window.Image();
+    img.src = slide.src;
+  });
+};
+
 export default function HeroSlideshow() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -42,6 +50,11 @@ export default function HeroSlideshow() {
     setTimeout(() => setIsTransitioning(false), 1000);
   };
 
+  // Preload images on mount
+  useEffect(() => {
+    preloadImages();
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
@@ -49,6 +62,20 @@ export default function HeroSlideshow() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
+      {/* Preload all images (hidden) */}
+      <div className="hidden">
+        {slides.map((slide, index) => (
+          <Image
+            key={`preload-${index}`}
+            src={slide.src}
+            alt={slide.alt}
+            width={1920}
+            height={1080}
+            priority={index < 3}
+          />
+        ))}
+      </div>
+
       {/* Slides */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -64,7 +91,8 @@ export default function HeroSlideshow() {
             alt={slides[currentSlide].alt}
             fill
             className="object-cover"
-            priority={currentSlide === 0}
+            priority
+            loading="eager"
           />
           {/* Dark Overlay with gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70" />
@@ -78,23 +106,13 @@ export default function HeroSlideshow() {
       {/* Content Overlay */}
       <div className="absolute inset-0 flex items-center justify-center z-20">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <div className="flex justify-center mb-6">
-              <div className="decorative-line" />
-            </div>
-          </motion.div>
-
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             className="font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            <span className="text-shimmer">Premium</span> Wine & Spirits
+            Your Trusted Partner in <span className="text-shimmer">Fine Wines & Spirits</span>
           </motion.h1>
 
           <motion.p
@@ -103,32 +121,23 @@ export default function HeroSlideshow() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="mx-auto mt-6 max-w-2xl font-[family-name:var(--font-montserrat)] text-lg text-gray-300 sm:text-xl"
           >
-            Global distribution, warehousing, and delivery of the world&apos;s finest wines and spirits
+            Seamless distribution, warehousing, and logistics solutions for premium brands
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+            className="mt-12"
           >
-            <motion.a
-              href="#contact"
-              className="rounded-full bg-[#C9A962] px-8 py-4 font-[family-name:var(--font-montserrat)] text-base font-medium text-black"
-              whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(201, 169, 98, 0.5)" }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Need help with distribution?
-            </motion.a>
-            <motion.a
-              href="#portfolio"
-              className="rounded-full border-2 border-[#C9A962] px-8 py-4 font-[family-name:var(--font-montserrat)] text-base font-medium text-[#C9A962]"
-              whileHover={{ backgroundColor: "#C9A962", color: "#000" }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Explore Our Portfolio
-            </motion.a>
+            <div className="flex justify-center mb-8">
+              <div className="decorative-line" />
+            </div>
+            <p className="font-[family-name:var(--font-montserrat)] text-sm uppercase tracking-[0.3em] text-[#C9A962]">
+              New Jersey Wine & Spirits Distributor
+            </p>
           </motion.div>
+
         </div>
       </div>
 

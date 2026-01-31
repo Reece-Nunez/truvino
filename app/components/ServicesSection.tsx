@@ -106,20 +106,6 @@ export default function ServicesSection() {
           ))}
         </div>
 
-        {/* CTA */}
-        <AnimatedSection delay={0.4} className="mt-16 text-center">
-          <motion.a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-full bg-[#C9A962] px-8 py-4 font-[family-name:var(--font-montserrat)] text-sm font-medium text-black transition-all"
-            whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(201, 169, 98, 0.4)" }}
-            whileTap={{ scale: 0.98 }}
-          >
-            Need help with distribution?
-            <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </motion.a>
-        </AnimatedSection>
       </div>
     </section>
   );

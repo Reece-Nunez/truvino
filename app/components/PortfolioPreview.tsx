@@ -137,7 +137,7 @@ export default function PortfolioPreview() {
             whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(201, 169, 98, 0.4)" }}
             whileTap={{ scale: 0.98 }}
           >
-            Need help with distribution?
+            Is your product looking for distribution?
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>

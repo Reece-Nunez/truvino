@@ -19,7 +19,7 @@ export default function CTABanner({ variant = "default" }: CTABannerProps) {
             href="#contact"
             className="inline-flex items-center gap-2 rounded-full bg-[#C9A962] px-8 py-3 font-[family-name:var(--font-montserrat)] text-sm font-medium text-black transition-all hover:bg-[#D4BA7A] hover:shadow-lg hover:shadow-[#C9A962]/20"
           >
-            Need help with distribution?
+            Is your product looking for distribution?
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -95,7 +95,7 @@ export default function CTABanner({ variant = "default" }: CTABannerProps) {
               transition={{ duration: 0.6 }}
             >
               <h3 className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl font-semibold text-white">
-                Need help with <span className="text-[#C9A962]">distribution</span>?
+                Is your product looking for <span className="text-[#C9A962]">distribution</span>?
               </h3>
               <p className="mt-2 font-[family-name:var(--font-montserrat)] text-gray-400">
                 Let us handle your global wine and spirits logistics
