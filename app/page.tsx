@@ -1,8 +1,9 @@
 import Header from "./components/Header";
 import HeroSlideshow from "./components/HeroSlideshow";
 import ServicesSection from "./components/ServicesSection";
+import CTABanner from "./components/CTABanner";
 import PortfolioPreview from "./components/PortfolioPreview";
-import GlobalPresence from "./components/GlobalPresence";
+import TestimonialSection from "./components/TestimonialSection";
 import Footer from "./components/Footer";
 
 export default function Home() {
@@ -12,8 +13,10 @@ export default function Home() {
       <main>
         <HeroSlideshow />
         <ServicesSection />
+        <CTABanner />
         <PortfolioPreview />
-        <GlobalPresence />
+        <TestimonialSection />
+        <CTABanner variant="large" />
       </main>
       <Footer />
     </>

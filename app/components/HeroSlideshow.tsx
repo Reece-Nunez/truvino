@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const slides = [
   { src: "/hero-slideshow/product1.jpeg", alt: "Premium Wine Selection 1" },
@@ -49,84 +50,127 @@ export default function HeroSlideshow() {
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* Slides */}
-      {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? "opacity-100" : "opacity-0"
-          }`}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentSlide}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.05 }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
+          className="absolute inset-0"
         >
           <Image
-            src={slide.src}
-            alt={slide.alt}
+            src={slides[currentSlide].src}
+            alt={slides[currentSlide].alt}
             fill
             className="object-cover"
-            priority={index === 0}
+            priority={currentSlide === 0}
           />
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-black/60" />
-        </div>
-      ))}
+          {/* Dark Overlay with gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/70" />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Decorative Elements */}
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black/60 to-transparent z-10" />
+      <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-[#0a0a0a] to-transparent z-10" />
 
       {/* Content Overlay */}
-      <div className="absolute inset-0 flex items-center justify-center">
+      <div className="absolute inset-0 flex items-center justify-center z-20">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-          <h1 className="font-[family-name:var(--font-cormorant)] text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
-            <span className="text-[#C9A962]">Premium</span> Wine & Spirits
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl font-[family-name:var(--font-montserrat)] text-lg text-gray-300 sm:text-xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <div className="flex justify-center mb-6">
+              <div className="decorative-line" />
+            </div>
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
+          >
+            <span className="text-shimmer">Premium</span> Wine & Spirits
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mx-auto mt-6 max-w-2xl font-[family-name:var(--font-montserrat)] text-lg text-gray-300 sm:text-xl"
+          >
             Global distribution, warehousing, and delivery of the world&apos;s finest wines and spirits
-          </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+          >
+            <motion.a
+              href="#contact"
+              className="rounded-full bg-[#C9A962] px-8 py-4 font-[family-name:var(--font-montserrat)] text-base font-medium text-black"
+              whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(201, 169, 98, 0.5)" }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Need help with distribution?
+            </motion.a>
+            <motion.a
               href="#portfolio"
-              className="rounded-full bg-[#C9A962] px-8 py-3 font-[family-name:var(--font-montserrat)] text-sm font-medium text-black transition-all hover:bg-[#D4BA7A] hover:shadow-lg hover:shadow-[#C9A962]/20"
+              className="rounded-full border-2 border-[#C9A962] px-8 py-4 font-[family-name:var(--font-montserrat)] text-base font-medium text-[#C9A962]"
+              whileHover={{ backgroundColor: "#C9A962", color: "#000" }}
+              whileTap={{ scale: 0.98 }}
             >
               Explore Our Portfolio
-            </a>
-            <a
-              href="#services"
-              className="rounded-full border-2 border-[#C9A962] px-8 py-3 font-[family-name:var(--font-montserrat)] text-sm font-medium text-[#C9A962] transition-all hover:bg-[#C9A962] hover:text-black"
-            >
-              Our Services
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
         </div>
       </div>
 
       {/* Navigation Arrows */}
-      <button
+      <motion.button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-3 text-[#C9A962] backdrop-blur-sm transition-all hover:bg-black/60 border border-[#C9A962]/30"
+        className="absolute left-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-black/30 p-4 text-[#C9A962] backdrop-blur-sm border border-[#C9A962]/30"
+        whileHover={{ scale: 1.1, backgroundColor: "rgba(201, 169, 98, 0.2)" }}
+        whileTap={{ scale: 0.95 }}
         aria-label="Previous slide"
       >
         <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
         </svg>
-      </button>
-      <button
+      </motion.button>
+      <motion.button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-3 text-[#C9A962] backdrop-blur-sm transition-all hover:bg-black/60 border border-[#C9A962]/30"
+        className="absolute right-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-black/30 p-4 text-[#C9A962] backdrop-blur-sm border border-[#C9A962]/30"
+        whileHover={{ scale: 1.1, backgroundColor: "rgba(201, 169, 98, 0.2)" }}
+        whileTap={{ scale: 0.95 }}
         aria-label="Next slide"
       >
         <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
-      </button>
+      </motion.button>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-2">
+      <div className="absolute bottom-12 left-1/2 flex -translate-x-1/2 gap-3 z-30">
         {slides.map((_, index) => (
-          <button
+          <motion.button
             key={index}
             onClick={() => goToSlide(index)}
             className={`h-2 rounded-full transition-all ${
-              index === currentSlide ? "w-8 bg-[#C9A962]" : "w-2 bg-[#C9A962]/40 hover:bg-[#C9A962]/60"
+              index === currentSlide ? "w-10 bg-[#C9A962]" : "w-2 bg-[#C9A962]/40"
             }`}
+            whileHover={{ scale: 1.2, backgroundColor: "#C9A962" }}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
+
     </section>
   );
 }

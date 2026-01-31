@@ -36,7 +36,7 @@ export default function CareersForm() {
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       {/* Section Header */}
       <div className="text-center">
-        <h2 className="font-[family-name:var(--font-cormorant)] text-3xl font-bold text-white sm:text-4xl">
+        <h2 className="font-[family-name:var(--font-playfair)] text-3xl font-bold text-white sm:text-4xl">
           Apply <span className="text-[#C9A962]">Now</span>
         </h2>
         <p className="mx-auto mt-4 max-w-2xl font-[family-name:var(--font-montserrat)] text-lg text-gray-400">
@@ -53,7 +53,7 @@ export default function CareersForm() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 className="font-[family-name:var(--font-cormorant)] text-3xl font-semibold text-white">
+            <h3 className="font-[family-name:var(--font-playfair)] text-3xl font-semibold text-white">
               Application Submitted
             </h3>
             <p className="mt-4 font-[family-name:var(--font-montserrat)] text-gray-400">

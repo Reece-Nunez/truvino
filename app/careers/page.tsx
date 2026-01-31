@@ -83,7 +83,7 @@ export default function CareersPage() {
           <div className="absolute inset-0 bg-black/60" />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-              <h1 className="font-[family-name:var(--font-cormorant)] text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
+              <h1 className="font-[family-name:var(--font-playfair)] text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
                 Join Our <span className="text-[#C9A962]">Team</span>
               </h1>
               <p className="mx-auto mt-6 max-w-2xl font-[family-name:var(--font-montserrat)] text-lg text-gray-300 sm:text-xl">
@@ -105,7 +105,7 @@ export default function CareersPage() {
         <section className="bg-[#0a0a0a] py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
-              <h2 className="font-[family-name:var(--font-cormorant)] text-3xl font-bold text-white sm:text-4xl">
+              <h2 className="font-[family-name:var(--font-playfair)] text-3xl font-bold text-white sm:text-4xl">
                 Why <span className="text-[#C9A962]">Truvino</span>?
               </h2>
               <p className="mx-auto mt-4 max-w-2xl font-[family-name:var(--font-montserrat)] text-lg text-gray-400">
@@ -122,7 +122,7 @@ export default function CareersPage() {
                   <div className="mb-6 text-[#C9A962] transition-transform group-hover:scale-110">
                     {benefit.icon}
                   </div>
-                  <h3 className="font-[family-name:var(--font-cormorant)] text-xl font-semibold text-white">
+                  <h3 className="font-[family-name:var(--font-playfair)] text-xl font-semibold text-white">
                     {benefit.title}
                   </h3>
                   <p className="mt-3 font-[family-name:var(--font-montserrat)] text-sm text-gray-400">
@@ -139,7 +139,7 @@ export default function CareersPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
               <div>
-                <h2 className="font-[family-name:var(--font-cormorant)] text-3xl font-bold text-white sm:text-4xl">
+                <h2 className="font-[family-name:var(--font-playfair)] text-3xl font-bold text-white sm:text-4xl">
                   Our <span className="text-[#C9A962]">Values</span>
                 </h2>
                 <p className="mt-4 font-[family-name:var(--font-montserrat)] text-lg text-gray-400">
@@ -150,7 +150,7 @@ export default function CareersPage() {
                     <div key={index} className="flex gap-4">
                       <div className="flex-shrink-0 w-1 bg-[#C9A962] rounded-full" />
                       <div>
-                        <h3 className="font-[family-name:var(--font-cormorant)] text-xl font-semibold text-white">
+                        <h3 className="font-[family-name:var(--font-playfair)] text-xl font-semibold text-white">
                           {value.title}
                         </h3>
                         <p className="mt-2 font-[family-name:var(--font-montserrat)] text-sm text-gray-400">
