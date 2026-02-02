@@ -16,8 +16,8 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "Truvino | Premium Wine & Spirits Distribution",
-  description: "Truvino - Your trusted partner in premium wine and spirits distribution, warehousing, clearing, and delivery services worldwide.",
-  keywords: "wine distribution, spirits, warehousing, clearing, delivery, premium wines, international distribution",
+  description: "Truvino - Your trusted partner in premium wine and spirits distribution, warehousing, clearing, and logistics services worldwide.",
+  keywords: "wine distribution, spirits, warehousing, clearing, logistics, premium wines, international distribution",
 };
 
 export default function RootLayout({

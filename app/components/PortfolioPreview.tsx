@@ -90,9 +90,9 @@ export default function PortfolioPreview() {
 
                 {/* Content */}
                 <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="flex items-center gap-3 mb-2">
+                  <div className="flex items-center gap-4">
                     <motion.div
-                      className="relative h-8 w-8"
+                      className="relative h-10 w-10"
                       whileHover={{ scale: 1.2, rotate: 10 }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
@@ -104,20 +104,10 @@ export default function PortfolioPreview() {
                         }}
                       />
                     </motion.div>
-                    <p className="font-[family-name:var(--font-montserrat)] text-sm uppercase tracking-wider text-[#C9A962]">
+                    <p className="font-[family-name:var(--font-montserrat)] text-xl uppercase tracking-wider text-[#C9A962]">
                       {region.country}
                     </p>
                   </div>
-                  <h3 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold text-white">
-                    {region.name}
-                  </h3>
-                  <motion.p
-                    className="mt-2 font-[family-name:var(--font-montserrat)] text-sm text-gray-300"
-                    initial={{ opacity: 0, y: 10 }}
-                    whileHover={{ opacity: 1, y: 0 }}
-                  >
-                    {region.description}
-                  </motion.p>
                 </div>
 
                 {/* Hover Shine Effect */}
@@ -132,7 +122,7 @@ export default function PortfolioPreview() {
         {/* CTA */}
         <AnimatedSection delay={0.4} className="mt-12 text-center">
           <motion.a
-            href="#contact"
+            href="/contact"
             className="inline-flex items-center gap-2 rounded-full bg-[#C9A962] px-8 py-4 font-[family-name:var(--font-montserrat)] text-sm font-medium text-black"
             whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(201, 169, 98, 0.4)" }}
             whileTap={{ scale: 0.98 }}

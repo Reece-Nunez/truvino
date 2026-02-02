@@ -11,6 +11,7 @@ export default function CareersForm() {
   });
   const [resume, setResume] = useState<File | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -25,11 +26,36 @@ export default function CareersForm() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData, resume);
-    setSubmitted(true);
+    setIsSubmitting(true);
+
+    const formDataToSend = new FormData();
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("phone", formData.phone);
+    formDataToSend.append("message", formData.message);
+    formDataToSend.append("_subject", `New Career Application from ${formData.name}`);
+    if (resume) {
+      formDataToSend.append("attachment", resume);
+    }
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/reece@nunezdev.com", {
+        method: "POST",
+        body: formDataToSend,
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch {
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -172,9 +198,10 @@ export default function CareersForm() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full rounded-full bg-[#C9A962] px-8 py-4 font-[family-name:var(--font-montserrat)] text-base font-medium text-black transition-all hover:bg-[#D4BA7A] hover:shadow-lg hover:shadow-[#C9A962]/20"
+              disabled={isSubmitting}
+              className="w-full rounded-full bg-[#C9A962] px-8 py-4 font-[family-name:var(--font-montserrat)] text-base font-medium text-black transition-all hover:bg-[#D4BA7A] hover:shadow-lg hover:shadow-[#C9A962]/20 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Submit Application
+              {isSubmitting ? "Submitting..." : "Submit Application"}
             </button>
           </form>
         )}

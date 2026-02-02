@@ -50,9 +50,9 @@ const services = [
     ),
   },
   {
-    title: "Delivery",
+    title: "Logistics",
     description:
-      "Reliable and timely delivery services ensuring your products reach their destination in perfect condition.",
+      "Seamless end-to-end logistics ensuring your products are handled with care from origin to destination.",
     icon: (
       <svg className="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path

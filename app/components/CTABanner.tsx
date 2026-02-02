@@ -16,7 +16,7 @@ export default function CTABanner({ variant = "default" }: CTABannerProps) {
           whileHover={{ scale: 1.02 }}
         >
           <Link
-            href="#contact"
+            href="/contact"
             className="inline-flex items-center gap-2 rounded-full bg-[#C9A962] px-8 py-3 font-[family-name:var(--font-montserrat)] text-sm font-medium text-black transition-all hover:bg-[#D4BA7A] hover:shadow-lg hover:shadow-[#C9A962]/20"
           >
             Is your product looking for distribution?
@@ -61,7 +61,7 @@ export default function CTABanner({ variant = "default" }: CTABannerProps) {
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Link
-                  href="#contact"
+                  href="/contact"
                   className="inline-block rounded-full bg-black px-10 py-4 font-[family-name:var(--font-montserrat)] text-base font-medium text-white transition-all hover:bg-black/80 hover:shadow-xl"
                 >
                   Get In Touch Today
@@ -110,7 +110,7 @@ export default function CTABanner({ variant = "default" }: CTABannerProps) {
               whileTap={{ scale: 0.98 }}
             >
               <Link
-                href="#contact"
+                href="/contact"
                 className="inline-block rounded-full bg-[#C9A962] px-10 py-4 font-[family-name:var(--font-montserrat)] text-sm font-medium text-black transition-all hover:bg-[#D4BA7A] hover:shadow-lg hover:shadow-[#C9A962]/20 whitespace-nowrap"
               >
                 Contact Us
