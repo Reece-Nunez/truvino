@@ -120,17 +120,25 @@ export default function PortfolioPreview() {
         </div>
 
         {/* CTA */}
-        <AnimatedSection delay={0.4} className="mt-12 text-center">
+        <AnimatedSection delay={0.4} className="mt-12 text-center flex flex-col sm:flex-row items-center justify-center gap-4">
           <motion.a
-            href="/contact"
+            href="/portfolio"
             className="inline-flex items-center gap-2 rounded-full bg-[#C9A962] px-8 py-4 font-[family-name:var(--font-montserrat)] text-sm font-medium text-black"
             whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(201, 169, 98, 0.4)" }}
             whileTap={{ scale: 0.98 }}
           >
-            Is your product looking for distribution?
+            View Full Portfolio
             <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
+          </motion.a>
+          <motion.a
+            href="/contact"
+            className="inline-flex items-center gap-2 rounded-full border border-[#C9A962] px-8 py-4 font-[family-name:var(--font-montserrat)] text-sm font-medium text-[#C9A962] transition-colors hover:bg-[#C9A962] hover:text-black"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            Is your product looking for distribution?
           </motion.a>
         </AnimatedSection>
       </div>

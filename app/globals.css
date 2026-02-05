@@ -232,6 +232,16 @@ html {
   background: linear-gradient(90deg, var(--primary), var(--primary-light));
 }
 
+/* Hide scrollbar for horizontal scroll containers */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Elegant quote styling */
 .elegant-quote {
   position: relative;

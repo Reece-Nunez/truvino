@@ -12,7 +12,7 @@ export default function Header() {
   const leftLinks = [
     { href: "/about", label: "About" },
     { href: "/services", label: "Services" },
-    { href: "/#portfolio", label: "Portfolio" },
+    { href: "/portfolio", label: "Portfolio" },
   ];
 
   const rightLinks = [
