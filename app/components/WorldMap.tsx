@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import {
   ComposableMap,
@@ -91,10 +91,37 @@ export default function WorldMap({
     return set;
   }, []);
 
-  const handleGeoHover = (countryId: string | null) => {
+  const handleGeoHover = useCallback((countryId: string | null) => {
     setHoveredCountry(countryId);
     onCountryHover(countryId);
-  };
+  }, [onCountryHover]);
+
+  // Unified mouse move handler on the wrapper div
+  const handleMapMouseMove = useCallback((e: React.MouseEvent) => {
+    // Walk up from the event target to find a data-country attribute
+    let el = e.target as HTMLElement | SVGElement | null;
+    let countryId: string | null = null;
+    while (el && el !== e.currentTarget) {
+      const attr = el.getAttribute("data-country");
+      if (attr) {
+        countryId = attr;
+        break;
+      }
+      el = el.parentElement;
+    }
+
+    if (countryId) {
+      handleGeoHover(countryId);
+      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+      setTooltipPos({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+    } else {
+      handleGeoHover(null);
+      setTooltipPos(null);
+    }
+  }, [handleGeoHover]);
 
   const displayedCountry = hoveredCountry || activeCountry;
   const tooltipData = displayedCountry ? countryMap.get(displayedCountry) : null;
@@ -105,6 +132,7 @@ export default function WorldMap({
       <div className="hidden sm:block">
         <div
           className="relative w-full mx-auto"
+          onMouseMove={handleMapMouseMove}
           onMouseLeave={() => {
             setTooltipPos(null);
             handleGeoHover(null);
@@ -115,15 +143,26 @@ export default function WorldMap({
             <motion.div
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
-              className="absolute z-20 pointer-events-none px-4 py-2 rounded-full bg-[#1a1a1a]/95 border border-[#C9A962]/50 backdrop-blur-sm"
+              className="absolute z-20 pointer-events-none flex items-center gap-2 px-4 py-2 rounded-full bg-[#1a1a1a]/95 border border-[#C9A962]/50 backdrop-blur-sm"
               style={{
                 left: tooltipPos.x,
                 top: tooltipPos.y - 50,
                 transform: "translateX(-50%)",
               }}
             >
+              {tooltipData.icon ? (
+                <span
+                  className="inline-block h-4 w-4 bg-[#C9A962]"
+                  style={{
+                    mask: `url(${tooltipData.icon}) center/contain no-repeat`,
+                    WebkitMask: `url(${tooltipData.icon}) center/contain no-repeat`,
+                  }}
+                />
+              ) : (
+                <span className="text-sm">{tooltipData.flag}</span>
+              )}
               <span className="font-[family-name:var(--font-montserrat)] text-sm text-white whitespace-nowrap">
-                {tooltipData.flag} {tooltipData.name}{" "}
+                {tooltipData.name}{" "}
                 <span className="text-[#C9A962]">
                   ({tooltipData.products.length})
                 </span>
@@ -156,37 +195,7 @@ export default function WorldMap({
                     <Geography
                       key={geo.rsmKey}
                       geography={geo}
-                      onMouseEnter={(e) => {
-                        if (ourCountryId) {
-                          handleGeoHover(ourCountryId);
-                          const rect = (
-                            e.target as SVGElement
-                          ).closest("svg")?.getBoundingClientRect();
-                          if (rect) {
-                            setTooltipPos({
-                              x: e.clientX - rect.left,
-                              y: e.clientY - rect.top,
-                            });
-                          }
-                        }
-                      }}
-                      onMouseMove={(e) => {
-                        if (ourCountryId) {
-                          const rect = (
-                            e.target as SVGElement
-                          ).closest("svg")?.getBoundingClientRect();
-                          if (rect) {
-                            setTooltipPos({
-                              x: e.clientX - rect.left,
-                              y: e.clientY - rect.top,
-                            });
-                          }
-                        }
-                      }}
-                      onMouseLeave={() => {
-                        handleGeoHover(null);
-                        setTooltipPos(null);
-                      }}
+                      data-country={ourCountryId || ""}
                       onClick={() => {
                         if (ourCountryId) {
                           onCountrySelect(ourCountryId);
@@ -300,23 +309,8 @@ export default function WorldMap({
                     fill="#C9A962"
                     stroke="#0a0a0a"
                     strokeWidth={1}
+                    data-country={country.id}
                     style={{ cursor: "pointer" }}
-                    onMouseEnter={(e) => {
-                      handleGeoHover(country.id);
-                      const rect = (
-                        e.target as SVGElement
-                      ).closest("svg")?.getBoundingClientRect();
-                      if (rect) {
-                        setTooltipPos({
-                          x: e.clientX - rect.left,
-                          y: e.clientY - rect.top,
-                        });
-                      }
-                    }}
-                    onMouseLeave={() => {
-                      handleGeoHover(null);
-                      setTooltipPos(null);
-                    }}
                     onClick={() => onCountrySelect(country.id)}
                   />
                 </Marker>

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import AnimatedSection from "../components/AnimatedSection";
@@ -35,7 +35,15 @@ const totalSpirits = allCountries.reduce(
 
 export default function PortfolioPage() {
   const [activeCountry, setActiveCountry] = useState<string | null>(null);
+  const [showBackToTop, setShowBackToTop] = useState(false);
   const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
+
+  // Show back-to-top button after scrolling past hero
+  useEffect(() => {
+    const onScroll = () => setShowBackToTop(window.scrollY > 600);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Scroll spy: track which country section is in view
   useEffect(() => {
@@ -48,7 +56,7 @@ export default function PortfolioPage() {
         }
       },
       {
-        rootMargin: "-160px 0px -60% 0px",
+        rootMargin: "-40% 0px -55% 0px",
         threshold: 0,
       }
     );
@@ -223,6 +231,35 @@ export default function PortfolioPage() {
         </section>
       </main>
       <Footer />
+
+      {/* Back to top button */}
+      <AnimatePresence>
+        {showBackToTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-[#C9A962] text-black flex items-center justify-center shadow-lg shadow-[#C9A962]/20 hover:bg-[#d4b96f] transition-colors"
+            aria-label="Back to top"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              strokeWidth={2.5}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 15l7-7 7 7"
+              />
+            </svg>
+          </motion.button>
+        )}
+      </AnimatePresence>
     </>
   );
 }
