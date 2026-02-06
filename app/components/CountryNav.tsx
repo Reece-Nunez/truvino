@@ -124,7 +124,7 @@ export default function CountryNav({
         {/* Scrollable pills */}
         <div
           ref={scrollRef}
-          className="flex justify-center gap-1.5 py-2.5 overflow-x-auto scrollbar-hide px-6"
+          className="flex gap-1.5 py-2.5 overflow-x-auto scrollbar-hide px-6"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {countries.map((country) => {
