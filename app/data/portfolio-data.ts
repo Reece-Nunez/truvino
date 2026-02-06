@@ -983,6 +983,7 @@ export const countries: CountryData[] = [
     id: "portugal",
     name: "Portugal",
     flag: "\u{1F1F5}\u{1F1F9}",
+    icon: "/icons/portugal.svg",
     region: "europe",
     mapPosition: { x: -8.2, y: 39.4 },
     description:
@@ -1028,6 +1029,7 @@ export const countries: CountryData[] = [
     id: "georgia",
     name: "Georgia",
     flag: "\u{1F1EC}\u{1F1EA}",
+    icon: "/icons/georgia.svg",
     region: "europe",
     mapPosition: { x: 43.4, y: 42.3 },
     description:
@@ -1089,6 +1091,7 @@ export const countries: CountryData[] = [
     id: "greece",
     name: "Greece",
     flag: "\u{1F1EC}\u{1F1F7}",
+    icon: "/icons/greece.svg",
     region: "europe",
     mapPosition: { x: 23.7, y: 37.9 },
     description:
@@ -1207,6 +1210,7 @@ export const countries: CountryData[] = [
     id: "argentina",
     name: "Argentina",
     flag: "\u{1F1E6}\u{1F1F7}",
+    icon: "/icons/argentina.svg",
     region: "south-america",
     mapPosition: { x: -64.0, y: -34.6 },
     description:
@@ -1354,6 +1358,7 @@ export const countries: CountryData[] = [
     id: "brazil",
     name: "Brazil",
     flag: "\u{1F1E7}\u{1F1F7}",
+    icon: "/icons/brazil.svg",
     region: "south-america",
     mapPosition: { x: -47.9, y: -15.8 },
     description:
@@ -1415,6 +1420,7 @@ export const countries: CountryData[] = [
     id: "chile",
     name: "Chile",
     flag: "\u{1F1E8}\u{1F1F1}",
+    icon: "/icons/chile.svg",
     region: "south-america",
     mapPosition: { x: -70.7, y: -33.4 },
     description:
@@ -1700,6 +1706,7 @@ export const countries: CountryData[] = [
     id: "new-zealand",
     name: "New Zealand",
     flag: "\u{1F1F3}\u{1F1FF}",
+    icon: "/icons/new-zealand.svg",
     region: "oceania",
     mapPosition: { x: 174.9, y: -41.3 },
     description:
@@ -1739,6 +1746,7 @@ export const countries: CountryData[] = [
     id: "south-korea",
     name: "South Korea",
     flag: "\u{1F1F0}\u{1F1F7}",
+    icon: "/icons/south-korea.svg",
     region: "asia",
     mapPosition: { x: 127.0, y: 37.6 },
     description:
@@ -1856,6 +1864,7 @@ export const countries: CountryData[] = [
     id: "japan",
     name: "Japan",
     flag: "\u{1F1EF}\u{1F1F5}",
+    icon: "/icons/japan.svg",
     region: "asia",
     mapPosition: { x: 139.7, y: 35.7 },
     description:
@@ -1885,6 +1894,7 @@ export const countries: CountryData[] = [
     id: "india",
     name: "India",
     flag: "\u{1F1EE}\u{1F1F3}",
+    icon: "/icons/india.svg",
     region: "asia",
     mapPosition: { x: 78.0, y: 21.0 },
     description:
@@ -1922,6 +1932,7 @@ export const countries: CountryData[] = [
     id: "china",
     name: "China",
     flag: "\u{1F1E8}\u{1F1F3}",
+    icon: "/icons/china.svg",
     region: "asia",
     mapPosition: { x: 104.2, y: 35.9 },
     description:
@@ -1967,6 +1978,7 @@ export const countries: CountryData[] = [
     id: "mexico",
     name: "Mexico",
     flag: "\u{1F1F2}\u{1F1FD}",
+    icon: "/icons/mexico.svg",
     region: "north-america",
     mapPosition: { x: -102.6, y: 23.6 },
     description:
@@ -1988,6 +2000,7 @@ export const countries: CountryData[] = [
     id: "caribbean",
     name: "Caribbean",
     flag: "\u{1F3DD}\u{FE0F}",
+    icon: "/icons/caribbean.svg",
     region: "north-america",
     mapPosition: { x: -72.0, y: 19.0 },
     description:

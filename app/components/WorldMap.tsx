@@ -134,12 +134,12 @@ export default function WorldMap({
           <ComposableMap
             projection="geoNaturalEarth1"
             projectionConfig={{
-              scale: 155,
+              scale: 190,
               center: [10, 15],
             }}
             width={960}
-            height={420}
-            style={{ width: "100%", height: "auto", maxHeight: "65vh" }}
+            height={550}
+            style={{ width: "100%", height: "auto", maxHeight: "80vh" }}
           >
             {/* Country shapes */}
             <Geographies geography={GEO_URL}>
@@ -243,6 +243,7 @@ export default function WorldMap({
                   strokeWidth={0.5}
                   strokeDasharray="4 4"
                   strokeOpacity={0.15}
+                  style={{ pointerEvents: "none" }}
                 />
               );
             })}
@@ -268,6 +269,7 @@ export default function WorldMap({
                       stroke="#C9A962"
                       strokeWidth={1}
                       opacity={0.4}
+                      pointerEvents="none"
                     >
                       <animate
                         attributeName="r"
@@ -290,6 +292,7 @@ export default function WorldMap({
                     r={isHighlighted ? 10 : 4}
                     fill="#C9A962"
                     opacity={isHighlighted ? 0.2 : 0.5}
+                    pointerEvents="none"
                   />
                   {/* Dot */}
                   <circle
