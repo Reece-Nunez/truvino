@@ -19,10 +19,13 @@ export default function CountryNav({
   const pillRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
+  const [needsScroll, setNeedsScroll] = useState(false);
 
   const checkScroll = useCallback(() => {
     const el = scrollRef.current;
     if (!el) return;
+    const overflows = el.scrollWidth > el.clientWidth + 10;
+    setNeedsScroll(overflows);
     setCanScrollLeft(el.scrollLeft > 10);
     setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
   }, []);
@@ -79,7 +82,7 @@ export default function CountryNav({
         {canScrollLeft && (
           <button
             onClick={() => scroll("left")}
-            className="absolute left-0 top-0 bottom-0 z-10 flex items-center px-2 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/90 to-transparent"
+            className="absolute left-0 top-0 bottom-0 z-20 flex items-center px-3 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/90 to-transparent"
             aria-label="Scroll left"
           >
             <svg
@@ -102,7 +105,7 @@ export default function CountryNav({
         {canScrollRight && (
           <button
             onClick={() => scroll("right")}
-            className="absolute right-0 top-0 bottom-0 z-10 flex items-center px-2 bg-gradient-to-l from-[#0a0a0a] via-[#0a0a0a]/90 to-transparent"
+            className="absolute right-0 top-0 bottom-0 z-20 flex items-center px-3 bg-gradient-to-l from-[#0a0a0a] via-[#0a0a0a]/90 to-transparent"
             aria-label="Scroll right"
           >
             <svg
@@ -124,7 +127,9 @@ export default function CountryNav({
         {/* Scrollable pills */}
         <div
           ref={scrollRef}
-          className="flex gap-1.5 py-2.5 overflow-x-auto scrollbar-hide px-6"
+          className={`flex gap-1.5 py-2.5 overflow-x-auto scrollbar-hide ${
+            needsScroll ? "px-10" : "justify-center px-6"
+          }`}
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {countries.map((country) => {
@@ -165,7 +170,9 @@ export default function CountryNav({
             );
           })}
           {/* End spacer */}
-          <div className="flex-shrink-0 w-6" aria-hidden="true" />
+          {needsScroll && (
+            <div className="flex-shrink-0 w-10" aria-hidden="true" />
+          )}
         </div>
       </div>
     </div>
