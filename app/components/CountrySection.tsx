@@ -41,7 +41,7 @@ export default function CountrySection({ country, index, filteredProducts }: Cou
     <section
       id={country.id}
       className={`${bgColor} py-20`}
-      style={{ scrollMarginTop: "140px" }}
+      style={{ scrollMarginTop: "195px" }}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <AnimatedSection>

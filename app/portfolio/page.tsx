@@ -312,7 +312,7 @@ export default function PortfolioPage() {
         />
 
         {/* Global Filter Bar */}
-        <section className="sticky top-[88px] z-30 bg-[#0a0a0a]/95 backdrop-blur-md border-b border-[#C9A962]/10 py-4">
+        <section className="sticky top-[128px] z-30 bg-[#0a0a0a]/95 backdrop-blur-md border-b border-[#C9A962]/10 py-4">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <ProductFilter
               categories={categoryOptions}

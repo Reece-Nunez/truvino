@@ -76,7 +76,7 @@ export default function CountryNav({
   };
 
   return (
-    <div className="sticky top-20 z-30 bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-[#C9A962]/20">
+    <div className="sticky top-20 z-40 bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-[#C9A962]/20">
       <div className="relative mx-auto px-2 sm:px-4">
         {/* Left scroll arrow */}
         {canScrollLeft && (
