@@ -29,8 +29,25 @@ export interface Product {
   category: ProductCategory;
   type: WineType | SpiritType;
   description: string;
+  image?: string;
   tags?: string[];
   points?: string;
+  origin?: string;
+  bottleSizes?: string[];
+  specifications?: Record<string, string>;
+  vinification?: string;
+  tastingNotes?: string;
+  foodPairings?: string;
+  downloadables?: { label: string; url: string }[];
+}
+
+export function generateSlug(product: Product): string {
+  return `${product.brand}-${product.name}`
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 }
 
 export interface CountryData {
@@ -64,6 +81,13 @@ export const countries: CountryData[] = [
         type: "sparkling",
         description:
           "From the heart of the DOC Prosecco region, sweet peaches and perfumed honeysuckle on a delicious citrus and ripe apple finish.",
+        image: "/portfolio/blu-prosecco.webp",
+        origin: "Valdobbiadene, Italy",
+        bottleSizes: ["750ml", "200ml"],
+        specifications: { "Type": "Sparkling Wine" },
+        tastingNotes: "From the heart of the DOC Prosecco region, sweet peaches and perfumed honeysuckle on a delicious citrus and ripe apple finish.",
+        vinification: "Base wine vinified in stainless steel at cool temperatures. Secondary fermentation develops fine persistent bubbles and elegant mousse. Careful dosage balances sweetness and acidity.",
+        foodPairings: "Appetizers, oysters, light seafood, fresh fruit, and celebratory toasts.",
       },
       {
         name: "Pink Sparkling Ros\u00e9",
@@ -73,6 +97,13 @@ export const countries: CountryData[] = [
         description:
           "Ribolla based sparkling ros\u00e9 with brilliant pink color, fresh red berries and hints of honeysuckle and pear on a clean, crisp finish.",
         tags: ["limited"],
+        image: "/portfolio/pink-sparkling-rose.webp",
+        origin: "Veneto, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Sparkling Wine" },
+        tastingNotes: "Ribolla based sparkling ros\u00e9 with brilliant pink color, fresh red berries and hints of honeysuckle and pear on a clean, crisp finish.",
+        vinification: "Base wine vinified in stainless steel at cool temperatures. Secondary fermentation develops fine persistent bubbles and elegant mousse. Careful dosage balances sweetness and acidity.",
+        foodPairings: "Appetizers, oysters, light seafood, fresh fruit, and celebratory toasts.",
       },
       {
         name: "Brut",
@@ -82,6 +113,13 @@ export const countries: CountryData[] = [
         description:
           "Floral aromas with flavors of green apples and white peach. Pale straw yellow, delicately aromatic with hints of white florals and candied lemon with a creamy finish.",
         tags: ["organic"],
+        image: "/portfolio/bee-organic-brut.webp",
+        origin: "Terre Siciliane IGP, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Sparkling Wine" },
+        tastingNotes: "Floral aromas with flavors of green apples and white peach. Pale straw yellow, delicately aromatic with hints of white florals and candied lemon with a creamy finish.",
+        vinification: "Base wine vinified in stainless steel at cool temperatures. Secondary fermentation develops fine persistent bubbles and elegant mousse. Careful dosage balances sweetness and acidity.",
+        foodPairings: "Appetizers, oysters, light seafood, fresh fruit, and celebratory toasts.",
       },
       {
         name: "Spumante Extra Dry",
@@ -90,6 +128,13 @@ export const countries: CountryData[] = [
         type: "sparkling",
         description:
           "100% Glera. Pale golden straw with tiny persistent bubbles. Fresh citrus aromas with hints of honey and white flowers. Ripe citrus, lemon, green apple with touches of grapefruit and mineralogy.",
+        image: "/portfolio/good-fucking-bubbles-spumante-extra-dry.webp",
+        origin: "Prosecco DOC, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Sparkling Wine" },
+        tastingNotes: "100% Glera. Pale golden straw with tiny persistent bubbles. Fresh citrus aromas with hints of honey and white flowers. Ripe citrus, lemon, green apple with touches of grapefruit and mineralogy.",
+        vinification: "Base wine vinified in stainless steel at cool temperatures. Secondary fermentation develops fine persistent bubbles and elegant mousse. Careful dosage balances sweetness and acidity.",
+        foodPairings: "Appetizers, oysters, light seafood, fresh fruit, and celebratory toasts.",
       },
       {
         name: "Prosecco",
@@ -98,6 +143,13 @@ export const countries: CountryData[] = [
         type: "sparkling",
         description:
           "Yellow hue with delicate green highlights. Aromatic bouquet with delicate notes of crisp apple and fragrant flowers. Captivating palate, zesty, refined taste that lingers elegantly.",
+        image: "/portfolio/vita-bella-prosecco.webp",
+        origin: "Italy",
+        bottleSizes: ["750ml", "200ml"],
+        specifications: { "Type": "Sparkling Wine" },
+        tastingNotes: "Yellow hue with delicate green highlights. Aromatic bouquet with delicate notes of crisp apple and fragrant flowers. Captivating palate, zesty, refined taste that lingers elegantly.",
+        vinification: "Base wine vinified in stainless steel at cool temperatures. Secondary fermentation develops fine persistent bubbles and elegant mousse. Careful dosage balances sweetness and acidity.",
+        foodPairings: "Appetizers, oysters, light seafood, fresh fruit, and celebratory toasts.",
       },
       {
         name: "Prosecco Ros\u00e9",
@@ -106,6 +158,13 @@ export const countries: CountryData[] = [
         type: "sparkling",
         description:
           "Refreshing, approachably effervescent. Fresh berry notes complemented by bright effervescence. A perfect brunch accompaniment.",
+        image: "/portfolio/vita-bella-prosecco-rose.webp",
+        origin: "Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Sparkling Wine" },
+        tastingNotes: "Refreshing, approachably effervescent. Fresh berry notes complemented by bright effervescence. A perfect brunch accompaniment.",
+        vinification: "Base wine vinified in stainless steel at cool temperatures. Secondary fermentation develops fine persistent bubbles and elegant mousse. Careful dosage balances sweetness and acidity.",
+        foodPairings: "Appetizers, oysters, light seafood, fresh fruit, and celebratory toasts.",
       },
       {
         name: "Prosecco",
@@ -114,6 +173,13 @@ export const countries: CountryData[] = [
         type: "sparkling",
         description:
           "A refreshing sparkling wine from the Veneto region. Delicate aromas of white flowers and citrus, with a crisp palate of green apple and lemon.",
+        image: "/portfolio/starla-prosecco.webp",
+        origin: "Veneto, Italy",
+        bottleSizes: ["1.5L", "750ml", "187ml"],
+        specifications: { "Type": "Sparkling Wine" },
+        tastingNotes: "A refreshing sparkling wine from the Veneto region. Delicate aromas of white flowers and citrus, with a crisp palate of green apple and lemon.",
+        vinification: "Base wine vinified in stainless steel at cool temperatures. Secondary fermentation develops fine persistent bubbles and elegant mousse. Careful dosage balances sweetness and acidity.",
+        foodPairings: "Appetizers, oysters, light seafood, fresh fruit, and celebratory toasts.",
       },
       {
         name: "Ros\u00e9 All\u00e9e Sparkling",
@@ -122,6 +188,13 @@ export const countries: CountryData[] = [
         type: "sparkling",
         description:
           "Blissfully delicious, the taste of the sparkling fruit gives way to an indescribable feeling of surrender. A tradition passed down from generation to generation.",
+        image: "/portfolio/birkedal-hartmann-rose-allee-sparkling.webp",
+        origin: "Denmark",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Sparkling Wine" },
+        tastingNotes: "Blissfully delicious, the taste of the sparkling fruit gives way to an indescribable feeling of surrender. A tradition passed down from generation to generation.",
+        vinification: "Base wine vinified in stainless steel at cool temperatures. Secondary fermentation develops fine persistent bubbles and elegant mousse. Careful dosage balances sweetness and acidity.",
+        foodPairings: "Appetizers, oysters, light seafood, fresh fruit, and celebratory toasts.",
       },
       // WHITE
       {
@@ -131,6 +204,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Crisp, refreshing profile. Straw yellow color. Bouquet of apples and citrus. Light body with flavors of apple and pear, complemented by subtle notes of lime.",
+        image: "/portfolio/toco-divino-pinot-grigio.webp",
+        origin: "Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Crisp, refreshing profile. Straw yellow color. Bouquet of apples and citrus. Light body with flavors of apple and pear, complemented by subtle notes of lime.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Light appetizers, seafood, and fresh salads.",
       },
       {
         name: "Pinot Grigio Delle Venezie",
@@ -139,6 +219,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Brilliant straw yellow with copper tinges. Elegant with delicate hints of apricot and peach. Dry, fresh, harmonic, acidity perfectly balanced.",
+        image: "/portfolio/progetto-costa-dino-pinot-grigio.webp",
+        origin: "Delle Venezie, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Brilliant straw yellow with copper tinges. Elegant with delicate hints of apricot and peach. Dry, fresh, harmonic, acidity perfectly balanced.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Pinot Grigio-Sauvignon Blanc",
@@ -147,6 +234,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Two noble varieties that blend perfectly. Intense fruity notes of peach, lime and grapefruit. Round, fruity and mineral on the palate.",
+        image: "/portfolio/villarria-pino-grigio-sauvignon-blanc.webp",
+        origin: "Terre Siciliane IGT, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Two noble varieties that blend perfectly. Intense fruity notes of peach, lime and grapefruit. Round, fruity and mineral on the palate.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fish courses, seafood, and light Italian meals.",
       },
       {
         name: "Pinot Grigio Delle Venezie DOC",
@@ -155,6 +249,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Light straw yellow. Dry and crisp. Perfect to accompany fish courses, risotto dishes, chicken and salads.",
+        image: "/portfolio/villarria-pinot-grigio-delle-venezie-DOC.webp",
+        origin: "Delle Venezie, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Light straw yellow. Dry and crisp. Perfect to accompany fish courses, risotto dishes, chicken and salads.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fish courses, risotto dishes, chicken, and salads.",
       },
       {
         name: "Moscato Puglia IGT",
@@ -163,6 +264,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Light golden yellow. Fresh and aromatic with intense notes of peaches and orange blossom. Fruity with soft sweetness on the palate.",
+        image: "/portfolio/villarria-moscato-puglia-IGT.webp",
+        origin: "Puglia, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Light golden yellow. Fresh and aromatic with intense notes of peaches and orange blossom. Fruity with soft sweetness on the palate.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Spicy food, Mediterranean salads, and as an aperitif.",
       },
       {
         name: "Emilia IGT Bianco",
@@ -171,6 +279,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Light straw yellow. Intense flavors of white flowers and tropical notes. Balanced and harmonious with delicate acidity.",
+        image: "/portfolio/matteotti-emilia-igt-bianco.webp",
+        origin: "Emilia Romagna, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Light straw yellow. Intense flavors of white flowers and tropical notes. Balanced and harmonious with delicate acidity.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Savory appetizers, salads, and as a refreshing drink.",
       },
       {
         name: "Pinot Grigio IGT",
@@ -179,6 +294,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Crystal clear straw yellow. Fruity and floral scents of apricot, peach, citrus, acacia, jasmine. Elegant, pleasant, and fruity with soft tannins.",
+        image: "/portfolio/with-love-pino-grigio-igt.webp",
+        origin: "Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Crystal clear straw yellow. Fruity and floral scents of apricot, peach, citrus, acacia, jasmine. Elegant, pleasant, and fruity with soft tannins.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Chardonnay",
@@ -187,6 +309,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Crystalline straw yellow with golden reflections. Delicate aromas of white flowers and yellow pulp fruit.",
+        image: "/portfolio/with-love-chardonnay.webp",
+        origin: "Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Crystalline straw yellow with golden reflections. Delicate aromas of white flowers and yellow pulp fruit.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Pinot Grigio",
@@ -195,6 +324,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Beautifully balanced Pinot Grigio from Alto Adige with bright citrus fruit flavors, underlying mineral notes and a lengthy finish.",
+        image: "/portfolio/arento-pinot-grigio-alto-adige.webp",
+        origin: "Alto Adige, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Beautifully balanced Pinot Grigio from Alto Adige with bright citrus fruit flavors, underlying mineral notes and a lengthy finish.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Chardonnay DOC",
@@ -203,6 +339,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Intense straw yellow with golden shades. Spring blossoms, white stone fruit with mineral notes. Enveloping, balanced with fresh acidity and sapidity.",
+        image: "/portfolio/la-bergera-chardonnay.webp",
+        origin: "Piedmont, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Chardonnay", "Classification": "DOC" },
+        tastingNotes: "Intense straw yellow with golden shades. Spring blossoms, white stone fruit with mineral notes. Enveloping, balanced with fresh acidity and sapidity.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Aperitif, appetizers, fish, veggie pasta, and poultry.",
       },
       {
         name: "Timorasso",
@@ -211,6 +354,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Made from the ancient and rare Timorasso grape from Colli Tortonesi. Enticing notes of ripe stone fruits, citrus, white flowers and a touch of honey.",
+        image: "/portfolio/volpi-timorasso.webp",
+        origin: "Piedmont, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Made from the ancient and rare Timorasso grape from Colli Tortonesi. Enticing notes of ripe stone fruits, citrus, white flowers and a touch of honey.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Oro di Gavi",
@@ -219,6 +369,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "One of Italy\u2019s top-ranking whites. Reminiscent of white flowers, lemons, green apples, honeydew and a unique almond finish.",
+        image: "/portfolio/oro-di-gavi.webp",
+        origin: "Gavi, Piedmont, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "One of Italy\u2019s top-ranking whites. Reminiscent of white flowers, lemons, green apples, honeydew and a unique almond finish.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Pinot Grigio",
@@ -227,6 +384,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "From the high altitude vineyards of the Veneto region. A delicious expression of a classic Italian varietal. Fresh, light, refreshing, and infinitely enjoyable.",
+        image: "/portfolio/good-fucking-pino-grigio.webp",
+        origin: "Veneto, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "From the high altitude vineyards of the Veneto region. A delicious expression of a classic Italian varietal. Fresh, light, refreshing, and infinitely enjoyable.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Pinot Grigio",
@@ -235,6 +399,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Crisp yet delicate, this dry, light-bodied wine has refreshing citrus flavors. Perfect as an aperitif with light hors d\u2019oeuvres or seafood.",
+        image: "/portfolio/costa-bella-pino-grigio.webp",
+        origin: "Delle Venezie, Italy",
+        bottleSizes: ["1.5L"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Crisp yet delicate, this dry, light-bodied wine has refreshing citrus flavors. Perfect as an aperitif with light hors d\u2019oeuvres or seafood.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Pinot Grigio",
@@ -244,6 +415,13 @@ export const countries: CountryData[] = [
         description:
           "A classic medium bodied pinot grigio from the heart of the Veneto region with honeyed lemony ripe apple and tropical fruit aromas.",
         tags: ["biodynamic"],
+        image: "/portfolio/san-santo-diodynamic-farmed-pino-grigio.webp",
+        origin: "Vicenza DOC, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Pinot Grigio", "Classification": "Vicenza DOC", "Farming": "Biodynamic" },
+        tastingNotes: "A classic medium bodied pinot grigio from the heart of the Veneto region with honeyed lemony ripe apple and tropical fruit aromas.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Sauvignon Blanc",
@@ -253,6 +431,13 @@ export const countries: CountryData[] = [
         description:
           "Dried apple, lemon, lime and lemon curd on the nose with hints of cedar. Medium-to full-bodied with a solid core of fruit and a fresh, vivid finish.",
         tags: ["biodynamic"],
+        image: "/portfolio/san-santo-diodynamic-farmed-sauvignon-blanc.webp",
+        origin: "Vicenza DOC, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Sauvignon Blanc", "Classification": "Vicenza DOC", "Farming": "Biodynamic" },
+        tastingNotes: "Dried apple, lemon, lime and lemon curd on the nose with hints of cedar. Medium-to full-bodied with a solid core of fruit and a fresh, vivid finish.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Les Terrasses Blanc",
@@ -261,6 +446,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Clear and crystalline. Striking fruitiness with notes of litchi and exotic fruits. Lively and fresh, perfect with a seafood platter.",
+        image: "/portfolio/la-negly-les-terrasses-blanc.webp",
+        origin: "La Clape, Languedoc, France",
+        bottleSizes: ["750ml"],
+        specifications: { "Style": "Lively, fresh, fruity" },
+        tastingNotes: "Clear and crystalline. Striking fruitiness with notes of litchi and exotic fruits. Lively and fresh, perfect with a seafood platter.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Aperitifs and seafood platters.",
       },
       {
         name: "Pinot Grigio",
@@ -269,6 +461,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Sicilian Pinot Grigio with ceramic embossed heart. Fresh hay, banana, yellow apple, pear, pine nuts and green melon. Fresh, light wine with a crisp finish.",
+        image: "/portfolio/amami-pino-grigio.webp",
+        origin: "Sicily, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Sicilian Pinot Grigio with ceramic embossed heart. Fresh hay, banana, yellow apple, pear, pine nuts and green melon. Fresh, light wine with a crisp finish.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Pinot Grigio",
@@ -277,6 +476,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Crisp yet delicate, this dry, light-bodied wine has refreshing citrus flavors. Excellent value as an aperitif or with seafood.",
+        image: "/portfolio/365-pino-grigio.webp",
+        origin: "Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Crisp yet delicate, this dry, light-bodied wine has refreshing citrus flavors. Excellent value as an aperitif or with seafood.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Sauvignon Blanc",
@@ -286,6 +492,13 @@ export const countries: CountryData[] = [
         description:
           "Medium body style. Fresh and fruity notes with touches of tropical fruit, white peaches and grapefruit.",
         tags: ["organic"],
+        image: "/portfolio/bee-organic-sauvignon-blanc.webp",
+        origin: "Terre Siciliane IGP, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Medium body style. Fresh and fruity notes with touches of tropical fruit, white peaches and grapefruit.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Chardonnay",
@@ -295,6 +508,13 @@ export const countries: CountryData[] = [
         description:
           "Medium bodied with flavors of apple and lemon. Crisp with notes of vanilla, butterscotch, and lush tropical fruit with a creamy finish.",
         tags: ["organic"],
+        image: "/portfolio/bee-organic-chardonnay.webp",
+        origin: "Terre Siciliane IGP, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Medium bodied with flavors of apple and lemon. Crisp with notes of vanilla, butterscotch, and lush tropical fruit with a creamy finish.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Pinot Grigio",
@@ -304,6 +524,13 @@ export const countries: CountryData[] = [
         description:
           "Bright straw yellow with intense aromas of green apples. Inzolia indigenous grapes add balance, good acidity, and a fresh finish.",
         tags: ["organic"],
+        image: "/portfolio/bee-organic-pinot-grigio.webp",
+        origin: "Terre Siciliane IGP, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Bright straw yellow with intense aromas of green apples. Inzolia indigenous grapes add balance, good acidity, and a fresh finish.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       // RED
       {
@@ -313,6 +540,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Ruby matures to garnet. Vibrant cherries, strawberries and plum. Dark red fruits enriched by oak aging with nuances of vanilla and spice complexity.",
+        image: "/portfolio/toco-divino-chianti.webp",
+        origin: "Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Ruby matures to garnet. Vibrant cherries, strawberries and plum. Dark red fruits enriched by oak aging with nuances of vanilla and spice complexity.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Italian dishes, red meats, and aged cheeses.",
       },
       {
         name: "Barolo",
@@ -321,6 +555,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Medium garnet. Cherries, violets, cinnamon, nutmeg, leather. Red flowers and forest floor. Smooth tannins with red currants and good minerality.",
+        image: "/portfolio/volpi-barolo.webp",
+        origin: "Piedmont, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Medium garnet. Cherries, violets, cinnamon, nutmeg, leather. Red flowers and forest floor. Smooth tannins with red currants and good minerality.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Vino Rosso Semisweet",
@@ -329,6 +570,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Deep ruby red. Intense ripe cherries, blackberries, violets and spices. Light bodied, round and soft on the palate.",
+        image: "/portfolio/villarria-vino-rosso-semisweet.webp",
+        origin: "Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Deep ruby red. Intense ripe cherries, blackberries, violets and spices. Light bodied, round and soft on the palate.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Pasta dishes, pizza, and spicy food.",
       },
       {
         name: "Cabernet-Merlot Veneto IGT",
@@ -337,6 +585,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Bright ruby red. Intense ripe fruits, lightly herbaceous and intensively vinous. Dry and harmonious with a fruity finish.",
+        image: "/portfolio/villarria-cabernet-merlot-veneto-igt.webp",
+        origin: "Veneto, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Bright ruby red. Intense ripe fruits, lightly herbaceous and intensively vinous. Dry and harmonious with a fruity finish.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled meats, aged cheese, and pasta dishes.",
       },
       {
         name: "Emilia IGT Rosso",
@@ -345,6 +600,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Ruby color. Intense flavors of red berries and cherries. Balanced and harmonious, lightly tannic.",
+        image: "/portfolio/matteotti-emilia-igt-rosso.webp",
+        origin: "Emilia Romagna, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Ruby color. Intense flavors of red berries and cherries. Balanced and harmonious, lightly tannic.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Savory appetizers, white meats, and ham. Excellent lightly chilled.",
       },
       {
         name: "Valpolicella Ripasso DOC Superiore",
@@ -354,6 +616,13 @@ export const countries: CountryData[] = [
         description:
           "Rich and deep, elegant and powerful. Typical notes of cherry and blackcurrant marry well with the complexity of the wine.",
         points: "99 Points - Luca Maroni",
+        image: "/portfolio/4-cento-valpolicella-ripasso-doc-superiore.webp",
+        origin: "Veneto, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Classification": "DOC Superiore", "Style": "Ripasso" },
+        tastingNotes: "Rich and deep, elegant and powerful. Typical notes of cherry and blackcurrant marry well with the complexity of the wine.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Red Appassimento IGT Veneto",
@@ -363,6 +632,13 @@ export const countries: CountryData[] = [
         description:
           "Intense garnet red with refined personality. Intense hints of red fruits. Soft, elegant and full-bodied.",
         points: "91 Points - Luca Maroni",
+        image: "/portfolio/4-cento-red-appassimento-igt-vento.webp",
+        origin: "Veneto, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Style": "Appassimento" },
+        tastingNotes: "Intense garnet red with refined personality. Intense hints of red fruits. Soft, elegant and full-bodied.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Amarone Valpolicella DOCG",
@@ -371,6 +647,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Ruby red with violet reflections. Intense, complex and fruity with notes of cherries and blackberries. Soft, warm and tannic with great persistence.",
+        image: "/portfolio/4-cento-amarone-valpolicella-docg.webp",
+        origin: "Veneto, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Classification": "DOCG" },
+        tastingNotes: "Ruby red with violet reflections. Intense, complex and fruity with notes of cherries and blackberries. Soft, warm and tannic with great persistence.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Corvina IGT Veneto",
@@ -379,6 +662,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Deep ruby red. Cherry and morello cherry aromas with red fruits and spices. Velvety, soft, full-bodied, very persistent.",
+        image: "/portfolio/4-cento-corvina-igt-vento.webp",
+        origin: "Veneto, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Deep ruby red. Cherry and morello cherry aromas with red fruits and spices. Velvety, soft, full-bodied, very persistent.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "De\u00ect\u00e0 Primitivo",
@@ -387,6 +677,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Bright and impenetrable. Mulberry, cranberry juice and light menthol notes. Fruity return meets smooth, enveloping tannins.",
+        image: "/portfolio/le-vigne-di-sammarco-deita-primitivo.webp",
+        origin: "Salento, Puglia, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Primitivo" },
+        tastingNotes: "Bright and impenetrable. Mulberry, cranberry juice and light menthol notes. Fruity return meets smooth, enveloping tannins.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Negroamaro Salentino",
@@ -395,6 +692,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Ruby red with purple hues. Cherries and cloves with floral violet notes. Smooth tannins and right freshness define balance and vigorous personality.",
+        image: "/portfolio/le-vigne-di-sammarco-negroamaro-salentino.webp",
+        origin: "Salento, Puglia, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Negroamaro" },
+        tastingNotes: "Ruby red with purple hues. Cherries and cloves with floral violet notes. Smooth tannins and right freshness define balance and vigorous personality.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Salice Salentino",
@@ -403,6 +707,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Ruby red with garnet nuances. Black cherries and marasche in spirit, humus, cocoa powder. Persistence and fine tannins.",
+        image: "/portfolio/le-vigne-di-sammarco-salice-salentino.webp",
+        origin: "Salento, Puglia, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Negroamaro, Malvasia Nera" },
+        tastingNotes: "Ruby red with garnet nuances. Black cherries and marasche in spirit, humus, cocoa powder. Persistence and fine tannins.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Primitivo Di Manduria",
@@ -411,6 +722,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Deep dark ruby. Blackberries and jam with berries, violet, chocolate and pepper. Warm and soft, closing with power and persistence.",
+        image: "/portfolio/le-vigne-di-sammarco-primitivo-di-manduria.webp",
+        origin: "Salento, Puglia, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Primitivo" },
+        tastingNotes: "Deep dark ruby. Blackberries and jam with berries, violet, chocolate and pepper. Warm and soft, closing with power and persistence.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Nero Di Troia",
@@ -419,6 +737,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Ruby lit. Blackberries, currants and violets chase spicy black pepper. Full and full-bodied with measured, soft tannins.",
+        image: "/portfolio/le-vigne-di-sammarco-nero-di-troia.webp",
+        origin: "Salento, Puglia, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Nero di Troia" },
+        tastingNotes: "Ruby lit. Blackberries, currants and violets chase spicy black pepper. Full and full-bodied with measured, soft tannins.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Traditional Apulian recipes.",
       },
       {
         name: "Cabernet Sauvignon",
@@ -427,6 +752,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Ruby red with purple hues. Spicy nose with aromas of red fruits.",
+        image: "/portfolio/with-love-cabernet-sauvignon.webp",
+        origin: "Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Ruby red with purple hues. Spicy nose with aromas of red fruits.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Montepulciano D\u2019Abruzzo DOC",
@@ -435,6 +767,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Intense ruby red. Notes of red jam, raspberry and blueberry. In the mouth it is full and enveloping.",
+        image: "/portfolio/with-love-montepulciano-dabruzzo-doc.webp",
+        origin: "Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Intense ruby red. Notes of red jam, raspberry and blueberry. In the mouth it is full and enveloping.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Merlot",
@@ -443,6 +782,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Ruby red with purple hues. Spicy nose with aromas of red fruits.",
+        image: "/portfolio/with-love-merlot.webp",
+        origin: "Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Ruby red with purple hues. Spicy nose with aromas of red fruits.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Riserva Chianti",
@@ -451,6 +797,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Bright ruby red with intense, characteristic fruity bouquet and violet fragrance. Dry and harmonious with dark chocolate and black cherry notes.",
+        image: "/portfolio/santa-fina-riserva-chianti.webp",
+        origin: "Tuscany, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Sangiovese", "Style": "Riserva", "Aging": "Slavonian oak" },
+        tastingNotes: "Bright ruby red with intense, characteristic fruity bouquet and violet fragrance. Dry and harmonious with dark chocolate and black cherry notes.",
+        vinification: "90% Sangiovese and 10% Canaiolo, aged in Slavonian oak barrels. Traditional Tuscan winemaking.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Barbaresco",
@@ -459,6 +812,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Velvety, balanced and elegant. Ruby red aging to garnet. Wild berries, raspberry, white pepper, licorice and aromatic herbs.",
+        image: "/portfolio/la-bergera-barbaresco.webp",
+        origin: "Piedmont, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Nebbiolo", "Classification": "DOCG" },
+        tastingNotes: "Velvety, balanced and elegant. Ruby red aging to garnet. Wild berries, raspberry, white pepper, licorice and aromatic herbs.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Meat entrées, cured cheese, truffle risotto, and hazelnut pie.",
       },
       {
         name: "Nebbiolo DOC",
@@ -467,6 +827,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Ruby red tending to garnet with aging. Clean and intense bouquet of violet, wild rose, raspberry and strawberry.",
+        image: "/portfolio/la-bergara-nebbiolo.webp",
+        origin: "Piedmont, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Nebbiolo", "Classification": "DOC" },
+        tastingNotes: "Ruby red tending to garnet with aging. Clean and intense bouquet of violet, wild rose, raspberry and strawberry.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Ham, salami, cheese, and main courses.",
       },
       {
         name: "Barolo DOCG",
@@ -475,6 +842,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Complex, combining freshness with elegance. Red plums, cherry, strawberry compote, star anise, nutmeg, mint. Fresh acidity with great balance.",
+        image: "/portfolio/la-bergera-barolo.webp",
+        origin: "Piedmont, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Nebbiolo", "Classification": "DOCG" },
+        tastingNotes: "Complex, combining freshness with elegance. Red plums, cherry, strawberry compote, star anise, nutmeg, mint. Fresh acidity with great balance.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Rich meat dishes, aged cheeses, and truffle-based preparations.",
       },
       {
         name: "Barbera d\u2019Alba",
@@ -483,6 +857,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Brilliant ruby hue with purple highlights. Ripe cherries, plums, and wild berries accented by subtle floral and spice notes. Bright acidity and soft tannins.",
+        image: "/portfolio/la-bergera-barbera-dalba.webp",
+        origin: "Piedmont, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Barbera", "Classification": "DOC" },
+        tastingNotes: "Brilliant ruby hue with purple highlights. Ripe cherries, plums, and wild berries accented by subtle floral and spice notes. Bright acidity and soft tannins.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Barbera",
@@ -491,6 +872,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "An everyday wine of the people. Made from Barbera grapes, a dry red wine that is both affordable and an amazing representation of this historic region.",
+        image: "/portfolio/volpi-barbera.webp",
+        origin: "Piedmont, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "An everyday wine of the people. Made from Barbera grapes, a dry red wine that is both affordable and an amazing representation of this historic region.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Montepulciano d\u2019Abruzzo DOC",
@@ -499,6 +887,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Loaded with blackberry and red cherry flavors with a hint of spice. Soft tannins and a velvety finish.",
+        image: "/portfolio/arcasto-montepulciano-dabruzzo.webp",
+        origin: "Abruzzo, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Loaded with blackberry and red cherry flavors with a hint of spice. Soft tannins and a velvety finish.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Brunello di Montalcino",
@@ -507,6 +902,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Intense ruby red. Fine, ample red fruits with notes of flowering grapes and lavender. Dry but soft, full-bodied, velvety tannins. Longevity: 30 years.",
+        image: "/portfolio/sasso-dante-brunello-di-montalcino.webp",
+        origin: "Montalcino, Tuscany, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Sangiovese Grosso", "Longevity": "30 years" },
+        tastingNotes: "Intense ruby red. Fine, ample red fruits with notes of flowering grapes and lavender. Dry but soft, full-bodied, velvety tannins. Longevity: 30 years.",
+        vinification: "100% Sangiovese Grosso. Traditional Montalcino winemaking with extended aging. Longevity potential of 30 years.",
+        foodPairings: "Grilled red meats, game, aged cheeses, and hearty stews.",
       },
       {
         name: "Rosso Toscano",
@@ -515,6 +917,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Hand-drawn masterpiece label. Super Tuscan! Red fruit, wild rose, mint, black currant, licorice, resin and roasted coffee. Can age gracefully for 20 years.",
+        image: "/portfolio/lei-e-venere-rosso-toscano.webp",
+        origin: "Tuscany, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Hand-drawn masterpiece label. Super Tuscan! Red fruit, wild rose, mint, black currant, licorice, resin and roasted coffee. Can age gracefully for 20 years.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled meats, aged cheeses. Can age gracefully for 20 years.",
       },
       {
         name: "Ripasso Valpolicella",
@@ -523,6 +932,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Complex and intense blackberries, fruit juice with notes of leather, cedar and spices. Aged 18 months in Slavonian oak barrels.",
+        image: "/portfolio/porta-erbe-ripasso-valpolicella.webp",
+        origin: "Valpolicella, Veneto, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Aging": "18 months in Slavonian oak barrels", "Style": "Ripasso" },
+        tastingNotes: "Complex and intense blackberries, fruit juice with notes of leather, cedar and spices. Aged 18 months in Slavonian oak barrels.",
+        vinification: "Aged 18 months in Slavonian oak barrels.",
+        foodPairings: "Aged cheeses, roasted meats, and hearty pasta dishes.",
       },
       {
         name: "Amarone Valpolicella",
@@ -532,6 +948,13 @@ export const countries: CountryData[] = [
         description:
           "Velvety with bold flavors of blackberry, plum jam, espresso and vanilla. Limited-edition Amarone aged in fine oak barrels. Rich with dried cherries, black figs and dark chocolate.",
         tags: ["limited"],
+        image: "/portfolio/una-vita-amarone-valpolecella.webp",
+        origin: "Valpolicella, Veneto, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Velvety with bold flavors of blackberry, plum jam, espresso and vanilla. Limited-edition Amarone aged in fine oak barrels. Rich with dried cherries, black figs and dark chocolate.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Ripasso",
@@ -540,6 +963,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Creamy style with rich mid-palate, fresh acidity and structured tannins. Aromas of black cherries, ripe blueberries, and spice.",
+        image: "/portfolio/podere-poiano-ripasso.webp",
+        origin: "Valpolicella, Veneto, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Creamy style with rich mid-palate, fresh acidity and structured tannins. Aromas of black cherries, ripe blueberries, and spice.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Amarone",
@@ -548,6 +978,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Spicy oak, black truffle and sweet cassis. Concentration of very ripe, raisiny plums with a long, extremely well balanced finish. Dark chocolate and roasted plums.",
+        image: "/portfolio/podere-poiano-amarone.webp",
+        origin: "Valpolicella, Veneto, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Spicy oak, black truffle and sweet cassis. Concentration of very ripe, raisiny plums with a long, extremely well balanced finish. Dark chocolate and roasted plums.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Amarone",
@@ -557,6 +994,13 @@ export const countries: CountryData[] = [
         description:
           "Corvina, Corvinone, Rondinella and Molinara. 3-4 month drying process. Slow fermentation with 40 days skin contact. 3-year aging in Slavonian oak and French barriques.",
         tags: ["coming-soon"],
+        image: "/portfolio/porta-erbe-amarone.webp",
+        origin: "Valpolicella, Veneto, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Corvina, Corvinone, Rondinella, Molinara", "Process": "3-4 month drying, 40 days skin contact", "Aging": "3 years in Slavonian oak and French barriques" },
+        tastingNotes: "Corvina, Corvinone, Rondinella and Molinara. 3-4 month drying process. Slow fermentation with 40 days skin contact. 3-year aging in Slavonian oak and French barriques.",
+        vinification: "Corvina, Corvinone, Rondinella and Molinara grapes undergo a 3-4 month drying process. Slow fermentation with 40 days skin contact. Aged 3 years in Slavonian oak and French barriques.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Il Segno",
@@ -565,6 +1009,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Blend of grapes from the south of Italy. Garnet red with blackberry, plum, raspberry. Vanilla, tobacco, and licorice finish. Full-bodied with velvety tannins.",
+        image: "/portfolio/il-segno.webp",
+        origin: "Southern Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Blend of grapes from the south of Italy. Garnet red with blackberry, plum, raspberry. Vanilla, tobacco, and licorice finish. Full-bodied with velvety tannins.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Montepulciano",
@@ -573,6 +1024,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "From the Abruzzo region. Deep ruby red with violet highlights. Fruity bouquet with spicy cacao notes. Full-bodied with soft tannins.",
+        image: "/portfolio/amami-montepulciano.webp",
+        origin: "Abruzzo, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "From the Abruzzo region. Deep ruby red with violet highlights. Fruity bouquet with spicy cacao notes. Full-bodied with soft tannins.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Italian courses, beef brisket, hamburgers, beef bolognese, and pizzas.",
       },
       {
         name: "Primitivo",
@@ -581,6 +1039,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "\u2018Love\u2019 written in different languages on the label. Spicy, plummy Primitivo with hints of tobacco spice and orange zest.",
+        image: "/portfolio/amami-primitivo.webp",
+        origin: "Puglia, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "\u2018Love\u2019 written in different languages on the label. Spicy, plummy Primitivo with hints of tobacco spice and orange zest.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Luna Passante Nero D\u2019Avola",
@@ -589,6 +1054,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Harvested at night near Lake Arancio, Sicily. Deep ruby with purple hues. Balsamic herbs, red fruits, and floral scents. Soft, round tannins with wild raspberry.",
+        image: "/portfolio/luna-passante-nero-davola.webp",
+        origin: "Southern Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Harvested at night near Lake Arancio, Sicily. Deep ruby with purple hues. Balsamic herbs, red fruits, and floral scents. Soft, round tannins with wild raspberry.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Cabernet Sauvignon",
@@ -597,6 +1069,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Goji berries. Firm but forgiving tannins with juicy umami mid-palate. Earthy, fruity and spicy notes pair well with grilled meats and hearty stews.",
+        image: "/portfolio/costa-bella-cabernet-sauvignon.webp",
+        origin: "Delle Venezie, Italy",
+        bottleSizes: ["1.5L"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Goji berries. Firm but forgiving tannins with juicy umami mid-palate. Earthy, fruity and spicy notes pair well with grilled meats and hearty stews.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled meats, hearty stews, and strong cheeses.",
       },
       {
         name: "Montepulciano d\u2019Abruzzo",
@@ -605,6 +1084,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Deep color, supple tannins, strong aromas of oregano, pepper, tobacco, blackberry and cherry with a hint of spice and velvet finish.",
+        image: "/portfolio/costa-bella-montepulicano-dabruzzo.webp",
+        origin: "Abruzzo, Italy",
+        bottleSizes: ["1.5L"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Deep color, supple tannins, strong aromas of oregano, pepper, tobacco, blackberry and cherry with a hint of spice and velvet finish.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Chianti",
@@ -614,6 +1100,13 @@ export const countries: CountryData[] = [
         description:
           "Sangiovese with merlot and cabernet sauvignon. Deep fruity plum and intense cherry flavors with hints of spice, hazelnut, and delicate violet aromas.",
         tags: ["biodynamic"],
+        image: "/portfolio/san-santo-biodynamic-farmed-chianti.webp",
+        origin: "Chianti, Tuscany, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Sangiovese, Merlot, Cabernet Sauvignon", "Farming": "Biodynamic" },
+        tastingNotes: "Sangiovese with merlot and cabernet sauvignon. Deep fruity plum and intense cherry flavors with hints of spice, hazelnut, and delicate violet aromas.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Cabernet Sauvignon",
@@ -622,6 +1115,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Bold and expressive with aromas of blackberry, black currant, and dark cherry, layered with vanilla, cedar, and dried herbs.",
+        image: "/portfolio/puribus-paso-robles-cabernet-sauvignon.webp",
+        origin: "Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Bold and expressive with aromas of blackberry, black currant, and dark cherry, layered with vanilla, cedar, and dried herbs.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Nero D\u2019Avola",
@@ -631,6 +1131,13 @@ export const countries: CountryData[] = [
         description:
           "Medium body. Typical fruit with touches of Morello cherry. Warm and lingering on the palate.",
         tags: ["organic"],
+        image: "/portfolio/bee-organic-nero-davola.webp",
+        origin: "Terre Siciliane IGP, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Medium body. Typical fruit with touches of Morello cherry. Warm and lingering on the palate.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Merlot",
@@ -640,6 +1147,13 @@ export const countries: CountryData[] = [
         description:
           "Medium body, sweet ripe fruit, black cherry aromas and flavors with a sweet cherry preserve finish.",
         tags: ["organic"],
+        image: "/portfolio/bee-organic-merlot.webp",
+        origin: "Terre Siciliane IGP, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Medium body, sweet ripe fruit, black cherry aromas and flavors with a sweet cherry preserve finish.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Cabernet Sauvignon",
@@ -649,6 +1163,13 @@ export const countries: CountryData[] = [
         description:
           "Full body. Full of spices. Fresh bouquet of dark fruits, plums and licorice with a well balanced finish.",
         tags: ["organic"],
+        image: "/portfolio/bee-organic-cabernet-saugivnon.webp",
+        origin: "Terre Siciliane IGP, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Full body. Full of spices. Fresh bouquet of dark fruits, plums and licorice with a well balanced finish.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Pinot Noir",
@@ -658,6 +1179,13 @@ export const countries: CountryData[] = [
         description:
           "Light bodied and fruit forward with flavors of dark cherries. Earthy, herbal and spicy nose with hints of vanilla and chocolate.",
         tags: ["organic"],
+        image: "/portfolio/bee-organic-pinot-noir.webp",
+        origin: "Terre Siciliane IGP, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Light bodied and fruit forward with flavors of dark cherries. Earthy, herbal and spicy nose with hints of vanilla and chocolate.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Chianti Riserva",
@@ -667,6 +1195,13 @@ export const countries: CountryData[] = [
         description:
           "90% Sangiovese and 10% Canaiolo, aged in Slavonian oak. Bright ruby-red with fruity aromas and violet hints. Dark chocolate and black cherry flavors.",
         tags: ["organic"],
+        image: "/portfolio/santa-fina-chianti-riserva.webp",
+        origin: "Tuscany, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "90% Sangiovese, 10% Canaiolo", "Style": "Riserva", "Aging": "Slavonian oak" },
+        tastingNotes: "90% Sangiovese and 10% Canaiolo, aged in Slavonian oak. Bright ruby-red with fruity aromas and violet hints. Dark chocolate and black cherry flavors.",
+        vinification: "90% Sangiovese and 10% Canaiolo, aged in Slavonian oak.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       // ROS\u00c9
       {
@@ -676,6 +1211,13 @@ export const countries: CountryData[] = [
         type: "ros\u00e9",
         description:
           "Soft pink with very intense and endless aromas of spring fruit.",
+        image: "/portfolio/with-love-rose.webp",
+        origin: "Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Ros\U00E9" },
+        tastingNotes: "Soft pink with very intense and endless aromas of spring fruit.",
+        vinification: "Brief skin contact with gentle pressing to achieve the desired color. Cool-fermented in stainless steel to preserve delicate fruit aromas and bright acidity. Bottled young to maintain freshness.",
+        foodPairings: "Mediterranean dishes, light appetizers, grilled vegetables, and summer salads.",
       },
       {
         name: "Ros\u00e9",
@@ -684,6 +1226,13 @@ export const countries: CountryData[] = [
         type: "ros\u00e9",
         description:
           "Chiaretto from the shores of Lake Garda. Corvina, Rondinella and Molinara. Intense cherry pink. Fragrant, smooth with good acid and great persistence.",
+        image: "/portfolio/good-fucking-rose.webp",
+        origin: "Veneto, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Corvina, Rondinella, Molinara", "Style": "Chiaretto", "Aging": "6 months in steel, 3 months in bottle" },
+        tastingNotes: "Chiaretto from the shores of Lake Garda. Corvina, Rondinella and Molinara. Intense cherry pink. Fragrant, smooth with good acid and great persistence.",
+        vinification: "A Chiaretto from the shores of Lake Garda, made from a blend of Corvina, Rondinella and Molinara, matured for six months in steel and refined for three months in the bottle.",
+        foodPairings: "Mediterranean dishes, light appetizers, grilled vegetables, and summer salads.",
       },
       {
         name: "Pinot Noir",
@@ -692,6 +1241,13 @@ export const countries: CountryData[] = [
         type: "ros\u00e9",
         description:
           "Red and black fruits on the palate framing blackberry, cherry and pomegranate flavors, drawing to a long, bright finish.",
+        image: "/portfolio/costa-bella-pinot-noir.webp",
+        origin: "Veneto, Italy",
+        bottleSizes: ["1.5L"],
+        specifications: { "Type": "Ros\U00E9" },
+        tastingNotes: "Red and black fruits on the palate framing blackberry, cherry and pomegranate flavors, drawing to a long, bright finish.",
+        vinification: "Brief skin contact with gentle pressing to achieve the desired color. Cool-fermented in stainless steel to preserve delicate fruit aromas and bright acidity. Bottled young to maintain freshness.",
+        foodPairings: "Roasted entrées, charcuterie, prosciutto, and mild cheeses.",
       },
       {
         name: "Ros\u00e9",
@@ -701,6 +1257,13 @@ export const countries: CountryData[] = [
         description:
           "Bright ros\u00e9 color from Nero d\u2019Avola with cherry and red highlights. Fragrant with wild berries. Well balanced, fresh and lively.",
         tags: ["organic"],
+        image: "/portfolio/bee-organic-rose.webp",
+        origin: "Terre Siciliane IGP, Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Ros\U00E9" },
+        tastingNotes: "Bright ros\u00e9 color from Nero d\u2019Avola with cherry and red highlights. Fragrant with wild berries. Well balanced, fresh and lively.",
+        vinification: "Brief skin contact with gentle pressing to achieve the desired color. Cool-fermented in stainless steel to preserve delicate fruit aromas and bright acidity. Bottled young to maintain freshness.",
+        foodPairings: "Mediterranean dishes, light appetizers, grilled vegetables, and summer salads.",
       },
       // MOSCATO / DESSERT
       {
@@ -710,6 +1273,13 @@ export const countries: CountryData[] = [
         type: "dessert",
         description:
           "A sweet, fruity Moscato with delightful floral and fruit notes.",
+        image: "/portfolio/bomba-moscato.webp",
+        origin: "Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Dessert Wine" },
+        tastingNotes: "A sweet, fruity Moscato with delightful floral and fruit notes.",
+        vinification: "Late-harvested grapes with elevated sugar levels. Slow, cool fermentation arrested to preserve natural sweetness. Balanced residual sugar with vibrant acidity.",
+        foodPairings: "Fruit tarts, blue cheese, foie gras, and dark chocolate desserts.",
       },
       {
         name: "Moscato Strawberry",
@@ -718,6 +1288,13 @@ export const countries: CountryData[] = [
         type: "dessert",
         description:
           "A sweet and fruity sparkling Moscato with floral notes and berry on the nose.",
+        image: "/portfolio/frizecco-moscato-strawberry.webp",
+        origin: "Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Dessert Wine" },
+        tastingNotes: "A sweet and fruity sparkling Moscato with floral notes and berry on the nose.",
+        vinification: "Late-harvested grapes with elevated sugar levels. Slow, cool fermentation arrested to preserve natural sweetness. Balanced residual sugar with vibrant acidity.",
+        foodPairings: "Fruit tarts, blue cheese, foie gras, and dark chocolate desserts.",
       },
       {
         name: "Moscato Mango",
@@ -726,6 +1303,13 @@ export const countries: CountryData[] = [
         type: "dessert",
         description:
           "Bright and refreshing Moscato infused with mango. Layers of citrus, mango, guava and banana flavors.",
+        image: "/portfolio/frizecco-moscato-mango.webp",
+        origin: "Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Dessert Wine" },
+        tastingNotes: "Bright and refreshing Moscato infused with mango. Layers of citrus, mango, guava and banana flavors.",
+        vinification: "Late-harvested grapes with elevated sugar levels. Slow, cool fermentation arrested to preserve natural sweetness. Balanced residual sugar with vibrant acidity.",
+        foodPairings: "Fruit tarts, blue cheese, foie gras, and dark chocolate desserts.",
       },
       {
         name: "Moscato Peach",
@@ -734,6 +1318,13 @@ export const countries: CountryData[] = [
         type: "dessert",
         description:
           "Sparkling Moscato bursting with sweet peach, honey and hints of orange. Refreshing with a crisp finish.",
+        image: "/portfolio/frizecco-moscato-peach.webp",
+        origin: "Italy",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Dessert Wine" },
+        tastingNotes: "Sparkling Moscato bursting with sweet peach, honey and hints of orange. Refreshing with a crisp finish.",
+        vinification: "Late-harvested grapes with elevated sugar levels. Slow, cool fermentation arrested to preserve natural sweetness. Balanced residual sugar with vibrant acidity.",
+        foodPairings: "Fruit tarts, blue cheese, foie gras, and dark chocolate desserts.",
       },
     ],
   },
@@ -756,6 +1347,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Full bodied, blending prestige and finesse. Pure, ripe and concentrated aromas of blackberry, blueberry, plum, and mocha with subtle hints of oak.",
+        image: "/portfolio/naudin-chateauneuf-du-pape.webp",
+        origin: "Châteauneuf-du-Pape, Rhône Valley, France",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Full bodied, blending prestige and finesse. Pure, ripe and concentrated aromas of blackberry, blueberry, plum, and mocha with subtle hints of oak.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Roasted lamb, wild game, and aged cheeses.",
       },
       {
         name: "Clos Des Truffiers",
@@ -766,6 +1364,13 @@ export const countries: CountryData[] = [
           "Intense ruby red. Black raspberries, blackberry liqueur, minerals, violet, herbs and espresso with captivating woody undertones. Voluptuous and velvety.",
         points: "100 Points",
         tags: ["coming-soon"],
+        image: "/portfolio/la-negly-clos-des-truffiers.webp",
+        origin: "La Clape, Languedoc, France",
+        bottleSizes: ["750ml"],
+        specifications: { "Points": "100 Points", "Style": "Full-bodied" },
+        tastingNotes: "Intense ruby red. Black raspberries, blackberry liqueur, minerals, violet, herbs and espresso with captivating woody undertones. Voluptuous and velvety.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "La Porte du Ciel",
@@ -774,6 +1379,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Cherry and cocoa aromas with vanilla and Virginia tobacco. Rich, dense and smooth with delicious blackberry flavors. Powerful and creamy.",
+        image: "/portfolio/la-negly-la-porte-du-ciel.webp",
+        origin: "La Clape, Languedoc, France",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Syrah, Grenache, Mourvèdre", "Style": "Rich, dense, smooth" },
+        tastingNotes: "Cherry and cocoa aromas with vanilla and Virginia tobacco. Rich, dense and smooth with delicious blackberry flavors. Powerful and creamy.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Hare stew and game dishes.",
       },
       {
         name: "L\u2019Ancely",
@@ -782,6 +1394,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Intense ruby red. Kirsch, mocha cocoa, soft spices. Rich, with silky tannins. Ripe fruit and roasted coffee bean finish with great ageing potential.",
+        image: "/portfolio/la-negly-lancely.webp",
+        origin: "La Clape, Languedoc, France",
+        bottleSizes: ["750ml"],
+        specifications: { "Style": "Rich, silky tannins", "Aging Potential": "Great" },
+        tastingNotes: "Intense ruby red. Kirsch, mocha cocoa, soft spices. Rich, with silky tannins. Ripe fruit and roasted coffee bean finish with great ageing potential.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Spit roast suckling pig.",
       },
       {
         name: "La C\u00f4te",
@@ -790,6 +1409,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Intense ruby robe. Blackcurrant and black pepper with notes of liquorice and grilling. Silky, racy texture.",
+        image: "/portfolio/la-negly-la-cote.webp",
+        origin: "La Clape, Languedoc, France",
+        bottleSizes: ["750ml"],
+        specifications: { "Style": "Silky, racy texture" },
+        tastingNotes: "Intense ruby robe. Blackcurrant and black pepper with notes of liquorice and grilling. Silky, racy texture.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "T-bone steak and grilled red meats.",
       },
       {
         name: "La Falaise",
@@ -798,6 +1424,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Intense ruby color. Raspberry, blackberry, chocolate and black olive. Licorice and roasting aromas. Exceptional concentration with perfectly ripe sweet tannins.",
+        image: "/portfolio/la-negly-la-falaise.webp",
+        origin: "La Clape, Languedoc, France",
+        bottleSizes: ["750ml"],
+        specifications: { "Style": "Exceptional concentration" },
+        tastingNotes: "Intense ruby color. Raspberry, blackberry, chocolate and black olive. Licorice and roasting aromas. Exceptional concentration with perfectly ripe sweet tannins.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Les Terrasses Rouge",
@@ -806,6 +1439,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Intensely colored, marked by the fullness of Syrahs. Undeniable red fruit with a notably fresh accent. Full palate of supple, soft and silky tannins.",
+        image: "/portfolio/la-negly-les-terrasses-rouge.webp",
+        origin: "La Clape, Languedoc, France",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Syrah dominant", "Style": "Full, supple tannins" },
+        tastingNotes: "Intensely colored, marked by the fullness of Syrahs. Undeniable red fruit with a notably fresh accent. Full palate of supple, soft and silky tannins.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Barbecued lamb.",
       },
       {
         name: "Bordeaux",
@@ -814,6 +1454,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Fruity Bordeaux with attention-grabbing artwork. Medium-bodied, rich with black and red fruit flavors, well balanced with soft tannins.",
+        image: "/portfolio/nokat-bordeaux.webp",
+        origin: "Bordeaux, France",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Fruity Bordeaux with attention-grabbing artwork. Medium-bodied, rich with black and red fruit flavors, well balanced with soft tannins.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Sauvignon Blanc",
@@ -822,6 +1469,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Fruity and pleasant. Delicate bouquet of fruits and flowers aroma with a lively and harmonious finish.",
+        image: "/portfolio/nokat-sauvignon-blanc.webp",
+        origin: "France",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Fruity and pleasant. Delicate bouquet of fruits and flowers aroma with a lively and harmonious finish.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Les Terrasses Blanc",
@@ -830,6 +1484,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Clear and crystalline. Striking fruitiness with notes of litchi and exotic fruits. Lively and fresh. Enjoy with a seafood platter.",
+        image: "/portfolio/la-negly-les-terrasses-blanc.webp",
+        origin: "La Clape, Languedoc, France",
+        bottleSizes: ["750ml"],
+        specifications: { "Style": "Lively, fresh, fruity" },
+        tastingNotes: "Clear and crystalline. Striking fruitiness with notes of litchi and exotic fruits. Lively and fresh. Enjoy with a seafood platter.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Aperitifs and seafood platters.",
       },
     ],
   },
@@ -852,6 +1513,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Clean and bright. Intense yellow with green hints. Elegant aromas with grassy, green notes, citrus, tropical fruits, passion fruit, pineapple and melon.",
+        image: "/portfolio/lawn-chair-sauvignon-blanc.webp",
+        origin: "Valencia, Spain",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Clean and bright. Intense yellow with green hints. Elegant aromas with grassy, green notes, citrus, tropical fruits, passion fruit, pineapple and melon.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "No. 12",
@@ -860,6 +1528,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Dark cherry-red with purple hints. Blackberries and red currants, dark-roasted balsamic, chocolate and white coffee hints. Complex and well-balanced.",
+        image: "/portfolio/venta-del-puerto-no12.webp",
+        origin: "Valencia, Spain",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Dark cherry-red with purple hints. Blackberries and red currants, dark-roasted balsamic, chocolate and white coffee hints. Complex and well-balanced.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats and rich stews.",
       },
       {
         name: "No. 18",
@@ -868,6 +1543,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Perfect combination of Cabernet Sauvignon, Tempranillo, Syrah and Merlot. Complex bouquet of fruit, balsamic notes, smoke, fruit liqueur, roasted coffee and bitter chocolate.",
+        image: "/portfolio/venta-del-puerto-no18.webp",
+        origin: "Valencia, Spain",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Cabernet Sauvignon, Tempranillo, Syrah, Merlot" },
+        tastingNotes: "Perfect combination of Cabernet Sauvignon, Tempranillo, Syrah and Merlot. Complex bouquet of fruit, balsamic notes, smoke, fruit liqueur, roasted coffee and bitter chocolate.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Roasted meats, hearty stews, and dark chocolate.",
       },
       {
         name: "Pink Moscato",
@@ -876,6 +1558,13 @@ export const countries: CountryData[] = [
         type: "sparkling",
         description:
           "Cherry red with purple hints. Varietal aroma with forest fruit and floral notes. Full, creamy foam. Pleasant and refreshing.",
+        image: "/portfolio/amatista-pink-moscato.webp",
+        origin: "Spain",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Sparkling Wine" },
+        tastingNotes: "Cherry red with purple hints. Varietal aroma with forest fruit and floral notes. Full, creamy foam. Pleasant and refreshing.",
+        vinification: "Base wine vinified in stainless steel at cool temperatures. Secondary fermentation develops fine persistent bubbles and elegant mousse. Careful dosage balances sweetness and acidity.",
+        foodPairings: "Aperitif, fish, seafood, white meat, pasta, salads, and cheese.",
       },
       {
         name: "Moscato",
@@ -884,6 +1573,13 @@ export const countries: CountryData[] = [
         type: "sparkling",
         description:
           "Pale yellow with green hints and fine bubbles. Pleasant, well-balanced acidity with creamy foam. Sweet, light and very refreshing.",
+        image: "/portfolio/amatista-moscato.webp",
+        origin: "Spain",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Sparkling Wine" },
+        tastingNotes: "Pale yellow with green hints and fine bubbles. Pleasant, well-balanced acidity with creamy foam. Sweet, light and very refreshing.",
+        vinification: "Base wine vinified in stainless steel at cool temperatures. Secondary fermentation develops fine persistent bubbles and elegant mousse. Careful dosage balances sweetness and acidity.",
+        foodPairings: "Aperitif, fish, seafood, white meat, pasta, salads, and cheese.",
       },
       {
         name: "Red",
@@ -892,6 +1588,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Deep cherry red. Highly complex with very ripe black fruit aromas. Ocean-aged and perfectly balanced. Vanilla and coconut with hints of eucalyptus.",
+        image: "/portfolio/la-bandida-red.webp",
+        origin: "Spain",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Deep cherry red. Highly complex with very ripe black fruit aromas. Ocean-aged and perfectly balanced. Vanilla and coconut with hints of eucalyptus.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Game, stew, lamb, and paella.",
       },
       {
         name: "White",
@@ -900,6 +1603,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Pale straw yellow. Intense white fruit, tropical and citrus with notes of white flower and honey. Ocean-aged, lingering and complex.",
+        image: "/portfolio/la-bandida-white.webp",
+        origin: "Spain",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Pale straw yellow. Intense white fruit, tropical and citrus with notes of white flower and honey. Ocean-aged, lingering and complex.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Seafood paella.",
       },
       {
         name: "Red",
@@ -908,6 +1618,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Spicy blackberry and blueberry aromas and flavors. Sweet, rich with long blackberry and overripe plum flavors.",
+        image: "/portfolio/cheap-bastard-red.webp",
+        origin: "Spain",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Spicy blackberry and blueberry aromas and flavors. Sweet, rich with long blackberry and overripe plum flavors.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Sangria",
@@ -917,6 +1634,13 @@ export const countries: CountryData[] = [
         description:
           "Light-bodied, fruity and refreshing Spanish Sangria from fine red wine and natural citrus fruit flavors. Tempranillo and Garnacha grape varieties.",
         tags: ["coming-soon"],
+        image: "/portfolio/tio-tio-sangria.webp",
+        origin: "Spain",
+        bottleSizes: ["1.5L"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Light-bodied, fruity and refreshing Spanish Sangria from fine red wine and natural citrus fruit flavors. Tempranillo and Garnacha grape varieties.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Grapes & Blueberry",
@@ -925,6 +1649,13 @@ export const countries: CountryData[] = [
         type: "dessert",
         description:
           "A powerful and complex wine made from natural flavors and wine spirit. Aged to enhance depth and complexity.",
+        image: "/portfolio/grande-seventh-grapes-blueberry.webp",
+        origin: "Spain",
+        bottleSizes: ["1L"],
+        specifications: { "Type": "Dessert Wine" },
+        tastingNotes: "A powerful and complex wine made from natural flavors and wine spirit. Aged to enhance depth and complexity.",
+        vinification: "Late-harvested grapes with elevated sugar levels. Slow, cool fermentation arrested to preserve natural sweetness. Balanced residual sugar with vibrant acidity.",
+        foodPairings: "Fruit tarts, blue cheese, foie gras, and dark chocolate desserts.",
       },
       {
         name: "Grapes & Peach",
@@ -933,6 +1664,13 @@ export const countries: CountryData[] = [
         type: "dessert",
         description:
           "A powerful and complex wine made from natural flavors and wine spirit. Aged to enhance depth and complexity.",
+        image: "/portfolio/grande-seventh-grapes-peach.webp",
+        origin: "Spain",
+        bottleSizes: ["1L"],
+        specifications: { "Type": "Dessert Wine" },
+        tastingNotes: "A powerful and complex wine made from natural flavors and wine spirit. Aged to enhance depth and complexity.",
+        vinification: "Late-harvested grapes with elevated sugar levels. Slow, cool fermentation arrested to preserve natural sweetness. Balanced residual sugar with vibrant acidity.",
+        foodPairings: "Fruit tarts, blue cheese, foie gras, and dark chocolate desserts.",
       },
       {
         name: "Grapes & Pineapple",
@@ -941,6 +1679,13 @@ export const countries: CountryData[] = [
         type: "dessert",
         description:
           "A powerful and complex wine made from natural flavors and wine spirit. Aged to enhance depth and complexity.",
+        image: "/portfolio/grande-seventh-grapes-pineapple.webp",
+        origin: "Spain",
+        bottleSizes: ["1L"],
+        specifications: { "Type": "Dessert Wine" },
+        tastingNotes: "A powerful and complex wine made from natural flavors and wine spirit. Aged to enhance depth and complexity.",
+        vinification: "Late-harvested grapes with elevated sugar levels. Slow, cool fermentation arrested to preserve natural sweetness. Balanced residual sugar with vibrant acidity.",
+        foodPairings: "Fruit tarts, blue cheese, foie gras, and dark chocolate desserts.",
       },
       {
         name: "Grapes & Raspberry",
@@ -949,6 +1694,13 @@ export const countries: CountryData[] = [
         type: "dessert",
         description:
           "A powerful and complex wine made from natural flavors and wine spirit. Aged to enhance depth and complexity.",
+        image: "/portfolio/grande-seventh-grapes-raspberry.webp",
+        origin: "Spain",
+        bottleSizes: ["1L"],
+        specifications: { "Type": "Dessert Wine" },
+        tastingNotes: "A powerful and complex wine made from natural flavors and wine spirit. Aged to enhance depth and complexity.",
+        vinification: "Late-harvested grapes with elevated sugar levels. Slow, cool fermentation arrested to preserve natural sweetness. Balanced residual sugar with vibrant acidity.",
+        foodPairings: "Fruit tarts, blue cheese, foie gras, and dark chocolate desserts.",
       },
       {
         name: "Grapes & Strawberry",
@@ -957,6 +1709,13 @@ export const countries: CountryData[] = [
         type: "dessert",
         description:
           "A powerful and complex wine made from natural flavors and wine spirit. Aged to enhance depth and complexity.",
+        image: "/portfolio/grande-seventh-grapes-strawberry.webp",
+        origin: "Spain",
+        bottleSizes: ["1L"],
+        specifications: { "Type": "Dessert Wine" },
+        tastingNotes: "A powerful and complex wine made from natural flavors and wine spirit. Aged to enhance depth and complexity.",
+        vinification: "Late-harvested grapes with elevated sugar levels. Slow, cool fermentation arrested to preserve natural sweetness. Balanced residual sugar with vibrant acidity.",
+        foodPairings: "Fruit tarts, blue cheese, foie gras, and dark chocolate desserts.",
       },
       {
         name: "Grapes & Wild Berries",
@@ -965,6 +1724,13 @@ export const countries: CountryData[] = [
         type: "dessert",
         description:
           "A powerful and complex wine made from natural flavors and wine spirit. Aged to enhance depth and complexity.",
+        image: "/portfolio/grande-signature-grapes-wild-berries.webp",
+        origin: "Spain",
+        bottleSizes: ["1L"],
+        specifications: { "Type": "Dessert Wine" },
+        tastingNotes: "A powerful and complex wine made from natural flavors and wine spirit. Aged to enhance depth and complexity.",
+        vinification: "Late-harvested grapes with elevated sugar levels. Slow, cool fermentation arrested to preserve natural sweetness. Balanced residual sugar with vibrant acidity.",
+        foodPairings: "Fruit tarts, blue cheese, foie gras, and dark chocolate desserts.",
       },
       // SPIRITS
       {
@@ -974,6 +1740,13 @@ export const countries: CountryData[] = [
         type: "vodka",
         description:
           "Over 600 years of tradition. Distilled in a copper still and filtered over charcoal. Gluten free, sulfite free, vegan and 7 times distilled.",
+        image: "/portfolio/1405-vodka.webp",
+        origin: "Spain",
+        bottleSizes: ["1.75L"],
+        specifications: { "Distillation": "7 times distilled", "Filtration": "Charcoal filtered", "Certification": "Gluten free, sulfite free, vegan" },
+        tastingNotes: "Over 600 years of tradition. Distilled in a copper still and filtered over charcoal. Gluten free, sulfite free, vegan and 7 times distilled.",
+        vinification: "Over 600 years of tradition. Distilled in a copper still and filtered over charcoal, removing 100% of impurities. 7 times distilled.",
+        foodPairings: "Caviar, smoked fish, pickled vegetables, and chilled seafood.",
       },
     ],
   },
@@ -996,6 +1769,13 @@ export const countries: CountryData[] = [
         type: "fortified",
         description:
           "Blend of Rabigato, Malvasia Fina, Viosinho, Moscatel Galego, Gouveio and C\u00f3dega. Attractive yellow, bright with floral aromas, tropical fruit and nuts.",
+        image: "/portfolio/adega-de-gavaios-monge-porto-white.webp",
+        origin: "DOC Porto, Douro, Portugal",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Rabigato, Malvasia Fina, Viosinho, Moscatel Galego, Gouveio, Códega", "Style": "Port Wine" },
+        tastingNotes: "Blend of Rabigato, Malvasia Fina, Viosinho, Moscatel Galego, Gouveio and C\u00f3dega. Attractive yellow, bright with floral aromas, tropical fruit and nuts.",
+        vinification: "Fermentation arrested by addition of grape spirit to retain natural sweetness. Extended aging develops rich, complex character with dried fruit and nutty notes.",
+        foodPairings: "Nuts, dried fruits, aged cheeses, and chocolate-based desserts.",
       },
       {
         name: "Monge Porto Fine Ruby",
@@ -1004,6 +1784,13 @@ export const countries: CountryData[] = [
         type: "fortified",
         description:
           "Touriga Franca, Tinta Roriz, Tinta Barroca and Tinta Amarela. Ruby coloured with intense red and black fruit. Full-bodied and balanced with sweet and morello cherries.",
+        image: "/portfolio/adega-de-favaios-monge-porto-fine-ruby.webp",
+        origin: "DOC Porto, Douro, Portugal",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Touriga Franca, Tinta Roriz, Tinta Barroca, Tinta Amarela", "Style": "Ruby Port" },
+        tastingNotes: "Touriga Franca, Tinta Roriz, Tinta Barroca and Tinta Amarela. Ruby coloured with intense red and black fruit. Full-bodied and balanced with sweet and morello cherries.",
+        vinification: "Fermentation arrested by addition of grape spirit to retain natural sweetness. Extended aging develops rich, complex character with dried fruit and nutty notes.",
+        foodPairings: "Nuts, dried fruits, aged cheeses, and chocolate-based desserts.",
       },
       {
         name: "Monge Porto Fine Tawny",
@@ -1012,6 +1799,13 @@ export const countries: CountryData[] = [
         type: "fortified",
         description:
           "Red with lighter highlights. Ripe fruit, figs, nuts with caramel and spice notes. Rich, velvety, full-bodied with elegant balance between structure and sweetness.",
+        image: "/portfolio/adega-de-favaios-monge-porto-fine-tawny.webp",
+        origin: "DOC Porto, Douro, Portugal",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Touriga Franca, Tinta Roriz, Tinta Barroca, Tinta Amarela", "Style": "Tawny Port" },
+        tastingNotes: "Red with lighter highlights. Ripe fruit, figs, nuts with caramel and spice notes. Rich, velvety, full-bodied with elegant balance between structure and sweetness.",
+        vinification: "Fermentation arrested by addition of grape spirit to retain natural sweetness. Extended aging develops rich, complex character with dried fruit and nutty notes.",
+        foodPairings: "Nuts, dried fruits, aged cheeses, and chocolate-based desserts.",
       },
       {
         name: "Monge Porto Tawny 10 Yr",
@@ -1020,6 +1814,13 @@ export const countries: CountryData[] = [
         type: "fortified",
         description:
           "Light amber from careful wood ageing. Delicious aromas of nuts, caramel, spices and ripe fruit. Rich, velvety, smooth and delectably sweet.",
+        image: "/portfolio/adega-de-favaios-monge-porto-tawny-10yr.webp",
+        origin: "DOC Porto, Douro, Portugal",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Traditional Douro varieties", "Style": "10 Year Tawny Port", "Aging": "10 years in wood" },
+        tastingNotes: "Light amber from careful wood ageing. Delicious aromas of nuts, caramel, spices and ripe fruit. Rich, velvety, smooth and delectably sweet.",
+        vinification: "Fermentation arrested by addition of grape spirit to retain natural sweetness. Extended aging develops rich, complex character with dried fruit and nutty notes.",
+        foodPairings: "Nuts, dried fruits, aged cheeses, and chocolate-based desserts.",
       },
     ],
   },
@@ -1042,6 +1843,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Sweet nose of dried apricot with a drier taste and pleasant hints of dried fruits. Georgian Rkatsiteli white wine.",
+        image: "/portfolio/ranina=kakhuri.webp",
+        origin: "Kakheti, Georgia",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Sweet nose of dried apricot with a drier taste and pleasant hints of dried fruits. Georgian Rkatsiteli white wine.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Light dishes and appetizers.",
       },
       {
         name: "Rkatsiteli",
@@ -1050,6 +1858,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Dry white wine from the Kakheti region. Herbal, floral and citrus notes. Sherry-like aromas with roasted nuts, apple and honey.",
+        image: "/portfolio/ranina-rkatsiteli.webp",
+        origin: "Kakheti, Georgia",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Dry white wine from the Kakheti region. Herbal, floral and citrus notes. Sherry-like aromas with roasted nuts, apple and honey.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Beef salads and boiled fish.",
       },
       {
         name: "Kindzmarauli",
@@ -1058,6 +1873,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Semi-sweet red from Saperavi grapes of Kakheti. Lively and energetic with ripe red fruit, blackberry, cherry, raspberry and strawberry.",
+        image: "/portfolio/ranina-kindzmarauli.webp",
+        origin: "Kakheti, Georgia",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Semi-sweet red from Saperavi grapes of Kakheti. Lively and energetic with ripe red fruit, blackberry, cherry, raspberry and strawberry.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Spicy food, lamb, veal, duck, deer, desserts, and mature cheese.",
       },
       {
         name: "Mukuzani",
@@ -1066,6 +1888,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Dry red with dark raspberry color. The top AOC wine from Kakheti, Georgia. Acquires unforgettable taste and scent after oak barrel aging.",
+        image: "/portfolio/ranina-makuzani.webp",
+        origin: "Kakheti, Georgia",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Dry red with dark raspberry color. The top AOC wine from Kakheti, Georgia. Acquires unforgettable taste and scent after oak barrel aging.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Red meats and aged cheeses.",
       },
       {
         name: "Saperavi",
@@ -1074,6 +1903,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Dry red from Kakheti. Strong with impressive scents. Peppery blackberry, dark cherry and gentle balanced tannins.",
+        image: "/portfolio/ranina-saperavi.webp",
+        origin: "Kakheti, Georgia",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Dry red from Kakheti. Strong with impressive scents. Peppery blackberry, dark cherry and gentle balanced tannins.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Fried meat, lamb, veal, game, mature cheese, and mushrooms.",
       },
       {
         name: "Ros\u00e9",
@@ -1082,6 +1918,13 @@ export const countries: CountryData[] = [
         type: "ros\u00e9",
         description:
           "Semi-sweet, vibrant ros\u00e9 from Saperavi and Tavkveri. Aromatic field strawberries, raspberry and red currants. Pleasant blend of sweetness and acidity.",
+        image: "/portfolio/ranina-rose.webp",
+        origin: "Kakheti, Georgia",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Ros\U00E9" },
+        tastingNotes: "Semi-sweet, vibrant ros\u00e9 from Saperavi and Tavkveri. Aromatic field strawberries, raspberry and red currants. Pleasant blend of sweetness and acidity.",
+        vinification: "Brief skin contact with gentle pressing to achieve the desired color. Cool-fermented in stainless steel to preserve delicate fruit aromas and bright acidity. Bottled young to maintain freshness.",
+        foodPairings: "Mediterranean dishes, light appetizers, grilled vegetables, and summer salads.",
       },
     ],
   },
@@ -1104,6 +1947,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Spicy nose, enjoyable in the mouth with good balance of tannins, acidity and alcohol. An excellent Syrah aging.",
+        image: "/portfolio/emphasis-red.webp",
+        origin: "Greece",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Spicy nose, enjoyable in the mouth with good balance of tannins, acidity and alcohol. An excellent Syrah aging.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Red",
@@ -1112,6 +1962,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Dark purple with violet reflections. Intense cherries and plums with chocolate, smoke and vanilla. Balanced, lively tannins. Long fruity aftertaste with a touch of oak.",
+        image: "/portfolio/thema-red.webp",
+        origin: "Drama, Greece",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Dark purple with violet reflections. Intense cherries and plums with chocolate, smoke and vanilla. Balanced, lively tannins. Long fruity aftertaste with a touch of oak.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Assyrtiko",
@@ -1120,6 +1977,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Rich lemon and white-flower nose. Fresh citrus fruit, vanilla and cigar smoke, balanced by lifted acidity and a pleasing chalky finish.",
+        image: "/portfolio/emphasis-assytriko.webp",
+        origin: "Greece",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Rich lemon and white-flower nose. Fresh citrus fruit, vanilla and cigar smoke, balanced by lifted acidity and a pleasing chalky finish.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Assyrtiko",
@@ -1128,6 +1992,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Assyrtiko adapted to Drama region with a broader aromatic profile. Inherent minerality and high acidity. Sauvignon Blanc boosts grassy-vegetal character and stone fruit aromas.",
+        image: "/portfolio/thema-assyrtiko.webp",
+        origin: "Drama, Greece",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Assyrtiko adapted to Drama region with a broader aromatic profile. Inherent minerality and high acidity. Sauvignon Blanc boosts grassy-vegetal character and stone fruit aromas.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
     ],
   },
@@ -1150,6 +2021,13 @@ export const countries: CountryData[] = [
         type: "whisky",
         description:
           "A truly Highland single malt matured in the finest oak casks. Refined, smooth taste with hints of smoke and peat. Barley sweetness, pear and vanilla.",
+        image: "/portfolio/glengarry-nas-single-malt.webp",
+        origin: "Highland, Scotland",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Highland Single Malt", "Barrel": "Finest oak casks" },
+        tastingNotes: "A truly Highland single malt matured in the finest oak casks. Refined, smooth taste with hints of smoke and peat. Barley sweetness, pear and vanilla.",
+        vinification: "Malted barley mashed and fermented. Distilled in traditional copper pot stills. Matured in carefully selected oak casks in Scottish warehouses.",
+        foodPairings: "Smoked salmon, dark chocolate, aged cheeses, and grilled meats.",
       },
       {
         name: "12-Year Single Malt",
@@ -1158,6 +2036,13 @@ export const countries: CountryData[] = [
         type: "whisky",
         description:
           "Highland Single Malt matured in three types of finest casks. Exceptionally well-balanced. Floral notes of peach blossom, pear, golden barley and vanilla.",
+        image: "/portfolio/glengarry-12year-single-malt-scotch.webp",
+        origin: "Highland, Scotland",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Highland Single Malt", "Aging": "12 years", "Barrel": "Three types of finest casks" },
+        tastingNotes: "Highland Single Malt matured in three types of finest casks. Exceptionally well-balanced. Floral notes of peach blossom, pear, golden barley and vanilla.",
+        vinification: "Malted barley mashed and fermented. Distilled in traditional copper pot stills. Matured in carefully selected oak casks in Scottish warehouses.",
+        foodPairings: "Smoked salmon, dark chocolate, aged cheeses, and grilled meats.",
       },
       {
         name: "4-Year Highland Blended Whisky",
@@ -1166,6 +2051,13 @@ export const countries: CountryData[] = [
         type: "whisky",
         description:
           "Blend of finest Scotch grain and malt whiskies. Fruity and sweet with mild peat finish. Toffee, soft fruits and citrus orange notes.",
+        image: "/portfolio/glengarry-4year-highland-whisky.webp",
+        origin: "Highland, Scotland",
+        bottleSizes: ["750ml", "1.75L"],
+        specifications: { "Type": "Blended Scotch Whisky", "Aging": "4 years", "Barrel": "Finest oak barrels" },
+        tastingNotes: "Blend of finest Scotch grain and malt whiskies. Fruity and sweet with mild peat finish. Toffee, soft fruits and citrus orange notes.",
+        vinification: "Malted barley mashed and fermented. Distilled in traditional copper pot stills. Matured in carefully selected oak casks in Scottish warehouses.",
+        foodPairings: "Smoked salmon, dark chocolate, aged cheeses, and grilled meats.",
       },
       {
         name: "Special Reserve Blended Scotch",
@@ -1174,6 +2066,13 @@ export const countries: CountryData[] = [
         type: "whisky",
         description:
           "Blended whisky from Highlands and Speyside malt and grain whiskies aged in oak barrels. Golden, delicate aroma, subtle and elegant on the palate.",
+        image: "/portfolio/the-glen-silvers-special-reserve-blended-scotch.webp",
+        origin: "Highland & Speyside, Scotland",
+        bottleSizes: ["1.75L", "1L", "750ml", "375ml", "200ml"],
+        specifications: { "Type": "Scotch Whisky" },
+        tastingNotes: "Blended whisky from Highlands and Speyside malt and grain whiskies aged in oak barrels. Golden, delicate aroma, subtle and elegant on the palate.",
+        vinification: "Malted barley mashed and fermented. Distilled in traditional copper pot stills. Matured in carefully selected oak casks in Scottish warehouses.",
+        foodPairings: "Smoked salmon, dark chocolate, aged cheeses, and grilled meats.",
       },
       {
         name: "Cristie Kerr 2002 US Open Edition",
@@ -1183,6 +2082,13 @@ export const countries: CountryData[] = [
         description:
           "Delicately aromatic and tropical. Pina colada, pistachio pudding, coconut and apple blossom. Elegant with vanilla milkshake, sweeping oak and tropical fruit finish.",
         tags: ["limited"],
+        image: "/portfolio/loch-lomond-cristie-kerr-2002.webp",
+        origin: "Scotland",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Scotch Whisky" },
+        tastingNotes: "Delicately aromatic and tropical. Pina colada, pistachio pudding, coconut and apple blossom. Elegant with vanilla milkshake, sweeping oak and tropical fruit finish.",
+        vinification: "Malted barley mashed and fermented. Distilled in traditional copper pot stills. Matured in carefully selected oak casks in Scottish warehouses.",
+        foodPairings: "Smoked salmon, dark chocolate, aged cheeses, and grilled meats.",
       },
       {
         name: "Organic Speyside Vodka",
@@ -1192,6 +2098,13 @@ export const countries: CountryData[] = [
         description:
           "Award-winning with tasting notes of marzipan and vanilla. Long smooth finish with a hint of spice. Unusual barley and wheat grain process.",
         tags: ["organic"],
+        image: "/portfolio/eight-lands-organic-speyside-vodka.webp",
+        origin: "Speyside, Scotland",
+        bottleSizes: ["700ml"],
+        specifications: { "Base": "Barley and wheat", "Certification": "Organic" },
+        tastingNotes: "Award-winning with tasting notes of marzipan and vanilla. Long smooth finish with a hint of spice. Unusual barley and wheat grain process.",
+        vinification: "Award-winning process using both barley and wheat grains, time consuming but delivers exceptional depth of flavor.",
+        foodPairings: "Caviar, smoked fish, pickled vegetables, and chilled seafood.",
       },
       {
         name: "Organic Speyside Gin",
@@ -1201,6 +2114,13 @@ export const countries: CountryData[] = [
         description:
           "Award-winning gin. Juniper complemented by cowberry, sorrel and eight other botanicals. Bold and bright juniper balanced with citrus and tart red berry.",
         tags: ["organic"],
+        image: "/portfolio/eight-lands-organic-speyside-gin.webp",
+        origin: "Speyside, Scotland",
+        bottleSizes: ["700ml"],
+        specifications: { "Botanicals": "Juniper, cowberry, sorrel + 8 others", "Certification": "Organic" },
+        tastingNotes: "Award-winning gin. Juniper complemented by cowberry, sorrel and eight other botanicals. Bold and bright juniper balanced with citrus and tart red berry.",
+        vinification: "Crafted with juniper, complemented by cowberry, sorrel and eight other botanicals from the Speyside region.",
+        foodPairings: "Cured meats, fresh herbs, citrus dishes, and Mediterranean appetizers.",
       },
     ],
   },
@@ -1223,6 +2143,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Tropical fruit aromas and minerality with a crisp, refreshing finish. Golden color with greenish highlights and a clean, bright appearance.",
+        image: "/portfolio/tierra-alta-charonnay.webp",
+        origin: "Mendoza, Argentina",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Tropical fruit aromas and minerality with a crisp, refreshing finish. Golden color with greenish highlights and a clean, bright appearance.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Malbec",
@@ -1231,6 +2158,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Classic Argentine Malbec from Mendoza with layers of chocolate syrup, cocoa powder, espresso, cinnamon and hits of clove.",
+        image: "/portfolio/un-mundo-chiquito-malbec.webp",
+        origin: "Mendoza, Argentina",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Classic Argentine Malbec from Mendoza with layers of chocolate syrup, cocoa powder, espresso, cinnamon and hits of clove.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Malbec",
@@ -1239,6 +2173,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "From high-altitude vineyards where the Andes kiss the sky. Ripe blackberry, dark plum, hints of violet, cocoa and vanilla from oak aging. Silky tannins.",
+        image: "/portfolio/tierra-alta-malbec.webp",
+        origin: "Mendoza, Argentina",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "From high-altitude vineyards where the Andes kiss the sky. Ripe blackberry, dark plum, hints of violet, cocoa and vanilla from oak aging. Silky tannins.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Cabernet Sauvignon",
@@ -1248,6 +2189,13 @@ export const countries: CountryData[] = [
         description:
           "Rich and full bodied. Bold black cherry, cassis and subtle oak spice from the Andes foothills. Smooth, elegant with a long satisfying finish.",
         tags: ["coming-soon"],
+        image: "/portfolio/tierra-alta-cabrnet-sauvignon.webp",
+        origin: "Mendoza, Argentina",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Rich and full bodied. Bold black cherry, cassis and subtle oak spice from the Andes foothills. Smooth, elegant with a long satisfying finish.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Corte B",
@@ -1257,6 +2205,13 @@ export const countries: CountryData[] = [
         description:
           "68% Malbec, 18% Cabernet Sauvignon, 14% Bonarda. Aged 15 months in French oak.",
         points: "94 Points - Tim Atkin MW",
+        image: "/portfolio/vistalba-corteb.webp",
+        origin: "Mendoza, Argentina",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "68% Malbec, 18% Cabernet Sauvignon, 14% Bonarda", "Aging": "15 months in French oak" },
+        tastingNotes: "68% Malbec, 18% Cabernet Sauvignon, 14% Bonarda. Aged 15 months in French oak.",
+        vinification: "68% Malbec, 18% Cabernet Sauvignon, 14% Bonarda. Aged 15 months in French oak.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Corte C",
@@ -1266,6 +2221,13 @@ export const countries: CountryData[] = [
         description:
           "80% Malbec, 20% Cabernet Sauvignon. 20% of the blend aged in oak barrels for 12 months.",
         points: "93 Points - Tim Atkin MW",
+        image: "/portfolio/vistalba-corte-c.webp",
+        origin: "Mendoza, Argentina",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "80% Malbec, 20% Cabernet Sauvignon", "Aging": "20% aged in oak for 12 months" },
+        tastingNotes: "80% Malbec, 20% Cabernet Sauvignon. 20% of the blend aged in oak barrels for 12 months.",
+        vinification: "80% Malbec, 20% Cabernet Sauvignon. 20% of the blend aged in oak barrels for 12 months.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Corte A",
@@ -1275,6 +2237,13 @@ export const countries: CountryData[] = [
         description:
           "70% Malbec, 20% Cabernet Sauvignon, 10% Bonarda. Aged 18 months in French oak.",
         points: "92 Points - Wine Advocate",
+        image: "/portfolio/vistalba-corte-a.webp",
+        origin: "Mendoza, Argentina",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "70% Malbec, 20% Cabernet Sauvignon, 10% Bonarda", "Aging": "18 months in French oak" },
+        tastingNotes: "70% Malbec, 20% Cabernet Sauvignon, 10% Bonarda. Aged 18 months in French oak.",
+        vinification: "70% Malbec, 20% Cabernet Sauvignon, 10% Bonarda. Aged 18 months in French oak.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Cabernet Sauvignon",
@@ -1283,6 +2252,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Intense ruby red with complex cassis, cherry, pepper, vanilla and tobacco aromas. Good structure with sweet, ripe tannins and a long finish.",
+        image: "/portfolio/maximus-cabernet-sauvignon.webp",
+        origin: "Mendoza, Argentina",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Intense ruby red with complex cassis, cherry, pepper, vanilla and tobacco aromas. Good structure with sweet, ripe tannins and a long finish.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Malbec",
@@ -1291,6 +2267,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Hand picked from vines over 15 years old. Aged 6 months in French oak barrels. Intense red fruit aromas with delicate spices and pepper.",
+        image: "/portfolio/maximus-malbec.webp",
+        origin: "Mendoza, Argentina",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Malbec", "Aging": "6 months in French oak barrels", "Vine Age": "15+ years" },
+        tastingNotes: "Hand picked from vines over 15 years old. Aged 6 months in French oak barrels. Intense red fruit aromas with delicate spices and pepper.",
+        vinification: "Hand picked from vines over 15 years old. Aged 6 months in French oak barrels.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Sauvignon Blanc",
@@ -1299,6 +2282,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "From the Los Carolinos estate (1927). Soft, fresh, fruity and balanced. Greenish yellow with golden sparkles.",
+        image: "/portfolio/bodegas-lopez-sauvignon-blanc.webp",
+        origin: "Mendoza, Argentina",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "From the Los Carolinos estate (1927). Soft, fresh, fruity and balanced. Greenish yellow with golden sparkles.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Malbec",
@@ -1307,6 +2297,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Aged 6 months in French oak casks. Medium intensity, red violet with garnet reflections. Fresh red fruit, plum, blackberry, and cinnamon.",
+        image: "/portfolio/bodegas-lopez-malbec.webp",
+        origin: "Mendoza, Argentina",
+        bottleSizes: ["750ml"],
+        specifications: { "Aging": "6 months in large French oak casks" },
+        tastingNotes: "Aged 6 months in French oak casks. Medium intensity, red violet with garnet reflections. Fresh red fruit, plum, blackberry, and cinnamon.",
+        vinification: "Aged for 6 months in large French oak casks.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Cabernet Sauvignon",
@@ -1315,6 +2312,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Aged 6 months in French oak casks. Ruby red with mahogany tones. Red currants, raspberry, black pepper and liquorice. Excellent structure with soft tannins.",
+        image: "/portfolio/bodegas-lopez-cabernet-sauvignon.webp",
+        origin: "Mendoza, Argentina",
+        bottleSizes: ["750ml"],
+        specifications: { "Aging": "6 months in large French oak casks" },
+        tastingNotes: "Aged 6 months in French oak casks. Ruby red with mahogany tones. Red currants, raspberry, black pepper and liquorice. Excellent structure with soft tannins.",
+        vinification: "Aged for 6 months in large French oak casks.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Malbec",
@@ -1323,6 +2327,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "100% Malbec. 20% aged in oak barrels for 8 months, remaining 80% in stainless steel.",
+        image: "/portfolio/tomero-malbec.webp",
+        origin: "Valle de Uco, Mendoza, Argentina",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "100% Malbec", "Aging": "20% in oak barrels for 8 months, 80% stainless steel" },
+        tastingNotes: "100% Malbec. 20% aged in oak barrels for 8 months, remaining 80% in stainless steel.",
+        vinification: "100% Malbec. 20% of the wine aged in oak barrels for 8 months, remaining 80% kept in stainless steel tanks before bottling.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Cabernet Sauvignon",
@@ -1331,6 +2342,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "100% Cabernet Sauvignon. 20% aged in French oak barrels for 6 months, remaining 80% in stainless steel.",
+        image: "/portfolio/tomero-cabernet-sauvinon.webp",
+        origin: "Valle de Uco, Mendoza, Argentina",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "100% Cabernet Sauvignon", "Aging": "20% in French oak for 6 months, 80% stainless steel" },
+        tastingNotes: "100% Cabernet Sauvignon. 20% aged in French oak barrels for 6 months, remaining 80% in stainless steel.",
+        vinification: "100% Cabernet Sauvignon. 20% of the wine aged in French oak barrels for 6 months, remaining 80% kept in stainless steel tanks before bottling.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Single Vineyard Malbec",
@@ -1340,6 +2358,13 @@ export const countries: CountryData[] = [
         description:
           "100% Malbec from single reserve vineyard. Aged in 225L oak barrels, 500L casks and 3500L barrels for 12 months. Rested 6 months in bottle.",
         points: "91 Points - Tim Atkin MW",
+        image: "/portfolio/tomero-single-vineyard-malbec.webp",
+        origin: "Los Árboles, Tunuyán, Valle de Uco, Argentina",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "100% Malbec", "Aging": "12 months in 225L oak barrels, 500L casks, and 3500L barrels, then 6 months in bottle" },
+        tastingNotes: "100% Malbec from single reserve vineyard. Aged in 225L oak barrels, 500L casks and 3500L barrels for 12 months. Rested 6 months in bottle.",
+        vinification: "100% Malbec sourced from single reserve vineyard. Aged in 225L oak barrels, 500L casks, and 3500L barrels for 12 months, then rested in bottle for 6 months.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Single Vineyard Pinot Noir",
@@ -1349,6 +2374,13 @@ export const countries: CountryData[] = [
         description:
           "100% Pinot Noir from single reserve vineyard. Aged in French oak barrels and 3500L barrels for 12 months.",
         points: "90 Points - Tim Atkin MW",
+        image: "/portfolio/tomero-single-vineyard-pinot-noir.webp",
+        origin: "Los Árboles, Tunuyán, Valle de Uco, Argentina",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "100% Pinot Noir", "Aging": "12 months in French oak barrels and 3500L barrels" },
+        tastingNotes: "100% Pinot Noir from single reserve vineyard. Aged in French oak barrels and 3500L barrels for 12 months.",
+        vinification: "100% Pinot Noir sourced from single reserve vineyard. Aged in French oak barrels and 3500L barrels for 12 months.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
     ],
   },
@@ -1371,6 +2403,13 @@ export const countries: CountryData[] = [
         type: "cacha\u00e7a",
         description:
           "Born in S\u00e3o Paulo from highly selected sugar cane juice. Crystalline white with pleasant citrus and white fruit notes. Clean and balanced.",
+        image: "/portfolio/cachaca-tatuzinho.webp",
+        origin: "São Paulo, Brazil",
+        bottleSizes: ["1L"],
+        specifications: { "Type": "Cacha\U00E7A" },
+        tastingNotes: "Born in S\u00e3o Paulo from highly selected sugar cane juice. Crystalline white with pleasant citrus and white fruit notes. Clean and balanced.",
+        vinification: "Starting from highly selected sugar cane juice from the state of São Paulo, Brazil.",
+        foodPairings: "Brazilian barbecue, tropical fruits, and lime-based appetizers.",
       },
       {
         name: "Cacha\u00e7a Boazinha",
@@ -1379,6 +2418,13 @@ export const countries: CountryData[] = [
         type: "cacha\u00e7a",
         description:
           "From Minas Gerais. Stored 2.5 years in balm barrels. Mild and slightly astringent flavor with intense aroma of herbs.",
+        image: "/portfolio/cachaca-boazinha.webp",
+        origin: "Minas Gerais, Brazil",
+        bottleSizes: ["1L"],
+        specifications: { "Type": "Cacha\U00E7A" },
+        tastingNotes: "From Minas Gerais. Stored 2.5 years in balm barrels. Mild and slightly astringent flavor with intense aroma of herbs.",
+        vinification: "Stored for 2.5 years in balm barrels. Created in Minas Gerais.",
+        foodPairings: "Brazilian barbecue, tropical fruits, and lime-based appetizers.",
       },
       {
         name: "Cacha\u00e7a Tatuzinho Lime",
@@ -1387,6 +2433,13 @@ export const countries: CountryData[] = [
         type: "cacha\u00e7a",
         description:
           "From highly selected sugar cane juice. Crystalline white with citrus and white fruit notes heightened with bright citrus and fresh lime zest.",
+        image: "/portfolio/cachaca-tatuzinho-lime.webp",
+        origin: "São Paulo, Brazil",
+        bottleSizes: ["1L"],
+        specifications: { "Type": "Cacha\U00E7A" },
+        tastingNotes: "From highly selected sugar cane juice. Crystalline white with citrus and white fruit notes heightened with bright citrus and fresh lime zest.",
+        vinification: "Fresh-pressed sugarcane juice fermented and single-distilled. May be aged in native Brazilian wood barrels for added character.",
+        foodPairings: "Brazilian barbecue, tropical fruits, and lime-based appetizers.",
       },
       {
         name: "Cacha\u00e7a Seleta Silver",
@@ -1395,6 +2448,13 @@ export const countries: CountryData[] = [
         type: "cacha\u00e7a",
         description:
           "Vegetable notes of freshly cut cane. Sweet aroma, soft flavor and velvety touch. Ideal for the caipirinha.",
+        image: "/portfolio/cachaca-seleta-silver.webp",
+        origin: "Brazil",
+        bottleSizes: ["1L"],
+        specifications: { "Type": "Cacha\U00E7A" },
+        tastingNotes: "Vegetable notes of freshly cut cane. Sweet aroma, soft flavor and velvety touch. Ideal for the caipirinha.",
+        vinification: "Fresh-pressed sugarcane juice fermented and single-distilled. May be aged in native Brazilian wood barrels for added character.",
+        foodPairings: "Brazilian barbecue, tropical fruits, and lime-based appetizers.",
       },
       {
         name: "Catuaba",
@@ -1403,6 +2463,13 @@ export const countries: CountryData[] = [
         type: "liqueur",
         description:
           "Catuaba is a well-known Brazilian plant with antioxidant and vasodilatory properties. Carefully selected spices create a truly unique tropical flavor.",
+        image: "/portfolio/catuaba-generosa.webp",
+        origin: "Brazil",
+        bottleSizes: ["1L"],
+        specifications: { "Type": "Liqueur" },
+        tastingNotes: "Catuaba is a well-known Brazilian plant with antioxidant and vasodilatory properties. Carefully selected spices create a truly unique tropical flavor.",
+        vinification: "Base spirit infused or macerated with fruits, herbs, or spices. Sweetened and blended to achieve a balanced, flavorful profile.",
+        foodPairings: "Desserts, cheese plates, after-dinner petit fours, and chocolate truffles.",
       },
       {
         name: "Suave White",
@@ -1411,6 +2478,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Elaborated from American grapes: Niagara, Couderc 13, Villard Serve. Straw-colored, light and soft. Characteristic aroma with guava flavor.",
+        image: "/portfolio/cancao-suave-white.webp",
+        origin: "Brazil",
+        bottleSizes: ["1L"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Elaborated from American grapes: Niagara, Couderc 13, Villard Serve. Straw-colored, light and soft. Characteristic aroma with guava flavor.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
     ],
   },
@@ -1433,6 +2507,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Aromas of toasty vanilla with ripe white peach and apricots. Tropical fruit flavors with a rich vanilla finish.",
+        image: "/portfolio/casa-monte-chardonnay.webp",
+        origin: "Central Valley, Chile",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Aromas of toasty vanilla with ripe white peach and apricots. Tropical fruit flavors with a rich vanilla finish.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Cabernet Sauvignon",
@@ -1441,6 +2522,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Dark overripe cherry and dark chocolate aromas. Sweet ripe red and black cherry fruit, with well balanced acidity.",
+        image: "/portfolio/casa-monte-cabernet-sauvignon.webp",
+        origin: "Central Valley, Chile",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Dark overripe cherry and dark chocolate aromas. Sweet ripe red and black cherry fruit, with well balanced acidity.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Sauvignon Blanc",
@@ -1449,6 +2537,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Citrus and pink grapefruit aromas. Tropical fruit, sweet citrus acidity, ripe white peaches and grapefruit flavors.",
+        image: "/portfolio/casa-monte-sauvignon-blanc.webp",
+        origin: "Central Valley, Chile",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Citrus and pink grapefruit aromas. Tropical fruit, sweet citrus acidity, ripe white peaches and grapefruit flavors.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Merlot",
@@ -1457,6 +2552,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Medium bodied and ruby red in color with notes of plum and cherry.",
+        image: "/portfolio/casa-monte-merlot.webp",
+        origin: "Central Valley, Chile",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Medium bodied and ruby red in color with notes of plum and cherry.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
     ],
   },
@@ -1481,6 +2583,13 @@ export const countries: CountryData[] = [
         description:
           "Beautiful red jewel tones. Raspberry, cherry, cola and spice notes. Sweet red fruit with hints of cinnamon spice and sweet vanilla.",
         points: "93 Points - The Grape Solution",
+        image: "/portfolio/kyle-cellars-pinot-noir.webp",
+        origin: "Monterey County, California",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Beautiful red jewel tones. Raspberry, cherry, cola and spice notes. Sweet red fruit with hints of cinnamon spice and sweet vanilla.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Cabernet Sauvignon",
@@ -1490,6 +2599,13 @@ export const countries: CountryData[] = [
         description:
           "Aromas of dried cranberry, cherry and dark chocolate. Rich dark fruits, baking spice and sweet oak lead to a long, lingering finish.",
         points: "94 Points - The Grape Solution",
+        image: "/portfolio/kyle-cellars-cabernet-sauvignon.webp",
+        origin: "Monterey County, California",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Aromas of dried cranberry, cherry and dark chocolate. Rich dark fruits, baking spice and sweet oak lead to a long, lingering finish.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Chardonnay",
@@ -1499,6 +2615,13 @@ export const countries: CountryData[] = [
         description:
           "Golden apple and lemon peel aromas with apricot essence, vanilla and spice. Rich and creamy mouthfeel with balanced acidity.",
         points: "94 Points - The Grape Solution",
+        image: "/portfolio/kyle-cellars-chardonnay.webp",
+        origin: "Monterey County, California",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Golden apple and lemon peel aromas with apricot essence, vanilla and spice. Rich and creamy mouthfeel with balanced acidity.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Sauvignon Blanc",
@@ -1507,6 +2630,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Citrus and pink grapefruit aromas. Tropical notes, white peach and grapefruit with sweet acidity.",
+        image: "/portfolio/paw-print-sauvignon-blanc.webp",
+        origin: "California",
+        bottleSizes: ["1.5L"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Citrus and pink grapefruit aromas. Tropical notes, white peach and grapefruit with sweet acidity.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "White Zinfandel",
@@ -1515,6 +2645,13 @@ export const countries: CountryData[] = [
         type: "ros\u00e9",
         description:
           "Aromas of raspberry and a hint of plums. Crisp with loads of sweet ripe fruits.",
+        image: "/portfolio/paw-print-white-zinfandel.webp",
+        origin: "California",
+        bottleSizes: ["1.5L"],
+        specifications: { "Type": "Ros\U00E9" },
+        tastingNotes: "Aromas of raspberry and a hint of plums. Crisp with loads of sweet ripe fruits.",
+        vinification: "Brief skin contact with gentle pressing to achieve the desired color. Cool-fermented in stainless steel to preserve delicate fruit aromas and bright acidity. Bottled young to maintain freshness.",
+        foodPairings: "Mediterranean dishes, light appetizers, grilled vegetables, and summer salads.",
       },
       {
         name: "Cabernet Sauvignon",
@@ -1523,6 +2660,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Deep notes of jammy berries. Sweet ripe red cherry and berry notes on the palate.",
+        image: "/portfolio/paw-print-cabernet-sauvignon.webp",
+        origin: "California",
+        bottleSizes: ["1.5L"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Deep notes of jammy berries. Sweet ripe red cherry and berry notes on the palate.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Pinot Grigio",
@@ -1531,6 +2675,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Tart green apple flavors with luscious white peach, floral blossom and citrus.",
+        image: "/portfolio/paw-print-pinot-grigio.webp",
+        origin: "California",
+        bottleSizes: ["1.5L"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Tart green apple flavors with luscious white peach, floral blossom and citrus.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Cabernet Sauvignon",
@@ -1539,6 +2690,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Dark fruits, ripe blackberries and plums with oak and vanilla. Bold with layers of spice, black pepper and tobacco. Pairs with hearty dishes and robust cheeses.",
+        image: "/portfolio/profanity-life-screw-off-cabernet-sauvignon.webp",
+        origin: "California",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Dark fruits, ripe blackberries and plums with oak and vanilla. Bold with layers of spice, black pepper and tobacco. Pairs with hearty dishes and robust cheeses.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Hearty dishes, grilled red meats, and robust cheeses.",
       },
       {
         name: "Sauvignon Blanc",
@@ -1547,6 +2705,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Crisp citrus and fresh green apple in harmonious natural simplicity. Aged 6 months, half in stainless steel and half in French oak.",
+        image: "/portfolio/undressed-sauvignon-blanc.webp",
+        origin: "California",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Sauvignon Blanc", "Aging": "6 months: 50% stainless steel, 50% French oak" },
+        tastingNotes: "Crisp citrus and fresh green apple in harmonious natural simplicity. Aged 6 months, half in stainless steel and half in French oak.",
+        vinification: "Unique fermentation process. Aged 6 months, half in stainless steel vats and half in French oak, resulting in a balance of freshness and complexity.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Paso Robles Cabernet Sauvignon",
@@ -1555,6 +2720,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Bold, expressive. Blackberry, black currant, dark cherry layered with vanilla, cedar and dried herbs. Rich and full-bodied with velvety tannins.",
+        image: "/portfolio/puribus-paso-robles-cabernet-sauvignon.webp",
+        origin: "Paso Robles, California",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Bold, expressive. Blackberry, black currant, dark cherry layered with vanilla, cedar and dried herbs. Rich and full-bodied with velvety tannins.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Barbecue, roasted meats, and bold cheeses.",
       },
       {
         name: "Napa Cabernet",
@@ -1564,6 +2736,13 @@ export const countries: CountryData[] = [
         description:
           "Precise, powerful and true. Dark fruit, firm structure and a finish that never misses. From Napa Valley, California.",
         tags: ["limited", "coming-soon"],
+        image: "/portfolio/golden-archer-napa-cabernet.webp",
+        origin: "Napa Valley, California",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Precise, powerful and true. Dark fruit, firm structure and a finish that never misses. From Napa Valley, California.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Cabernet Sauvignon",
@@ -1573,6 +2752,13 @@ export const countries: CountryData[] = [
         description:
           "Dark fruit, firm structure and a finish that never misses. From Red Hill, California.",
         tags: ["coming-soon"],
+        image: "/portfolio/cooper-oak-cabernet-sauvignon.webp",
+        origin: "Red Hill, California",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Dark fruit, firm structure and a finish that never misses. From Red Hill, California.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Pinot Noir",
@@ -1581,6 +2767,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "From prime terroir with high elevation and volcanic soils. Dried red fruit, cocoa, spices and blackberries from French oak. Lasting and pleasurable finish.",
+        image: "/portfolio/one-life-pinot-noir.webp",
+        origin: "Napa Valley, California",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "From prime terroir with high elevation and volcanic soils. Dried red fruit, cocoa, spices and blackberries from French oak. Lasting and pleasurable finish.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Private Collection Napa Cabernet Sauvignon",
@@ -1590,6 +2783,13 @@ export const countries: CountryData[] = [
         description:
           "Once a year allocated production. Royal cassis, silky black cherry, dark berry fruit framed by bakers\u2019 chocolate, cedar and toasted sage. Best from 2025 through 2036.",
         tags: ["limited", "coming-soon"],
+        image: "/portfolio/one-life-napa-cabernet-sauvignon.webp",
+        origin: "Napa Valley, California",
+        bottleSizes: ["750ml"],
+        specifications: { "Grape": "Cabernet Sauvignon", "Production": "Once a year allocated", "Drinking Window": "2025-2036" },
+        tastingNotes: "Once a year allocated production. Royal cassis, silky black cherry, dark berry fruit framed by bakers\u2019 chocolate, cedar and toasted sage. Best from 2025 through 2036.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled steaks, braised short ribs, and dark chocolate desserts.",
       },
       {
         name: "Cabernet Sauvignon",
@@ -1599,6 +2799,13 @@ export const countries: CountryData[] = [
         description:
           "A bold California Cabernet Sauvignon with rich, deep flavors.",
         tags: ["coming-soon"],
+        image: "/portfolio/good-fucking-wine-cabernet-sauvignon.webp",
+        origin: "California",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "A bold California Cabernet Sauvignon with rich, deep flavors.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Red Blend",
@@ -1608,6 +2815,12 @@ export const countries: CountryData[] = [
         description:
           "A flavorful California red blend.",
         tags: ["coming-soon"],
+        image: "/portfolio/good-fucking-wine-red-blend.webp",
+        origin: "California",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       {
         name: "Sweet Red",
@@ -1616,6 +2829,13 @@ export const countries: CountryData[] = [
         type: "red",
         description:
           "Delicious blend of sweet California red grapes, wonderfully smooth with bright fruity taste and ruby-red color. Refreshingly crisp and just sweet enough.",
+        image: "/portfolio/good-fucking-wine-sweet-red.webp",
+        origin: "California",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "Red Wine" },
+        tastingNotes: "Delicious blend of sweet California red grapes, wonderfully smooth with bright fruity taste and ruby-red color. Refreshingly crisp and just sweet enough.",
+        vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+        foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
       },
       // SPIRITS
       {
@@ -1625,6 +2845,13 @@ export const countries: CountryData[] = [
         type: "bourbon",
         description:
           "Rich corn mash bill aged in 4 distinct char 100 year-old forest oak barrels. Creamy vanilla nose with caramel and honey. 99% Corn, 1% Barley.",
+        image: "/portfolio/american-woman-spirit-co-92-straight-bourbon-whisky.webp",
+        origin: "USA",
+        bottleSizes: ["750ml"],
+        specifications: { "Proof": "92 (46% ABV)", "Mash Bill": "99% Corn, 1% Barley", "Barrel": "4 distinct char 100 year-old forest oak" },
+        tastingNotes: "Rich corn mash bill aged in 4 distinct char 100 year-old forest oak barrels. Creamy vanilla nose with caramel and honey. 99% Corn, 1% Barley.",
+        vinification: "Selected grains mashed and fermented. Distilled in copper stills and aged in new charred American oak barrels. Non-chill filtered to preserve depth of flavor.",
+        foodPairings: "Smoked meats, dark chocolate, pecan pie, and sharp cheddar cheese.",
       },
       {
         name: "102 Proof Straight Bourbon",
@@ -1633,6 +2860,13 @@ export const countries: CountryData[] = [
         type: "bourbon",
         description:
           "95% Rye, 5% Malted Barley aged in 4 distinct char 100 year-old forest oak barrels for over 3 years. Rich oak, cinnamon, pear, honey and spice.",
+        image: "/portfolio/american-woman-spirit-co-102-proof-bourbon.webp",
+        origin: "USA",
+        bottleSizes: ["750ml"],
+        specifications: { "Proof": "102 (51% ABV)", "Mash Bill": "95% Rye, 5% Malted Barley", "Barrel": "4 distinct char 100 year-old forest oak", "Aging": "3+ years" },
+        tastingNotes: "95% Rye, 5% Malted Barley aged in 4 distinct char 100 year-old forest oak barrels for over 3 years. Rich oak, cinnamon, pear, honey and spice.",
+        vinification: "Selected grains mashed and fermented. Distilled in copper stills and aged in new charred American oak barrels. Non-chill filtered to preserve depth of flavor.",
+        foodPairings: "Smoked meats, dark chocolate, pecan pie, and sharp cheddar cheese.",
       },
       {
         name: "Cask Strength Straight Bourbon",
@@ -1641,6 +2875,13 @@ export const countries: CountryData[] = [
         type: "bourbon",
         description:
           "Buttery cask strength bourbon. Coffee nose with honey. 99% Corn, 1% Barley. Bottled at barrel strength 126-132 Proof.",
+        image: "/portfolio/american-woman-spirit-co-cask-strength-straigh-bourbon.webp",
+        origin: "USA",
+        bottleSizes: ["750ml"],
+        specifications: { "Proof": "126-132 (66% ABV)", "Mash Bill": "99% Corn, 1% Barley", "Barrel": "4 distinct char 100 year-old forest oak" },
+        tastingNotes: "Buttery cask strength bourbon. Coffee nose with honey. 99% Corn, 1% Barley. Bottled at barrel strength 126-132 Proof.",
+        vinification: "Selected grains mashed and fermented. Distilled in copper stills and aged in new charred American oak barrels. Non-chill filtered to preserve depth of flavor.",
+        foodPairings: "Smoked meats, dark chocolate, pecan pie, and sharp cheddar cheese.",
       },
       {
         name: "Tequila Blanco",
@@ -1649,6 +2890,13 @@ export const countries: CountryData[] = [
         type: "tequila",
         description:
           "100% Blue Weber Agave. Fresh and herbaceous with grapefruit and green apple notes. Pepper and cloves warmth. Whiskey barrel stave finishing process.",
+        image: "/portfolio/american-woman-spirit-co-tequila-blanco.webp",
+        origin: "USA",
+        bottleSizes: ["750ml"],
+        specifications: { "Proof": "80 (40% ABV)", "Agave": "100% Blue Weber Agave", "Finish": "Whiskey barrel stave finishing" },
+        tastingNotes: "100% Blue Weber Agave. Fresh and herbaceous with grapefruit and green apple notes. Pepper and cloves warmth. Whiskey barrel stave finishing process.",
+        vinification: "Harvested blue agave piñas slow-roasted and crushed. Fermented and distilled in copper pot stills. Clean, refined spirit with characteristic agave character.",
+        foodPairings: "Mexican cuisine, grilled seafood, citrus dishes, and spicy appetizers.",
       },
       {
         name: "Small Batch Bourbon",
@@ -1657,6 +2905,13 @@ export const countries: CountryData[] = [
         type: "bourbon",
         description:
           "70% corn, 30% wheat. Distilled in authentic copper pot still. Aged 4 years. Non chill-filtered. Caramel and honey with a long, gentle finish.",
+        image: "/portfolio/good-fucking-bourbon-small-batch.webp",
+        origin: "Minnesota",
+        bottleSizes: ["750ml"],
+        specifications: { "Proof": "80 (40% ABV)", "Mash Bill": "70% Corn, 30% Wheat", "Still": "Copper pot still", "Aging": "4 years", "Filtration": "Non chill-filtered" },
+        tastingNotes: "70% corn, 30% wheat. Distilled in authentic copper pot still. Aged 4 years. Non chill-filtered. Caramel and honey with a long, gentle finish.",
+        vinification: "Sweet mash of 70% corn, 30% wheat. Distilled slowly in an authentic copper pot still. Aged 4 years. Non chill-filtered to maintain deep flavors and smooth mouthfeel.",
+        foodPairings: "Smoked meats, dark chocolate, pecan pie, and sharp cheddar cheese.",
       },
       {
         name: "Small Batch Tequila",
@@ -1665,6 +2920,13 @@ export const countries: CountryData[] = [
         type: "tequila",
         description:
           "100% Blue Weber Agave. Oxygenated Blanco for a smoother finish. Light, clean and smooth finish. From Jalisco, Mexico.",
+        image: "/portfolio/good-fucking-tequila-small-batch.webp",
+        origin: "Jalisco, Mexico",
+        bottleSizes: ["750ml"],
+        specifications: { "Proof": "80 (40% ABV)", "Agave": "100% Blue Weber Agave", "Process": "Oxygenated Blanco" },
+        tastingNotes: "100% Blue Weber Agave. Oxygenated Blanco for a smoother finish. Light, clean and smooth finish. From Jalisco, Mexico.",
+        vinification: "100% Blue Weber Agave. Oxygenated Blanco tequila – micro-oxygen bubbles mixed with chemical compounds of the distillate to evaporate less desirable compounds.",
+        foodPairings: "Mexican cuisine, grilled seafood, citrus dishes, and spicy appetizers.",
       },
       {
         name: "Small Batch Vodka",
@@ -1673,6 +2935,13 @@ export const countries: CountryData[] = [
         type: "vodka",
         description:
           "Small batch craft vodka from American corn. Ultra smooth. Shenandoah Valley, Blue Ridge Limestone water for silky texture. No mixers needed.",
+        image: "/portfolio/good-fucking-vodka-small-batch.webp",
+        origin: "Virginia",
+        bottleSizes: ["750ml"],
+        specifications: { "Base": "American corn", "Water": "Shenandoah Valley Blue Ridge Limestone" },
+        tastingNotes: "Small batch craft vodka from American corn. Ultra smooth. Shenandoah Valley, Blue Ridge Limestone water for silky texture. No mixers needed.",
+        vinification: "Made from American corn. Shenandoah Valley, Blue Ridge Limestone water instills silky, smooth texture.",
+        foodPairings: "Caviar, smoked fish, pickled vegetables, and chilled seafood.",
       },
       {
         name: "Bourbon",
@@ -1681,6 +2950,13 @@ export const countries: CountryData[] = [
         type: "bourbon",
         description:
           "Straight Bourbon Whiskey with medium to light body. Rich notes of leather, tobacco, vanilla and hints of caramel.",
+        image: "/portfolio/reserve-1787-bourbon.webp",
+        origin: "USA",
+        bottleSizes: ["1.75L"],
+        specifications: { "Type": "Straight Bourbon Whiskey", "Body": "Medium to light" },
+        tastingNotes: "Straight Bourbon Whiskey with medium to light body. Rich notes of leather, tobacco, vanilla and hints of caramel.",
+        vinification: "Selected grains mashed and fermented. Distilled in copper stills and aged in new charred American oak barrels. Non-chill filtered to preserve depth of flavor.",
+        foodPairings: "Smoked meats, dark chocolate, pecan pie, and sharp cheddar cheese.",
       },
       {
         name: "Gin",
@@ -1689,6 +2965,13 @@ export const countries: CountryData[] = [
         type: "gin",
         description:
           "Premium spirit from Long Island. Blend of exotic botanicals delivering a crisp and invigorating flavor. Perfect for elegant cocktails.",
+        image: "/portfolio/axis-gin.webp",
+        origin: "Long Island, New York",
+        bottleSizes: ["750ml"],
+        specifications: { "Style": "Premium London Dry" },
+        tastingNotes: "Premium spirit from Long Island. Blend of exotic botanicals delivering a crisp and invigorating flavor. Perfect for elegant cocktails.",
+        vinification: "Premium base spirit redistilled with botanicals including juniper, coriander, and citrus. Balanced botanical profile with juniper-forward character.",
+        foodPairings: "Cured meats, fresh herbs, citrus dishes, and Mediterranean appetizers.",
       },
       {
         name: "Cognac",
@@ -1697,6 +2980,13 @@ export const countries: CountryData[] = [
         type: "cognac",
         description:
           "Finest grapes from the best areas of Cognac, France. Blend of 80% VS (3yr), 15% VSOP (5yr), and 5% XO (10yr). The Rolls Royce of Cognac.",
+        image: "/portfolio/revanche-cognac.webp",
+        origin: "Cognac, France",
+        bottleSizes: ["750ml", "375ml", "100ml"],
+        specifications: { "Blend": "80% VS (3yr), 15% VSOP (5yr), 5% XO (10yr)", "Region": "Cognac, France" },
+        tastingNotes: "Finest grapes from the best areas of Cognac, France. Blend of 80% VS (3yr), 15% VSOP (5yr), and 5% XO (10yr). The Rolls Royce of Cognac.",
+        vinification: "Made with the finest grapes from the best areas of Cognac, France. Proprietary blend of 80% VS (3 years old), 15% VSOP (5 years old), and 5% XO (10 years old).",
+        foodPairings: "Dark chocolate, dried fruits, cigars, and rich desserts.",
       },
     ],
   },
@@ -1719,6 +3009,13 @@ export const countries: CountryData[] = [
         type: "white",
         description:
           "Traditional punchy herbal nose with cut grass, green peppercorns, gooseberry and marjoram. Chalky, gravelly texture with steely acidity.",
+        image: "/portfolio/coco-bay-marlborough-sauvignon-blanc.webp",
+        origin: "Marlborough, New Zealand",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Traditional punchy herbal nose with cut grass, green peppercorns, gooseberry and marjoram. Chalky, gravelly texture with steely acidity.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Sauvignon Blanc",
@@ -1728,6 +3025,13 @@ export const countries: CountryData[] = [
         description:
           "Hallmark Marlborough aromatics. Tropical and citrusy with fresh herbs and pepper notes. Bright, lively acidity.",
         tags: ["coming-soon"],
+        image: "/portfolio/tiki-grove-sauvignon-blanc.webp",
+        origin: "Marlborough, New Zealand",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Hallmark Marlborough aromatics. Tropical and citrusy with fresh herbs and pepper notes. Bright, lively acidity.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
       {
         name: "Sauvignon Blanc",
@@ -1737,6 +3041,13 @@ export const countries: CountryData[] = [
         description:
           "Crisp freshness with vibrant grape aromas. Citrus and tropical fruit burst, balanced by zesty acidity and a clean, lingering finish.",
         tags: ["coming-soon"],
+        image: "/portfolio/blue-bay-sauvignon-blanc.webp",
+        origin: "New Zealand",
+        bottleSizes: ["750ml"],
+        specifications: { "Type": "White Wine" },
+        tastingNotes: "Crisp freshness with vibrant grape aromas. Citrus and tropical fruit burst, balanced by zesty acidity and a clean, lingering finish.",
+        vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+        foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
       },
     ],
   },
@@ -1759,6 +3070,13 @@ export const countries: CountryData[] = [
         type: "soju",
         description:
           "Delicious Korean drink with honey dew melon flavor. Newtro prepared with Korean pear and apple wine.",
+        image: "/portfolio/7-drops-soju-yogurt.webp",
+        origin: "South Korea",
+        bottleSizes: ["750ml"],
+        specifications: { "ABV": "12.5%", "Base": "Korean pear and apple wine" },
+        tastingNotes: "Delicious Korean drink with honey dew melon flavor. Newtro prepared with Korean pear and apple wine.",
+        vinification: "Fermented and distilled from rice, wheat, or barley. Clean, smooth spirit with subtle sweetness. Diluted to drinking strength.",
+        foodPairings: "Korean BBQ, fried chicken, dumplings, and spicy noodle dishes.",
       },
       {
         name: "Soju Passion Fruit",
@@ -1767,6 +3085,13 @@ export const countries: CountryData[] = [
         type: "soju",
         description:
           "Smooth richness of Soju with sweet and fragrant notes of lychee. Perfect companion for any occasion.",
+        image: "/portfolio/7-drops-soju-passion-fruit.webp",
+        origin: "South Korea",
+        bottleSizes: ["750ml"],
+        specifications: { "ABV": "12.5%" },
+        tastingNotes: "Smooth richness of Soju with sweet and fragrant notes of lychee. Perfect companion for any occasion.",
+        vinification: "Fermented and distilled from rice, wheat, or barley. Clean, smooth spirit with subtle sweetness. Diluted to drinking strength.",
+        foodPairings: "Korean BBQ, fried chicken, dumplings, and spicy noodle dishes.",
       },
       {
         name: "Apple Soju",
@@ -1775,6 +3100,13 @@ export const countries: CountryData[] = [
         type: "soju",
         description:
           "Crisp and refreshing with high-quality apple juice and natural rock water. 12.5% ABV.",
+        image: "/portfolio/better-tomorrow-apple-soju.webp",
+        origin: "South Korea",
+        bottleSizes: ["375ml"],
+        specifications: { "ABV": "12.5%", "Water": "Natural rock water" },
+        tastingNotes: "Crisp and refreshing with high-quality apple juice and natural rock water. 12.5% ABV.",
+        vinification: "Fermented and distilled from rice, wheat, or barley. Clean, smooth spirit with subtle sweetness. Diluted to drinking strength.",
+        foodPairings: "Korean BBQ, fried chicken, dumplings, and spicy noodle dishes.",
       },
       {
         name: "Blueberry Soju",
@@ -1783,6 +3115,13 @@ export const countries: CountryData[] = [
         type: "soju",
         description:
           "Smooth and enjoyable with fresh blueberry flavor and natural rock water. 12.5% ABV.",
+        image: "/portfolio/better-tomorrow-blueberry-soju.webp",
+        origin: "South Korea",
+        bottleSizes: ["375ml"],
+        specifications: { "ABV": "12.5%", "Water": "Natural rock water" },
+        tastingNotes: "Smooth and enjoyable with fresh blueberry flavor and natural rock water. 12.5% ABV.",
+        vinification: "Fermented and distilled from rice, wheat, or barley. Clean, smooth spirit with subtle sweetness. Diluted to drinking strength.",
+        foodPairings: "Korean BBQ, fried chicken, dumplings, and spicy noodle dishes.",
       },
       {
         name: "Grapefruit Soju",
@@ -1791,6 +3130,13 @@ export const countries: CountryData[] = [
         type: "soju",
         description:
           "Crisp and refreshing with grapefruit juice and natural rock water. 12.5% ABV.",
+        image: "/portfolio/better-tomorrow-grapefruit-soju.webp",
+        origin: "South Korea",
+        bottleSizes: ["375ml"],
+        specifications: { "ABV": "12.5%", "Water": "Natural rock water" },
+        tastingNotes: "Crisp and refreshing with grapefruit juice and natural rock water. 12.5% ABV.",
+        vinification: "Fermented and distilled from rice, wheat, or barley. Clean, smooth spirit with subtle sweetness. Diluted to drinking strength.",
+        foodPairings: "Korean BBQ, fried chicken, dumplings, and spicy noodle dishes.",
       },
       {
         name: "Lychee Soju",
@@ -1799,6 +3145,13 @@ export const countries: CountryData[] = [
         type: "soju",
         description:
           "Smooth with delicate lychee flavor harmonized with natural rock water. 12.5% ABV.",
+        image: "/portfolio/better-tomorrow-lychee-soju.webp",
+        origin: "South Korea",
+        bottleSizes: ["375ml"],
+        specifications: { "ABV": "12.5%", "Water": "Natural rock water" },
+        tastingNotes: "Smooth with delicate lychee flavor harmonized with natural rock water. 12.5% ABV.",
+        vinification: "Fermented and distilled from rice, wheat, or barley. Clean, smooth spirit with subtle sweetness. Diluted to drinking strength.",
+        foodPairings: "Korean BBQ, fried chicken, dumplings, and spicy noodle dishes.",
       },
       {
         name: "Pomegranate Soju",
@@ -1807,6 +3160,13 @@ export const countries: CountryData[] = [
         type: "soju",
         description:
           "Refreshing with pomegranate juice and natural rock water. 12.5% ABV.",
+        image: "/portfolio/better-tomorrow-pomegranate-soju.webp",
+        origin: "South Korea",
+        bottleSizes: ["375ml"],
+        specifications: { "ABV": "12.5%", "Water": "Natural rock water" },
+        tastingNotes: "Refreshing with pomegranate juice and natural rock water. 12.5% ABV.",
+        vinification: "Fermented and distilled from rice, wheat, or barley. Clean, smooth spirit with subtle sweetness. Diluted to drinking strength.",
+        foodPairings: "Korean BBQ, fried chicken, dumplings, and spicy noodle dishes.",
       },
       {
         name: "Green Grape Soju",
@@ -1815,6 +3175,13 @@ export const countries: CountryData[] = [
         type: "soju",
         description:
           "Light and refreshing with green grape flavor and natural rock water. 12.5% ABV.",
+        image: "/portfolio/better-tomorrow-green-grape-soju.webp",
+        origin: "South Korea",
+        bottleSizes: ["375ml"],
+        specifications: { "ABV": "12.5%", "Water": "Natural rock water" },
+        tastingNotes: "Light and refreshing with green grape flavor and natural rock water. 12.5% ABV.",
+        vinification: "Fermented and distilled from rice, wheat, or barley. Clean, smooth spirit with subtle sweetness. Diluted to drinking strength.",
+        foodPairings: "Korean BBQ, fried chicken, dumplings, and spicy noodle dishes.",
       },
       {
         name: "Pineapple Soju",
@@ -1823,6 +3190,13 @@ export const countries: CountryData[] = [
         type: "soju",
         description:
           "Tropical and refreshing with pineapple juice and natural rock water. 12.5% ABV.",
+        image: "/portfolio/better-tomorrow-pineapple-soju.webp",
+        origin: "South Korea",
+        bottleSizes: ["375ml"],
+        specifications: { "ABV": "12.5%", "Water": "Natural rock water" },
+        tastingNotes: "Tropical and refreshing with pineapple juice and natural rock water. 12.5% ABV.",
+        vinification: "Fermented and distilled from rice, wheat, or barley. Clean, smooth spirit with subtle sweetness. Diluted to drinking strength.",
+        foodPairings: "Korean BBQ, fried chicken, dumplings, and spicy noodle dishes.",
       },
       {
         name: "Mango Soju",
@@ -1831,6 +3205,13 @@ export const countries: CountryData[] = [
         type: "soju",
         description:
           "Rich mango flavor harmonized with natural rock water. 12.5% ABV.",
+        image: "/portfolio/better-tomorrow-mango-soju.webp",
+        origin: "South Korea",
+        bottleSizes: ["375ml"],
+        specifications: { "ABV": "12.5%", "Water": "Natural rock water" },
+        tastingNotes: "Rich mango flavor harmonized with natural rock water. 12.5% ABV.",
+        vinification: "Fermented and distilled from rice, wheat, or barley. Clean, smooth spirit with subtle sweetness. Diluted to drinking strength.",
+        foodPairings: "Korean BBQ, fried chicken, dumplings, and spicy noodle dishes.",
       },
       {
         name: "Strawberry Soju",
@@ -1839,6 +3220,13 @@ export const countries: CountryData[] = [
         type: "soju",
         description:
           "Sweet strawberry flavor balanced with natural rock water. 12.5% ABV.",
+        image: "/portfolio/better-tomorrow-strawberry-soju.webp",
+        origin: "South Korea",
+        bottleSizes: ["375ml"],
+        specifications: { "ABV": "12.5%", "Water": "Natural rock water" },
+        tastingNotes: "Sweet strawberry flavor balanced with natural rock water. 12.5% ABV.",
+        vinification: "Fermented and distilled from rice, wheat, or barley. Clean, smooth spirit with subtle sweetness. Diluted to drinking strength.",
+        foodPairings: "Korean BBQ, fried chicken, dumplings, and spicy noodle dishes.",
       },
       {
         name: "Peach Soju",
@@ -1847,6 +3235,12 @@ export const countries: CountryData[] = [
         type: "soju",
         description:
           "Delicate peach flavor with natural rock water. 12.5% ABV.",
+        image: "/portfolio/better-tomorrow-peach-soju.webp",
+        origin: "South Korea",
+        bottleSizes: ["375ml"],
+        specifications: { "ABV": "12.5%", "Water": "Natural rock water" },
+        vinification: "Fermented and distilled from rice, wheat, or barley. Clean, smooth spirit with subtle sweetness. Diluted to drinking strength.",
+        foodPairings: "Korean BBQ, fried chicken, dumplings, and spicy noodle dishes.",
       },
       {
         name: "Watermelon Soju",
@@ -1855,6 +3249,13 @@ export const countries: CountryData[] = [
         type: "soju",
         description:
           "Refreshing watermelon flavor with natural rock water. 12.5% ABV.",
+        image: "/portfolio/better-tomorrow-watermelon-soju.webp",
+        origin: "South Korea",
+        bottleSizes: ["375ml"],
+        specifications: { "ABV": "12.5%", "Water": "Natural rock water" },
+        tastingNotes: "Refreshing watermelon flavor with natural rock water. 12.5% ABV.",
+        vinification: "Fermented and distilled from rice, wheat, or barley. Clean, smooth spirit with subtle sweetness. Diluted to drinking strength.",
+        foodPairings: "Korean BBQ, fried chicken, dumplings, and spicy noodle dishes.",
       },
     ],
   },
@@ -1877,6 +3278,13 @@ export const countries: CountryData[] = [
         type: "sake",
         description:
           "Excellent balance of gorgeous aroma and acidity. Premium Japanese rice and local spring water. Medium, crisp dryness with a fruity, exotic profile.",
+        image: "/portfolio/sakeberto-junmai-ginjo-sake.webp",
+        origin: "Japan",
+        bottleSizes: ["300ml", "720ml"],
+        specifications: { "Rice": "Premium Japanese rice", "Water": "Local spring water", "Style": "Junmai Ginjo" },
+        tastingNotes: "Excellent balance of gorgeous aroma and acidity. Premium Japanese rice and local spring water. Medium, crisp dryness with a fruity, exotic profile.",
+        vinification: "Premium rice polished, washed, and steamed. Fermented with koji mold and yeast in a parallel process. Pressed, filtered, and pasteurized.",
+        foodPairings: "Japanese sushi and sashimi, Mexican burritos, mole, chicken, turkey, and pork.",
       },
       {
         name: "Junmai Sake",
@@ -1885,6 +3293,13 @@ export const countries: CountryData[] = [
         type: "sake",
         description:
           "Extra crispy with umami and deep richness of rice. Best served warm or at room temperature. Slight apple and melon-like aromas.",
+        image: "/portfolio/sakeberto-junmai.webp",
+        origin: "Japan",
+        bottleSizes: ["720ml"],
+        specifications: { "Rice": "Premium Japanese rice", "Water": "Local spring water", "Style": "Junmai" },
+        tastingNotes: "Extra crispy with umami and deep richness of rice. Best served warm or at room temperature. Slight apple and melon-like aromas.",
+        vinification: "Premium rice polished, washed, and steamed. Fermented with koji mold and yeast in a parallel process. Pressed, filtered, and pasteurized.",
+        foodPairings: "Rich-flavored foods: burgers, ribs, steaks, fatty fish, pork belly, and rice-based dishes.",
       },
     ],
   },
@@ -1907,6 +3322,13 @@ export const countries: CountryData[] = [
         type: "vodka",
         description:
           "5 times distilled ultra pure spirit. Certified Gluten Free and Kosher.",
+        image: "/portfolio/smoke-lab-classic-vodka.webp",
+        origin: "India",
+        bottleSizes: ["750ml", "50ml"],
+        specifications: { "Distillation": "5 times distilled", "Certification": "Gluten Free, Kosher" },
+        tastingNotes: "5 times distilled ultra pure spirit. Certified Gluten Free and Kosher.",
+        vinification: "5 times distilled ultra pure spirit.",
+        foodPairings: "Caviar, smoked fish, pickled vegetables, and chilled seafood.",
       },
       {
         name: "Aniseed Flavored Vodka",
@@ -1915,6 +3337,13 @@ export const countries: CountryData[] = [
         type: "vodka",
         description:
           "Aniseed (saunf) first discovered in the Mediterranean. Refreshing notes of fennel and liquorice. Certified Gluten Free and Kosher.",
+        image: "/portfolio/smoke-lab-aniseed-flavored-vodka.webp",
+        origin: "India",
+        bottleSizes: ["750ml", "50ml"],
+        specifications: { "Flavor": "Aniseed (Saunf)", "Certification": "Gluten Free, Kosher" },
+        tastingNotes: "Aniseed (saunf) first discovered in the Mediterranean. Refreshing notes of fennel and liquorice. Certified Gluten Free and Kosher.",
+        vinification: "Selected grains or potatoes distilled multiple times for purity. Filtered to remove impurities while preserving subtle character. Diluted to proof with pure water.",
+        foodPairings: "Caviar, smoked fish, pickled vegetables, and chilled seafood.",
       },
       {
         name: "Saffron Vodka",
@@ -1923,6 +3352,13 @@ export const countries: CountryData[] = [
         type: "vodka",
         description:
           "Ultra Pure Spirit infused with Kashmiri Saffron, the most expensive spice. First and most awarded premium vodka from India.",
+        image: "/portfolio/smoke-lab-saffron-vodka.webp",
+        origin: "India",
+        bottleSizes: ["750ml", "50ml"],
+        specifications: { "Infusion": "Kashmiri Saffron", "Certification": "Premium Vodka from India" },
+        tastingNotes: "Ultra Pure Spirit infused with Kashmiri Saffron, the most expensive spice. First and most awarded premium vodka from India.",
+        vinification: "Ultra pure spirit infused with the king of spices – Kashmiri Saffron.",
+        foodPairings: "Caviar, smoked fish, pickled vegetables, and chilled seafood.",
       },
     ],
   },
@@ -1945,6 +3381,13 @@ export const countries: CountryData[] = [
         type: "rtd",
         description:
           "Vodka, grape wine and grape brandy with peach flavor. Refreshing and unique taste.",
+        image: "/portfolio/rio-light-peach-brandy.webp",
+        origin: "China",
+        bottleSizes: ["330ml"],
+        specifications: { "Type": "Ready-to-Drink" },
+        tastingNotes: "Vodka, grape wine and grape brandy with peach flavor. Refreshing and unique taste.",
+        vinification: "Premium spirits or wine blended with natural fruit flavors. Balanced for refreshing, easy drinking. Carbonated for a crisp, effervescent finish.",
+        foodPairings: "Casual dining, light snacks, party appetizers, and outdoor gatherings.",
       },
       {
         name: "Passion Fruit & Vodka Flavor",
@@ -1953,6 +3396,13 @@ export const countries: CountryData[] = [
         type: "rtd",
         description:
           "Refreshing passion fruit flavor with vodka. Light and easy to drink.",
+        image: "/portfolio/rio-light-passion-fruit-vodka.webp",
+        origin: "China",
+        bottleSizes: ["330ml"],
+        specifications: { "Type": "Ready-to-Drink" },
+        tastingNotes: "Refreshing passion fruit flavor with vodka. Light and easy to drink.",
+        vinification: "Premium spirits or wine blended with natural fruit flavors. Balanced for refreshing, easy drinking. Carbonated for a crisp, effervescent finish.",
+        foodPairings: "Casual dining, light snacks, party appetizers, and outdoor gatherings.",
       },
       {
         name: "Ros\u00e9 Lychee & Brandy Flavor",
@@ -1961,6 +3411,13 @@ export const countries: CountryData[] = [
         type: "rtd",
         description:
           "Sweetness of lychee flavor with brandy. Refreshing and unique taste.",
+        image: "/portfolio/rio-light-rose-lychee-brandy.webp",
+        origin: "China",
+        bottleSizes: ["330ml"],
+        specifications: { "Type": "Ready-to-Drink" },
+        tastingNotes: "Sweetness of lychee flavor with brandy. Refreshing and unique taste.",
+        vinification: "Premium spirits or wine blended with natural fruit flavors. Balanced for refreshing, easy drinking. Carbonated for a crisp, effervescent finish.",
+        foodPairings: "Casual dining, light snacks, party appetizers, and outdoor gatherings.",
       },
       {
         name: "Yogurt & Vodka Flavor",
@@ -1969,6 +3426,13 @@ export const countries: CountryData[] = [
         type: "rtd",
         description:
           "Creamy yogurt flavor paired with vodka. Light and refreshing.",
+        image: "/portfolio/rio-light-yogurt-vodka.webp",
+        origin: "China",
+        bottleSizes: ["330ml"],
+        specifications: { "Type": "Ready-to-Drink" },
+        tastingNotes: "Creamy yogurt flavor paired with vodka. Light and refreshing.",
+        vinification: "Premium spirits or wine blended with natural fruit flavors. Balanced for refreshing, easy drinking. Carbonated for a crisp, effervescent finish.",
+        foodPairings: "Casual dining, light snacks, party appetizers, and outdoor gatherings.",
       },
     ],
   },
@@ -1991,6 +3455,13 @@ export const countries: CountryData[] = [
         type: "tequila",
         description:
           "Collected from organic Blue Weber Agaves. Clean, refined taste. Impeccable sweet and herbal flavor with softness of taste. Perfect for experimental cocktails or classic margaritas.",
+        image: "/portfolio/la-brune-ed-catrina-tequila-blanco.webp",
+        origin: "Mexico",
+        bottleSizes: ["750ml"],
+        specifications: { "Agave": "Organic Blue Weber Agave" },
+        tastingNotes: "Collected from organic Blue Weber Agaves. Clean, refined taste. Impeccable sweet and herbal flavor with softness of taste. Perfect for experimental cocktails or classic margaritas.",
+        vinification: "Collected from organic Blue Weber Agaves. Clean, refined taste with impeccable sweet and herbal flavor.",
+        foodPairings: "Mexican cuisine, grilled seafood, citrus dishes, and spicy appetizers.",
       },
     ],
   },
@@ -2013,6 +3484,13 @@ export const countries: CountryData[] = [
         type: "rum",
         description:
           "Traditional Caribbean rum with coconut liqueur. Smooth, tasty and flavorful. Great in Pi\u00f1a Coladas.",
+        image: "/portfolio/blue-coco-beach-carribean-spiced-rum.webp",
+        origin: "Caribbean",
+        bottleSizes: ["1.75L"],
+        specifications: { "Type": "Rum" },
+        tastingNotes: "Traditional Caribbean rum with coconut liqueur. Smooth, tasty and flavorful. Great in Pi\u00f1a Coladas.",
+        vinification: "Fermented sugarcane juice or molasses. Distilled and aged in oak barrels. Rich, smooth character with caramel and tropical fruit notes.",
+        foodPairings: "Tropical fruit dishes, grilled pineapple, jerk chicken, and coconut desserts.",
       },
       {
         name: "Black Spiced Rum",
@@ -2021,6 +3499,13 @@ export const countries: CountryData[] = [
         type: "rum",
         description:
           "Deep dark brown with ruby and mahogany hints. Sweet vanilla, caramel, dark chocolate with cinnamon, clove and nutmeg. Bold with burnt caramel and coffee.",
+        image: "/portfolio/black-sand-beach-black-spiced-rum.webp",
+        origin: "Caribbean",
+        bottleSizes: ["1.75L"],
+        specifications: { "Type": "Rum" },
+        tastingNotes: "Deep dark brown with ruby and mahogany hints. Sweet vanilla, caramel, dark chocolate with cinnamon, clove and nutmeg. Bold with burnt caramel and coffee.",
+        vinification: "Fermented sugarcane juice or molasses. Distilled and aged in oak barrels. Rich, smooth character with caramel and tropical fruit notes.",
+        foodPairings: "Tropical fruit dishes, grilled pineapple, jerk chicken, and coconut desserts.",
       },
     ],
   },
@@ -2036,6 +3521,13 @@ export const valuedWines: Product[] = [
     type: "white",
     description:
       "Beautifully ripe green apple and lemon with hints of honeydew. Crisp and refreshing. The perfect everyday wine.",
+    image: "/portfolio/zuccotti-pinot-grigio.webp",
+    origin: "Italy",
+    bottleSizes: ["1.5L"],
+    specifications: { "Type": "White Wine" },
+    tastingNotes: "Beautifully ripe green apple and lemon with hints of honeydew. Crisp and refreshing. The perfect everyday wine.",
+    vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+    foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
   },
   {
     name: "Pinot Grigio",
@@ -2044,6 +3536,13 @@ export const valuedWines: Product[] = [
     type: "white",
     description:
       "Crisp and refreshing in style with hints of lemon, peach and melon.",
+    image: "/portfolio/san-nicola-pinot-grigio.webp",
+    origin: "Italy",
+    bottleSizes: ["1.5L"],
+    specifications: { "Type": "White Wine" },
+    tastingNotes: "Crisp and refreshing in style with hints of lemon, peach and melon.",
+    vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+    foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
   },
   {
     name: "Sauvignon Blanc",
@@ -2052,6 +3551,13 @@ export const valuedWines: Product[] = [
     type: "white",
     description:
       "Fragrant bouquet with vibrant lime zest, ruby grapefruit and pineapple with a crisp, refreshing finish.",
+    image: "/portfolio/san-nicola-sauvignon-blanc.webp",
+    origin: "Italy",
+    bottleSizes: ["1.5L"],
+    specifications: { "Type": "White Wine" },
+    tastingNotes: "Fragrant bouquet with vibrant lime zest, ruby grapefruit and pineapple with a crisp, refreshing finish.",
+    vinification: "Whole-cluster pressed and gently settled. Cool-fermented in temperature-controlled stainless steel tanks to preserve fresh aromatics. Racked and aged on fine lees for added body and texture.",
+    foodPairings: "Fresh seafood, light salads, poultry, and soft cheeses.",
   },
   {
     name: "Cabernet Sauvignon",
@@ -2060,6 +3566,13 @@ export const valuedWines: Product[] = [
     type: "red",
     description:
       "Full bodied with rich ruby red color. Black cherry, plum and blackberry flavors.",
+    image: "/portfolio/san-nicola-cabernet-sauvignon.webp",
+    origin: "Italy",
+    bottleSizes: ["1.5L"],
+    specifications: { "Type": "Red Wine" },
+    tastingNotes: "Full bodied with rich ruby red color. Black cherry, plum and blackberry flavors.",
+    vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+    foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
   },
   {
     name: "Moscato",
@@ -2068,6 +3581,13 @@ export const valuedWines: Product[] = [
     type: "dessert",
     description:
       "Lusciously refreshing with the perfect amount of sweetness. White peach, apricot and tropical fruit flavors.",
+    image: "/portfolio/san-nicola-moscato.webp",
+    origin: "Italy",
+    bottleSizes: ["1.5L"],
+    specifications: { "Type": "Dessert Wine" },
+    tastingNotes: "Lusciously refreshing with the perfect amount of sweetness. White peach, apricot and tropical fruit flavors.",
+    vinification: "Late-harvested grapes with elevated sugar levels. Slow, cool fermentation arrested to preserve natural sweetness. Balanced residual sugar with vibrant acidity.",
+    foodPairings: "Spicy foods, fruit, and soft cheese.",
   },
   {
     name: "Montepulciano",
@@ -2076,6 +3596,13 @@ export const valuedWines: Product[] = [
     type: "red",
     description:
       "Leather and earthy notes with a wild, deep nose. Dark cherry and blackcurrant fill the palate.",
+    image: "/portfolio/san-nicola-montepulicano.webp",
+    origin: "Italy",
+    bottleSizes: ["1.5L"],
+    specifications: { "Type": "Red Wine" },
+    tastingNotes: "Leather and earthy notes with a wild, deep nose. Dark cherry and blackcurrant fill the palate.",
+    vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+    foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
   },
   {
     name: "Merlot",
@@ -2084,6 +3611,12 @@ export const valuedWines: Product[] = [
     type: "red",
     description:
       "Medium bodied and ruby red with notes of plum and cherry.",
+    image: "/portfolio/san-nicola-merlot.webp",
+    origin: "Italy",
+    bottleSizes: ["1.5L"],
+    specifications: { "Type": "Red Wine" },
+    vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+    foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
   },
   {
     name: "Pinot Noir",
@@ -2092,6 +3625,13 @@ export const valuedWines: Product[] = [
     type: "red",
     description:
       "Brilliant ruby color. Medium bodied and refreshing with cherry and wild berry notes.",
+    image: "/portfolio/san-nicola-pinot-noir.webp",
+    origin: "Italy",
+    bottleSizes: ["1.5L"],
+    specifications: { "Type": "Red Wine" },
+    tastingNotes: "Brilliant ruby color. Medium bodied and refreshing with cherry and wild berry notes.",
+    vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+    foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
   },
   {
     name: "Chianti",
@@ -2100,6 +3640,13 @@ export const valuedWines: Product[] = [
     type: "red",
     description:
       "Sangiovese, merlot and cabernet sauvignon. Deep fruity plum and intense cherry with hints of spice, hazelnut and violet aromas.",
+    image: "/portfolio/san-marco-chianti.webp",
+    origin: "Italy",
+    bottleSizes: ["1.5L"],
+    specifications: { "Type": "Red Wine" },
+    tastingNotes: "Sangiovese, merlot and cabernet sauvignon. Deep fruity plum and intense cherry with hints of spice, hazelnut and violet aromas.",
+    vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+    foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
   },
   {
     name: "Montepulciano",
@@ -2108,5 +3655,34 @@ export const valuedWines: Product[] = [
     type: "red",
     description:
       "Leather and earthy notes with a wild, deep nose. Dark cherry and blackcurrant fill the palate.",
+    image: "/portfolio/san-marco-montepuliciano.webp",
+    origin: "Italy",
+    bottleSizes: ["1.5L"],
+    specifications: { "Type": "Red Wine" },
+    tastingNotes: "Leather and earthy notes with a wild, deep nose. Dark cherry and blackcurrant fill the palate.",
+    vinification: "Destemmed and gently crushed. Fermented in temperature-controlled stainless steel tanks with regular pump-overs to extract color and tannins. Aged in a combination of stainless steel and oak to develop complexity and structure.",
+    foodPairings: "Grilled red meats, aged cheeses, hearty pasta dishes, and rich stews.",
   },
 ];
+
+export function getAllProducts(): { product: Product; country: CountryData }[] {
+  const results: { product: Product; country: CountryData }[] = [];
+  for (const country of countries) {
+    const prods = country.id === "italy"
+      ? [...country.products, ...valuedWines]
+      : country.products;
+    for (const product of prods) {
+      results.push({ product, country });
+    }
+  }
+  return results;
+}
+
+export function getProductBySlug(slug: string): { product: Product; country: CountryData } | null {
+  for (const entry of getAllProducts()) {
+    if (generateSlug(entry.product) === slug) {
+      return entry;
+    }
+  }
+  return null;
+}

@@ -1,27 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 import ProductCard from "./ProductCard";
-import type { CountryData } from "../data/portfolio-data";
+import type { CountryData, Product } from "../data/portfolio-data";
 
 interface CountrySectionProps {
   country: CountryData;
   index: number;
+  filteredProducts: Product[];
 }
 
-export default function CountrySection({ country, index }: CountrySectionProps) {
+function sortByBrand(products: Product[]): Product[] {
+  const brandOrder: Map<string, number> = new Map();
+  let idx = 0;
+  for (const p of products) {
+    if (!brandOrder.has(p.brand)) {
+      brandOrder.set(p.brand, idx++);
+    }
+  }
+  return [...products].sort(
+    (a, b) => (brandOrder.get(a.brand) ?? 0) - (brandOrder.get(b.brand) ?? 0)
+  );
+}
+
+export default function CountrySection({ country, index, filteredProducts }: CountrySectionProps) {
+  const sortedProducts = useMemo(() => sortByBrand(filteredProducts), [filteredProducts]);
+
   const wines = country.products.filter((p) => p.category === "wine");
   const spirits = country.products.filter((p) => p.category === "spirit");
   const hasBoth = wines.length > 0 && spirits.length > 0;
 
-  const [activeTab, setActiveTab] = useState<"all" | "wine" | "spirit">("all");
-
-  const filteredProducts =
-    activeTab === "all"
-      ? country.products
-      : country.products.filter((p) => p.category === activeTab);
+  // Hide section entirely if no products match the filter
+  if (sortedProducts.length === 0) return null;
 
   const bgColor = index % 2 === 0 ? "bg-[#0a0a0a]" : "bg-[#111111]";
 
@@ -34,7 +46,7 @@ export default function CountrySection({ country, index }: CountrySectionProps) 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <AnimatedSection>
           {/* Country Header */}
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
             <div className="flex items-center gap-4">
               {country.icon ? (
                 <div
@@ -52,8 +64,8 @@ export default function CountrySection({ country, index }: CountrySectionProps) 
                   {country.name}
                 </h3>
                 <p className="font-[family-name:var(--font-montserrat)] text-sm text-gray-400 mt-1">
-                  {country.products.length} product{country.products.length !== 1 ? "s" : ""}
-                  {hasBoth && (
+                  {sortedProducts.length} product{sortedProducts.length !== 1 ? "s" : ""}
+                  {hasBoth && sortedProducts.length === country.products.length && (
                     <span>
                       {" "}&middot; {wines.length} wine{wines.length !== 1 ? "s" : ""}, {spirits.length} spirit{spirits.length !== 1 ? "s" : ""}
                     </span>
@@ -61,38 +73,10 @@ export default function CountrySection({ country, index }: CountrySectionProps) 
                 </p>
               </div>
             </div>
-
-            {/* Filter tabs - only show if country has both wines and spirits */}
-            {hasBoth && (
-              <div className="sm:ml-auto flex gap-2">
-                {(["all", "wine", "spirit"] as const).map((tab) => (
-                  <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`relative px-4 py-2 rounded-full text-sm font-[family-name:var(--font-montserrat)] font-medium transition-all duration-300 ${
-                      activeTab === tab
-                        ? "text-black"
-                        : "text-gray-400 hover:text-white"
-                    }`}
-                  >
-                    {activeTab === tab && (
-                      <motion.div
-                        layoutId={`tab-bg-${country.id}`}
-                        className="absolute inset-0 bg-[#C9A962] rounded-full"
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                      />
-                    )}
-                    <span className="relative z-10">
-                      {tab === "all" ? "All" : tab === "wine" ? "Wines" : "Spirits"}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
 
           {/* Description */}
-          <p className="font-[family-name:var(--font-montserrat)] text-gray-400 mb-10 max-w-3xl">
+          <p className="font-[family-name:var(--font-montserrat)] text-gray-400 mb-6 max-w-3xl">
             {country.description}
           </p>
 
@@ -100,17 +84,17 @@ export default function CountrySection({ country, index }: CountrySectionProps) 
           <div className="decorative-line mb-10" />
         </AnimatedSection>
 
-        {/* Product Grid */}
+        {/* Product grid sorted by brand */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={activeTab}
+            key={sortedProducts.map((p) => `${p.brand}-${p.name}`).join(",")}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
             className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           >
-            {filteredProducts.map((product, i) => (
+            {sortedProducts.map((product, i) => (
               <ProductCard
                 key={`${product.brand}-${product.name}-${i}`}
                 product={product}

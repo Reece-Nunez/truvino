@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "../components/Header";
@@ -9,7 +9,9 @@ import AnimatedSection from "../components/AnimatedSection";
 import WorldMap from "../components/WorldMap";
 import CountryNav from "../components/CountryNav";
 import CountrySection from "../components/CountrySection";
+import ProductFilter from "../components/ProductFilter";
 import { countries, valuedWines } from "../data/portfolio-data";
+import type { Product } from "../data/portfolio-data";
 
 // Merge valued wines into Italy's products
 const allCountries = countries.map((c) => {
@@ -33,10 +35,137 @@ const totalSpirits = allCountries.reduce(
   0
 );
 
+// All products flat
+const allProducts: Product[] = allCountries.flatMap((c) => c.products);
+
+// Size sort order (smallest to largest)
+const sizeOrder: Record<string, number> = {
+  "50ml": 1, "100ml": 2, "187ml": 3, "200ml": 4, "300ml": 5,
+  "330ml": 6, "375ml": 7, "700ml": 8, "720ml": 9, "750ml": 10,
+  "1L": 11, "1.5L": 12, "1.75L": 13,
+};
+
+// Type display labels
+const typeLabels: Record<string, string> = {
+  red: "Red Wine",
+  white: "White Wine",
+  rosé: "Rosé",
+  sparkling: "Sparkling",
+  dessert: "Dessert Wine",
+  fortified: "Fortified",
+  bourbon: "Bourbon",
+  whisky: "Whisky",
+  cognac: "Cognac",
+  tequila: "Tequila",
+  vodka: "Vodka",
+  gin: "Gin",
+  rum: "Rum",
+  cachaça: "Cachaça",
+  soju: "Soju",
+  sake: "Sake",
+  rtd: "RTD",
+  sangria: "Sangria",
+  liqueur: "Liqueur",
+};
+
+// Wine type sort order
+const wineOrder = ["red", "white", "rosé", "sparkling", "dessert", "fortified"];
+const spiritOrder = ["bourbon", "whisky", "cognac", "tequila", "vodka", "gin", "rum", "cachaça", "soju", "sake", "rtd", "sangria", "liqueur"];
+const typeOrder = [...wineOrder, ...spiritOrder];
+
+function filterProducts(
+  products: Product[],
+  category: string,
+  types: string[],
+  sizes: string[]
+): Product[] {
+  return products.filter((p) => {
+    if (category === "wine" && p.category !== "wine") return false;
+    if (category === "spirit" && p.category !== "spirit") return false;
+    if (types.length > 0 && !types.includes(p.type)) return false;
+    if (sizes.length > 0) {
+      const productSizes = p.bottleSizes || ["750ml"];
+      if (!sizes.some((s) => productSizes.includes(s))) return false;
+    }
+    return true;
+  });
+}
+
 export default function PortfolioPage() {
   const [activeCountry, setActiveCountry] = useState<string | null>(null);
   const [showBackToTop, setShowBackToTop] = useState(false);
   const sectionRefs = useRef<Map<string, HTMLElement>>(new Map());
+
+  // Filter state
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [activeTypes, setActiveTypes] = useState<string[]>([]);
+  const [activeSizes, setActiveSizes] = useState<string[]>([]);
+
+  // Compute filtered products for each country
+  const filteredCountries = useMemo(() => {
+    return allCountries.map((country) => ({
+      ...country,
+      filteredProducts: filterProducts(country.products, activeCategory, activeTypes, activeSizes),
+    }));
+  }, [activeCategory, activeTypes, activeSizes]);
+
+  const totalFilteredProducts = useMemo(
+    () => filteredCountries.reduce((sum, c) => sum + c.filteredProducts.length, 0),
+    [filteredCountries]
+  );
+
+  // Build filter options with counts (based on current other filters)
+  const categoryOptions = useMemo(() => {
+    const filtered = filterProducts(allProducts, "all", activeTypes, activeSizes);
+    return [
+      { value: "all", label: "All", count: filtered.length },
+      { value: "wine", label: "Wines", count: filtered.filter((p) => p.category === "wine").length },
+      { value: "spirit", label: "Spirits", count: filtered.filter((p) => p.category === "spirit").length },
+    ];
+  }, [activeTypes, activeSizes]);
+
+  const typeOptions = useMemo(() => {
+    const filtered = filterProducts(allProducts, activeCategory, [], activeSizes);
+    const typeCounts = new Map<string, number>();
+    for (const p of filtered) {
+      typeCounts.set(p.type, (typeCounts.get(p.type) || 0) + 1);
+    }
+    return Array.from(typeCounts.entries())
+      .sort(([a], [b]) => {
+        const ai = typeOrder.indexOf(a);
+        const bi = typeOrder.indexOf(b);
+        return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+      })
+      .map(([type, count]) => ({
+        value: type,
+        label: typeLabels[type] || type,
+        count,
+      }));
+  }, [activeCategory, activeSizes]);
+
+  const sizeOptions = useMemo(() => {
+    const filtered = filterProducts(allProducts, activeCategory, activeTypes, []);
+    const sizeCounts = new Map<string, number>();
+    for (const p of filtered) {
+      const sizes = p.bottleSizes || ["750ml"];
+      for (const size of sizes) {
+        sizeCounts.set(size, (sizeCounts.get(size) || 0) + 1);
+      }
+    }
+    return Array.from(sizeCounts.entries())
+      .sort(([a], [b]) => (sizeOrder[a] || 99) - (sizeOrder[b] || 99))
+      .map(([size, count]) => ({
+        value: size,
+        label: size,
+        count,
+      }));
+  }, [activeCategory, activeTypes]);
+
+  const clearAllFilters = useCallback(() => {
+    setActiveCategory("all");
+    setActiveTypes([]);
+    setActiveSizes([]);
+  }, []);
 
   // Show back-to-top button after scrolling past hero
   useEffect(() => {
@@ -182,10 +311,51 @@ export default function PortfolioPage() {
           onCountryClick={scrollToCountry}
         />
 
+        {/* Global Filter Bar */}
+        <section className="sticky top-[88px] z-30 bg-[#0a0a0a]/95 backdrop-blur-md border-b border-[#C9A962]/10 py-4">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <ProductFilter
+              categories={categoryOptions}
+              types={typeOptions}
+              sizes={sizeOptions}
+              activeCategory={activeCategory}
+              activeTypes={activeTypes}
+              activeSizes={activeSizes}
+              onCategoryChange={setActiveCategory}
+              onTypesChange={setActiveTypes}
+              onSizesChange={setActiveSizes}
+              onClearAll={clearAllFilters}
+              totalResults={totalFilteredProducts}
+            />
+          </div>
+        </section>
+
         {/* Country Sections */}
-        {allCountries.map((country, index) => (
-          <CountrySection key={country.id} country={country} index={index} />
+        {filteredCountries.map((country, index) => (
+          <CountrySection
+            key={country.id}
+            country={country}
+            index={index}
+            filteredProducts={country.filteredProducts}
+          />
         ))}
+
+        {/* No results message */}
+        {totalFilteredProducts === 0 && (
+          <section className="bg-[#0a0a0a] py-24">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+              <p className="font-[family-name:var(--font-montserrat)] text-gray-500 text-lg">
+                No products match your filters.
+              </p>
+              <button
+                onClick={clearAllFilters}
+                className="mt-4 font-[family-name:var(--font-montserrat)] text-sm text-[#C9A962] hover:text-[#d4b96f] transition-colors"
+              >
+                Clear all filters
+              </button>
+            </div>
+          </section>
+        )}
 
         {/* CTA Section */}
         <section className="bg-[#0a0a0a] py-24 border-t border-[#C9A962]/10">
