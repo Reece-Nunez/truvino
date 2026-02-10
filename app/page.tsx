@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import HeroSlideshow from "./components/HeroSlideshow";
+import FeaturedProduct from "./components/FeaturedProduct";
 import ServicesSection from "./components/ServicesSection";
 import CTABanner from "./components/CTABanner";
 import PortfolioPreview from "./components/PortfolioPreview";
@@ -12,6 +13,7 @@ export default function Home() {
       <Header />
       <main>
         <HeroSlideshow />
+        <FeaturedProduct />
         <ServicesSection />
         <CTABanner />
         <PortfolioPreview />
