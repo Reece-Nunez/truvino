@@ -1,53 +1,31 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import AnimatedSection, { AnimatedCard } from "./AnimatedSection";
+import { countries, valuedWines } from "../data/portfolio-data";
 
-const regions = [
-  {
-    name: "California",
-    country: "USA",
-    description: "Premium wines from Napa Valley and beyond",
-    image: "/hero-slideshow/product1.jpeg",
-    icon: "/icons/california.svg"
-  },
-  {
-    name: "France",
-    country: "France",
-    description: "Exquisite wines from Bordeaux, Burgundy, and Champagne",
-    image: "/hero-slideshow/product2.jpeg",
-    icon: "/icons/france.svg"
-  },
-  {
-    name: "Italy",
-    country: "Italy",
-    description: "Fine wines from Tuscany, Piedmont, and Veneto",
-    image: "/hero-slideshow/product3.jpeg",
-    icon: "/icons/italy.svg"
-  },
-  {
-    name: "Spain",
-    country: "Spain",
-    description: "Bold wines from Rioja, Ribera del Duero, and Priorat",
-    image: "/hero-slideshow/product4.jpeg",
-    icon: "/icons/spain.svg"
-  },
-  {
-    name: "Scotland",
-    country: "Scotland",
-    description: "World-renowned single malt and blended whiskies",
-    image: "/hero-slideshow/product5.jpeg",
-    icon: "/icons/scotland.svg"
-  },
-  {
-    name: "Sri Lanka",
-    country: "Sri Lanka",
-    description: "Unique spirits and specialty selections",
-    image: "/hero-slideshow/product6.jpeg",
-    icon: "/icons/sri-lanka.svg"
-  },
-];
+// Merge valued wines into Italy (same as portfolio page)
+const allCountries = countries.map((c) => {
+  if (c.id === "italy") {
+    return { ...c, products: [...c.products, ...valuedWines] };
+  }
+  return c;
+});
+
+// Pick a representative product image for each country (first product with an image)
+const countryCards = allCountries.map((country) => {
+  const representative = country.products.find((p) => p.image);
+  return {
+    id: country.id,
+    name: country.name,
+    icon: country.icon,
+    flag: country.flag,
+    productCount: country.products.length,
+    image: representative?.image || null,
+  };
+});
 
 export default function PortfolioPreview() {
   return (
@@ -66,55 +44,59 @@ export default function PortfolioPreview() {
           </p>
         </AnimatedSection>
 
-        {/* Regions Grid */}
-        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {regions.map((region, index) => (
-            <AnimatedCard key={index} index={index}>
-              <div className="group relative overflow-hidden rounded-2xl bg-[#1a1a1a] border border-[#C9A962]/10 cursor-pointer transition-all duration-500 hover:border-[#C9A962]/40 glow-hover">
-                <div className="aspect-[4/3] overflow-hidden">
-                  <motion.div
-                    className="h-full w-full"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <Image
-                      src={region.image}
-                      alt={region.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </motion.div>
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20 transition-opacity duration-500 group-hover:from-black/95" />
-                </div>
+        {/* Country Cards Grid */}
+        <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+          {countryCards.map((card, index) => (
+            <AnimatedCard key={card.id} index={index}>
+              <Link href={`/portfolio#${card.id}`}>
+                <div className="group relative overflow-hidden rounded-2xl bg-[#1a1a1a] border border-[#C9A962]/10 transition-all duration-500 hover:border-[#C9A962]/40 aspect-[3/4]">
+                  {/* Product bottle image */}
+                  {card.image && (
+                    <div className="absolute inset-0 flex items-center justify-center p-4 pb-14">
+                      <motion.div
+                        className="relative w-full h-full"
+                        whileHover={{ scale: 1.08 }}
+                        transition={{ duration: 0.4 }}
+                      >
+                        <Image
+                          src={card.image}
+                          alt={card.name}
+                          fill
+                          className="object-contain drop-shadow-[0_0_15px_rgba(201,169,98,0.1)]"
+                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 16vw"
+                        />
+                      </motion.div>
+                    </div>
+                  )}
 
-                {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="flex items-center gap-4">
-                    <motion.div
-                      className="relative h-10 w-10"
-                      whileHover={{ scale: 1.2, rotate: 10 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
-                      <div
-                        className="absolute inset-0 bg-[#C9A962] rounded transition-opacity duration-300 opacity-100"
+                  {/* Bottom gradient */}
+                  <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/95 to-transparent" />
+
+                  {/* Country info bar */}
+                  <div className="absolute bottom-0 left-0 right-0 p-3 flex items-center gap-2">
+                    {card.icon ? (
+                      <span
+                        className="inline-block h-5 w-5 flex-shrink-0 bg-[#C9A962]"
                         style={{
-                          mask: `url(${region.icon}) center/contain no-repeat`,
-                          WebkitMask: `url(${region.icon}) center/contain no-repeat`
+                          mask: `url(${card.icon}) center/contain no-repeat`,
+                          WebkitMask: `url(${card.icon}) center/contain no-repeat`,
                         }}
                       />
-                    </motion.div>
-                    <p className="font-[family-name:var(--font-montserrat)] text-xl uppercase tracking-wider text-[#C9A962]">
-                      {region.country}
-                    </p>
+                    ) : (
+                      <span className="text-lg flex-shrink-0">{card.flag}</span>
+                    )}
+                    <span className="font-[family-name:var(--font-montserrat)] text-xs font-medium text-white truncate">
+                      {card.name}
+                    </span>
+                    <span className="font-[family-name:var(--font-montserrat)] text-[10px] text-gray-500 ml-auto flex-shrink-0">
+                      {card.productCount}
+                    </span>
                   </div>
-                </div>
 
-                {/* Hover Shine Effect */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                  {/* Hover glow */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl ring-1 ring-[#C9A962]/30 ring-inset" />
                 </div>
-              </div>
+              </Link>
             </AnimatedCard>
           ))}
         </div>
