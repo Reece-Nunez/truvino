@@ -40,7 +40,7 @@ export default function FeaturedProduct() {
               {/* Bottle image */}
               <div className="relative h-[450px] sm:h-[550px] w-full max-w-[350px] mx-auto">
                 <Image
-                  src="/portfolio/golden-archer-napa-cabernet.webp"
+                  src="/golden-archer.png"
                   alt="Golden Archer 2023 Cabernet Sauvignon, Napa Valley"
                   fill
                   className="object-contain drop-shadow-[0_0_40px_rgba(201,169,98,0.2)]"
