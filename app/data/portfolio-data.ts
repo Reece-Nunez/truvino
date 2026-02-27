@@ -3495,6 +3495,40 @@ export const countries: CountryData[] = [
       },
     ],
   },
+  // ─── UKRAINE ────────────────────────────────────────────
+  {
+    id: "ukraine",
+    name: "Ukraine",
+    flag: "\u{1F1FA}\u{1F1E6}",
+    icon: "/icons/ukraine.svg",
+    region: "europe",
+    mapPosition: { x: 31.0, y: 49.0 },
+    description:
+      "A rising star in ultra-premium spirits, Ukraine brings centuries of grain cultivation and distillation expertise to the world stage.",
+    products: [
+      {
+        name: "Ultra Premium Vodka",
+        brand: "Fluid Oz",
+        category: "spirit",
+        type: "vodka",
+        description:
+          "Handmade ultra-premium vodka crafted from the finest grains and pure deep ground spring water. 12-time distilled with multi-stage filtration and a revolutionary 60-day aging process for a smooth, creamy, distinctive taste.",
+        image: "/portfolio/fluid-oz-vodka.png",
+        origin: "Ukraine",
+        bottleSizes: ["750ml"],
+        specifications: {
+          "Distillation": "12 times distilled",
+          "Filtration": "Multi-stage filtration",
+          "Aging": "60-day aging process",
+          "Base": "Premium grains",
+          "Water": "Pure deep ground spring water",
+        },
+        tastingNotes: "Clean and understated nose with subtle grain sweetness and a whisper of citrus peel. Silky entry with smooth texture, light sweet grain flavor, and mild peppery warmth mid-palate. Short to medium finish with gentle warmth, soft grain sweetness, and mineral dryness.",
+        vinification: "Specially grown grains from regions with optimal soil and climate conditions. Pure deep ground spring water undergoes multi-stage filtration and 12-time distillation before being blended to proofing specifications. Finished with a revolutionary 60-day aging process.",
+        foodPairings: "Caviar, smoked fish, pickled vegetables, chilled seafood, and cured meats.",
+      },
+    ],
+  },
 ];
 
 // ─── VALUED WINES (Italy value line) ──────────────────────
