@@ -89,8 +89,8 @@ export function AnimatedCard({
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{
-        duration: 0.5,
-        delay: index * 0.1,
+        duration: 0.4,
+        delay: Math.min(index * 0.05, 0.3),
         ease: "easeOut",
       }}
       whileHover={{
@@ -145,7 +145,7 @@ export function FadeInStagger({
         hidden: {},
         visible: {
           transition: {
-            staggerChildren: 0.15,
+            staggerChildren: 0.06,
           },
         },
       }}

@@ -62,7 +62,7 @@ export default function ProductCard({ product, index }: ProductCardProps) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
+      transition={{ duration: 0.3, delay: Math.min(index * 0.04, 0.2) }}
     >
       <Link
         href={`/portfolio/${slug}`}
