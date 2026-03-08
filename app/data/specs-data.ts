@@ -147,4 +147,8 @@ export const specProducts: SpecProduct[] = [
     name: "Tio Tio",
     techSheet: "/docs/TIO TIO.pdf",
   },
+  {
+    name: "Tiki Grove",
+    techSheet: "/docs/Tiki Grove.pdf",
+  },
 ];
