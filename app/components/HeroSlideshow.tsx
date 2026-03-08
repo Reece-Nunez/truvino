@@ -60,8 +60,29 @@ export default function HeroSlideshow() {
     return () => clearInterval(interval);
   }, [nextSlide]);
 
+  // Swipe handling for mobile
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart === null) return;
+    const diff = touchStart - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextSlide();
+      else prevSlide();
+    }
+    setTouchStart(null);
+  };
+
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section
+      className="relative h-screen w-full overflow-hidden"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Preload all images (hidden) */}
       <div className="hidden">
         {slides.map((slide, index) => (
@@ -144,7 +165,7 @@ export default function HeroSlideshow() {
       {/* Navigation Arrows */}
       <motion.button
         onClick={prevSlide}
-        className="absolute left-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-black/30 p-4 text-[#C9A962] backdrop-blur-sm border border-[#C9A962]/30"
+        className="absolute left-6 top-1/2 -translate-y-1/2 z-30 hidden md:block rounded-full bg-black/30 p-4 text-[#C9A962] backdrop-blur-sm border border-[#C9A962]/30"
         whileHover={{ scale: 1.1, backgroundColor: "rgba(201, 169, 98, 0.2)" }}
         whileTap={{ scale: 0.95 }}
         aria-label="Previous slide"
@@ -155,7 +176,7 @@ export default function HeroSlideshow() {
       </motion.button>
       <motion.button
         onClick={nextSlide}
-        className="absolute right-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-black/30 p-4 text-[#C9A962] backdrop-blur-sm border border-[#C9A962]/30"
+        className="absolute right-6 top-1/2 -translate-y-1/2 z-30 hidden md:block rounded-full bg-black/30 p-4 text-[#C9A962] backdrop-blur-sm border border-[#C9A962]/30"
         whileHover={{ scale: 1.1, backgroundColor: "rgba(201, 169, 98, 0.2)" }}
         whileTap={{ scale: 0.95 }}
         aria-label="Next slide"

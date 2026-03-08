@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     // Send notification to Truvino
     await resend.emails.send({
       from: "Truvino <noreply@truvinousa.com>",
-      to: ["info@truvinousa.com"],
+      to: ["sales@truvinonj.com"],
       subject: `New Contact Form: ${subject}`,
       html: contactNotificationEmail({ name, email, phone, company, subject, message }),
       replyTo: email,

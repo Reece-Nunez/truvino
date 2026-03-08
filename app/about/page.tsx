@@ -6,13 +6,6 @@ import Footer from "../components/Footer";
 import { motion } from "framer-motion";
 import AnimatedSection, { AnimatedCard } from "../components/AnimatedSection";
 
-const stats = [
-  { value: "X+", label: "Years of Experience" },
-  { value: "X+", label: "Partner Brands" },
-  { value: "X+", label: "Markets Served" },
-  { value: "X%", label: "Client Retention" },
-];
-
 const values = [
   {
     title: "Quality First",
@@ -53,29 +46,6 @@ const values = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
       </svg>
     ),
-  },
-];
-
-const milestones = [
-  {
-    year: "XXXX",
-    title: "Company Founded",
-    description: "Truvino was established with a vision to transform wine and spirits distribution.",
-  },
-  {
-    year: "XXXX",
-    title: "Expanded Operations",
-    description: "Opened state-of-the-art warehousing facilities to serve growing demand.",
-  },
-  {
-    year: "XXXX",
-    title: "Strategic Partnerships",
-    description: "Formed key partnerships with renowned vineyards and distilleries worldwide.",
-  },
-  {
-    year: "XXXX",
-    title: "Market Leadership",
-    description: "Became a leading distributor in the Northeast region for premium brands.",
   },
 ];
 
@@ -193,26 +163,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Stats Section */}
-        <section className="bg-[#0a0a0a] py-20 border-y border-[#C9A962]/10">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-              {stats.map((stat, index) => (
-                <AnimatedCard key={index} index={index}>
-                  <div className="text-center">
-                    <p className="font-[family-name:var(--font-playfair)] text-4xl md:text-5xl font-bold text-[#C9A962]">
-                      {stat.value}
-                    </p>
-                    <p className="mt-2 font-[family-name:var(--font-montserrat)] text-gray-400">
-                      {stat.label}
-                    </p>
-                  </div>
-                </AnimatedCard>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Values Section */}
         <section className="bg-[#0a0a0a] py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -248,53 +198,6 @@ export default function AboutPage() {
                   </div>
                 </AnimatedCard>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Timeline Section */}
-        <section className="bg-[#111111] py-24">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <AnimatedSection className="text-center">
-              <div className="flex justify-center mb-6">
-                <div className="decorative-line" />
-              </div>
-              <h2 className="font-[family-name:var(--font-playfair)] text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-                Our <span className="text-[#C9A962]">Journey</span>
-              </h2>
-              <p className="mx-auto mt-4 max-w-2xl font-[family-name:var(--font-montserrat)] text-lg text-gray-400">
-                Key milestones in our growth
-              </p>
-            </AnimatedSection>
-
-            <div className="mt-16 relative">
-              {/* Timeline line */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-px bg-[#C9A962]/20 hidden md:block" />
-
-              <div className="space-y-12">
-                {milestones.map((milestone, index) => (
-                  <AnimatedSection key={index}>
-                    <div className={`flex flex-col md:flex-row items-center gap-8 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                      <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
-                        <div className={`inline-block rounded-2xl bg-[#1a1a1a] p-8 border border-[#C9A962]/10 ${index % 2 === 0 ? 'md:ml-auto' : 'md:mr-auto'}`}>
-                          <p className="font-[family-name:var(--font-playfair)] text-3xl font-bold text-[#C9A962]">
-                            {milestone.year}
-                          </p>
-                          <h3 className="mt-2 font-[family-name:var(--font-playfair)] text-xl font-semibold text-white">
-                            {milestone.title}
-                          </h3>
-                          <p className="mt-2 font-[family-name:var(--font-montserrat)] text-gray-400 text-sm max-w-sm">
-                            {milestone.description}
-                          </p>
-                        </div>
-                      </div>
-                      {/* Timeline dot */}
-                      <div className="hidden md:flex items-center justify-center w-4 h-4 rounded-full bg-[#C9A962] border-4 border-[#111111] z-10" />
-                      <div className="flex-1 hidden md:block" />
-                    </div>
-                  </AnimatedSection>
-                ))}
-              </div>
             </div>
           </div>
         </section>

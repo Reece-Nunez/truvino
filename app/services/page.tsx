@@ -92,8 +92,6 @@ const services = [
       "Full supply chain management",
       "Temperature-controlled transportation",
       "Route optimization and scheduling",
-      "Real-time shipment tracking",
-      "Last-mile delivery coordination",
     ],
     image: "/hero-slideshow/product8.jpeg",
     icon: (

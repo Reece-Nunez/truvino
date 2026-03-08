@@ -60,8 +60,8 @@ export default function ContactPage() {
         </svg>
       ),
       label: "Address",
-      value: "354 State Street Unit 102,\nHackensack, NJ 07601, USA",
-      href: "https://maps.google.com/?q=354+State+Street+Unit+102+Hackensack+NJ+07601",
+      value: "PO BOX 42,\nWaldwick, NJ 07463, USA",
+      href: "https://maps.google.com/?q=Waldwick+NJ+07463",
     },
     {
       icon: (
@@ -70,7 +70,7 @@ export default function ContactPage() {
         </svg>
       ),
       label: "Phone",
-      value: "+1 (201) 290-5627",
+      value: "+1 (201) 212-6338",
       href: "tel:+12012905627",
     },
     {
@@ -80,8 +80,8 @@ export default function ContactPage() {
         </svg>
       ),
       label: "Email",
-      value: "info@truvinousa.com",
-      href: "mailto:info@truvinousa.com",
+      value: "sales@truvinonj.com",
+      href: "mailto:sales@truvinonj.com",
     },
   ];
 

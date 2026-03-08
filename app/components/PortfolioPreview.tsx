@@ -14,16 +14,28 @@ const allCountries = countries.map((c) => {
   return c;
 });
 
-// Pick a representative product image for each country (first product with an image)
+// Override face products for specific countries
+const faceProducts: Record<string, string> = {
+  greece: "/portfolio/thema-assyrtiko.webp",
+  spain: "/portfolio/tio-tio-sangria.webp",
+  italy: "/portfolio/vita-bella-prosecco.webp",
+  usa: "/golden-archer.png",
+  argentina: "/portfolio/tierra-alta-malbec.webp",
+};
+
+// Pick a representative product image for each country
 const countryCards = allCountries.map((country) => {
-  const representative = country.products.find((p) => p.image);
+  const image =
+    faceProducts[country.id] ||
+    country.products.find((p) => p.image)?.image ||
+    null;
   return {
     id: country.id,
     name: country.name,
     icon: country.icon,
     flag: country.flag,
     productCount: country.products.length,
-    image: representative?.image || null,
+    image,
   };
 });
 

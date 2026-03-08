@@ -103,7 +103,7 @@ export default function FeaturedProduct() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.35 }}
               >
-                Napa Valley &middot; $49
+                Napa Valley
               </motion.p>
 
               {/* 95pt Badge Image */}

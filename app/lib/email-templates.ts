@@ -36,9 +36,9 @@ function baseLayout(content: string) {
               <div style="height:1px;background:linear-gradient(to right,transparent,#C9A962,transparent);margin-bottom:24px;"></div>
               <p style="margin:0;font-size:12px;color:#666;text-align:center;line-height:1.6;">
                 Truvino | Premium Wine &amp; Spirits Distribution<br />
-                354 State Street Unit 102, Hackensack, NJ 07601, USA<br />
-                <a href="tel:+12012905627" style="color:#C9A962;text-decoration:none;">+1 (201) 290-5627</a> &nbsp;|&nbsp;
-                <a href="mailto:info@truvinousa.com" style="color:#C9A962;text-decoration:none;">info@truvinousa.com</a>
+                PO BOX 42, Waldwick, NJ 07463, USA<br />
+                <a href="tel:+12012126338" style="color:#C9A962;text-decoration:none;">+1 (201) 212-6338</a> &nbsp;|&nbsp;
+                <a href="mailto:sales@truvinonj.com" style="color:#C9A962;text-decoration:none;">sales@truvinonj.com</a>
               </p>
               <p style="margin:16px 0 0;font-size:11px;color:#444;text-align:center;">
                 &copy; ${new Date().getFullYear()} Truvino. All rights reserved.
@@ -117,8 +117,8 @@ export function contactConfirmationEmail(name: string) {
         Direct Contact
       </p>
       <p style="margin:8px 0 0;font-size:14px;color:#e5e5e5;">
-        <a href="tel:+12012905627" style="color:#C9A962;text-decoration:none;">+1 (201) 290-5627</a><br />
-        <a href="mailto:info@truvinousa.com" style="color:#C9A962;text-decoration:none;">info@truvinousa.com</a>
+        <a href="tel:+12012126338" style="color:#C9A962;text-decoration:none;">+1 (201) 212-6338</a><br />
+        <a href="mailto:sales@truvinonj.com" style="color:#C9A962;text-decoration:none;">sales@truvinonj.com</a>
       </p>
     </div>
     <p style="margin:24px 0 0;font-size:14px;color:#999;line-height:1.6;">
