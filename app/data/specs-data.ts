@@ -16,7 +16,7 @@ export const specProducts: SpecProduct[] = [
     techSheet: "/docs/Angelica Rosso.pdf",
   },
   {
-    name: "Italian Rosé Wine Angelica",
+    name: "Angelica Rosé",
     techSheet: "/docs/Italian Rosé Wine Angelica_rev.pdf",
   },
   {
@@ -110,5 +110,41 @@ export const specProducts: SpecProduct[] = [
   {
     name: "With Love Rosé",
     techSheet: "/docs/With Love Rose tech sheet.pdf",
+  },
+  {
+    name: "FeFe Cocktails & Mocktails",
+    techSheet: "/docs/fefe.jpeg",
+  },
+  {
+    name: "Blue Bay",
+    techSheet: "/docs/Blue Bay.pdf",
+  },
+  {
+    name: "Cala Caterina Vermentino Sardegna",
+    techSheet: "/docs/CALA CATERINA VERMENTINO SARDEGNA Tech Sheet.pdf",
+  },
+  {
+    name: "Maximus Cabernet Sauvignon",
+    techSheet: "/docs/MAXIMUS Cabernet Sauvignon Tech Sheet.pdf",
+  },
+  {
+    name: "Maximus Malbec",
+    techSheet: "/docs/MAXIMUS Malbec tech Sheet.pdf",
+  },
+  {
+    name: "Primitivo Puglia Deità",
+    techSheet: "/docs/PRIMITIVO PUGLIA DEITA tech sheet.pdf",
+  },
+  {
+    name: "Tierra Alta Cabernet Sauvignon",
+    techSheet: "/docs/TIERRA ALTA Cabernet Sauvignon tech sheet.pdf",
+  },
+  {
+    name: "Tierra Alta Malbec",
+    techSheet: "/docs/TIERRA ALTA Malbec tech sheet.pdf",
+  },
+  {
+    name: "Tio Tio",
+    techSheet: "/docs/TIO TIO.pdf",
   },
 ];

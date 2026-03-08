@@ -35,13 +35,12 @@ export default function CareersForm() {
     formDataToSend.append("email", formData.email);
     formDataToSend.append("phone", formData.phone);
     formDataToSend.append("message", formData.message);
-    formDataToSend.append("_subject", `New Career Application from ${formData.name}`);
     if (resume) {
-      formDataToSend.append("attachment", resume);
+      formDataToSend.append("resume", resume);
     }
 
     try {
-      const response = await fetch("https://formsubmit.co/ajax/reece@nunezdev.com", {
+      const response = await fetch("/api/careers", {
         method: "POST",
         body: formDataToSend,
       });

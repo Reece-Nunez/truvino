@@ -4,24 +4,24 @@ import { specProducts, pricingPdf } from "../data/specs-data";
 import SpecCard from "../components/SpecCard";
 
 export const metadata: Metadata = {
-  title: "Product Specifications & Pricing | Truvino",
+  title: "By the Glass Product Tech Sheets & Pricing",
   description:
-    "Technical sheets and pricing for Truvino spirits products.",
+    "Technical sheets and pricing for By the Glass spirits products.",
 };
 
 export default function SpecsPage() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       {/* Header */}
-      <header className="border-b border-[#C9A962]/10 py-6">
+      <header className="border-b border-[#C9A962]/10">
         <div className="mx-auto max-w-4xl px-4 flex justify-center">
-          <a href="/">
+          <a href="https://bytheglassimports.com" target="_blank" rel="noopener noreferrer">
             <Image
-              src="/transparent.png"
-              alt="Truvino Logo"
+              src="/docs/by-the-glass-transparent.png"
+              alt="By the Glass"
               width={400}
               height={134}
-              className="h-24 w-auto"
+              className="h-36 w-auto"
               priority
             />
           </a>
@@ -31,11 +31,30 @@ export default function SpecsPage() {
       {/* Main */}
       <main className="mx-auto max-w-4xl px-4 py-10">
         <h1 className="font-[family-name:var(--font-playfair)] text-2xl sm:text-3xl font-semibold text-white">
-          Product Specifications &amp; Pricing
+          By the Glass Product Tech Sheets &amp; Pricing
         </h1>
-        <p className="mt-2 font-[family-name:var(--font-montserrat)] text-sm text-gray-400">
-          Technical sheets and pricing for our spirits products.
-        </p>
+
+        {/* Contact info */}
+        <div className="mt-6 flex flex-col sm:flex-row gap-6 font-[family-name:var(--font-montserrat)] text-sm">
+          <p className="text-gray-400 self-center">For any inquiries please contact:</p>
+          <div className="flex flex-col sm:flex-row gap-6">
+            <div>
+              <p className="font-semibold text-white">Kyle Flandrau</p>
+              <a href="tel:+12012905627" className="text-[#C9A962] hover:underline block">
+                201-290-5627
+              </a>
+              <a href="mailto:Kyle@bytheglassimports.com" className="text-[#C9A962] hover:underline block">
+                Kyle@bytheglassimports.com
+              </a>
+            </div>
+            <div>
+              <p className="font-semibold text-white">Jim Treanor</p>
+              <a href="mailto:Jimt@threesixtyfivewines.com" className="text-[#C9A962] hover:underline block">
+                Jimt@threesixtyfivewines.com
+              </a>
+            </div>
+          </div>
+        </div>
 
         {/* Pricing button */}
         <div className="mt-8">
@@ -71,25 +90,24 @@ export default function SpecsPage() {
       <footer className="border-t border-[#C9A962]/10 py-10">
         <div className="mx-auto max-w-4xl px-4 text-center">
           <p className="font-[family-name:var(--font-montserrat)] text-sm text-gray-300">
-            Need additional specifications or bulk pricing?
+            For any inquiries please contact
           </p>
-          <p className="mt-1 font-[family-name:var(--font-montserrat)] text-sm text-gray-300">
-            Contact our sales team.
-          </p>
-          <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4 font-[family-name:var(--font-montserrat)] text-sm">
-            <a
-              href="mailto:info@truvino.com"
-              className="text-[#C9A962] hover:underline"
-            >
-              info@truvino.com
-            </a>
-            <span className="hidden sm:inline text-gray-600">|</span>
-            <a
-              href="tel:+12012905627"
-              className="text-[#C9A962] hover:underline"
-            >
-              +1 (201) 290-5627
-            </a>
+          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-8 font-[family-name:var(--font-montserrat)] text-sm">
+            <div>
+              <p className="font-semibold text-white">Kyle Flandrau</p>
+              <a href="tel:+12012905627" className="text-[#C9A962] hover:underline block mt-1">
+                201-290-5627
+              </a>
+              <a href="mailto:Kyle@bytheglassimports.com" className="text-[#C9A962] hover:underline block mt-1">
+                Kyle@bytheglassimports.com
+              </a>
+            </div>
+            <div>
+              <p className="font-semibold text-white">Jim Treanor</p>
+              <a href="mailto:Jimt@threesixtyfivewines.com" className="text-[#C9A962] hover:underline block mt-1">
+                Jimt@threesixtyfivewines.com
+              </a>
+            </div>
           </div>
         </div>
       </footer>

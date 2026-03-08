@@ -32,19 +32,11 @@ export default function ContactPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const formDataToSend = new FormData();
-    formDataToSend.append("name", formData.name);
-    formDataToSend.append("email", formData.email);
-    formDataToSend.append("phone", formData.phone);
-    formDataToSend.append("company", formData.company);
-    formDataToSend.append("subject", formData.subject);
-    formDataToSend.append("message", formData.message);
-    formDataToSend.append("_subject", `New Contact Form: ${formData.subject || "General Inquiry"}`);
-
     try {
-      const response = await fetch("https://formsubmit.co/ajax/reece@nunezdev.com", {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        body: formDataToSend,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
@@ -88,8 +80,8 @@ export default function ContactPage() {
         </svg>
       ),
       label: "Email",
-      value: "info@truvino.com",
-      href: "mailto:info@truvino.com",
+      value: "info@truvinousa.com",
+      href: "mailto:info@truvinousa.com",
     },
   ];
 
