@@ -4,7 +4,7 @@ export interface SpecProduct {
   techSheet: string;
 }
 
-export const pricingPdf = "/docs/By the Glass - Alliance Show FOB Pricing USE.pdf";
+export const pricingPdf = "/docs/By the Glass - Alliance Show FOB Pricing USE 2.pdf";
 
 export const specProducts: SpecProduct[] = [
   {
